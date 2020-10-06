@@ -32,8 +32,8 @@ MANIFEST
 # config file
 config.py
 
-# Resources Folder - Dataset
-Resources/
+# Resources Folder - Datasets
+static/resources/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
