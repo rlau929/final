@@ -36,7 +36,6 @@ config.py
 resources/
 
 #others
-.vscode
 .ipynb_checkpoints
 __pycache__
 
