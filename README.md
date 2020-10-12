@@ -3,6 +3,9 @@ Final group project
 ## Team Name
 accidentsHappen
 
+## Google Slides
+[Slides Link](https://drive.google.com/file/d/1ud5LxVQhqDQVythqhW2E_3Y9M8qgcm1X/view)
+
 ## Team Members
 Joshuapaul Rivera, Robert Lau, Simranjot Singh, and Kim Ngo
 
