@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Initial Dashboard 0.1</title>
+    <title>Initial Dashboard 0.2</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="static/css/styles.css">
   </head>
@@ -23,9 +23,17 @@
           <a href="#zip_code_colored">Zip Codes</a>
           <a href="#seasons">Seasonal Trends</a>
           <a href="#weekdays">Weekdays vs Weekend</a>
-          <a href="#time_day">Time_of_the_day</a>
+          <a href="#time_day">Time of the day</a>
+          <div class="search-container">
+            <form id="zip_form" onsubmit="return false;">
+              <!-- these input types put constraints on the our zipcode search, they follow these constraints, otherwise the next step doesnt happen -->
+              <input id="inputZip" type="number" placeholder="Enter 5 Digit Zip Code" name="search" autocomplete="on" pattern="\d{5}" maxlength="5" minlength="5" inputmode="numeric" >
+              <!-- Heres where the magic happens, type in a zip code, and it should activate a function where the zipcode is saved as a variable -->
+              <input style="color:brown;" type="submit" onclick='zip_test()'>
+            </form>
+          </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div id="thesis">
             <h2>accidentsHappen</h2>
               <p>A car accident story inspired us to use a dataset to analyze and predict the chances of getting in an accident based on
@@ -35,7 +43,7 @@
                 </p>
           </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div id="zip_code_colored">
             <h3>Zip Codes</h3>
             <img src="static/images/state_zipcode_zone1.png">
@@ -49,14 +57,14 @@
               </p>
           </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div id="seasons">
             <h3>Seasons throughout 4 Years</h3>
             <img src="static/images/seasonal_counts.png">
               <p>Throughout the four years, we were hoping to find certain trends but then the months of one year. Thus, we can see there are certain trends,
                  especially during the summer, that might lead to higher accident rates.</p>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div id="weekdays">
             <h3>Weekend vs Weekdays</h3>
             <img src="static/images/weekday_counts.png">
@@ -64,7 +72,7 @@
                  of accidents occur within the weekday, even though there are five days in a week day and only two days on a weekend.
                 </p>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-12">
           <div id="time_day">
             <h3>Time of the Day</h3>
             <img src="static/images/time_of_day_count.png">

@@ -50,3 +50,47 @@ body {
   background-color: #ddd;
   color: black;
 }
+
+/* Search container box, button, and styles*/
+.topnav .search-container {
+  float: right;
+}
+
+.topnav input[type=text] {
+  padding: 6px;
+  margin-top: 1px;
+  font-size: 12px;
+  border: line-style;
+}
+
+.topnav .search-container button {
+  float: right;
+  padding: 6px 6px;
+  margin-top: 6px;
+  margin-right: 6px;
+  background: darkolivegreen;
+  font-size: 12px;
+  border: line-style;
+  cursor: pointer;
+}
+
+.topnav .search-container button:hover {
+  background: #ccc;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav .search-container {
+    float: none;
+  }
+  .topnav a, .topnav input[type=text], .topnav .search-container button {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+  }
+  .topnav input[type=text] {
+    border: 1px solid #ccc;  
+  }
+}
