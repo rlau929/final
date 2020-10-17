@@ -8,6 +8,8 @@
 
 // this function holds the zipcode, with constraints, as a variable to be used later
 
+// definition zip_thro():
+    
 function zip_test() {
 
     var zip_input = document.getElementById('inputZip').value;
@@ -29,9 +31,98 @@ function zip_test() {
 
     }
 
-    return flushed_zip;
+    // return flushed_zip;
     
+    // var month_input = "March"
+
+    // var zip_url = ("localhost:9090/zip_query?" + flushed_zip);
+
+    var zip_url = ("http://127.0.0.1:5000/zipquery?get_zip=" + flushed_zip)
+
+    // var zip_url = ("localhost:9090/zip_query?" + month_input);
+
+
+    // $.get("http://127.0.0.1:5000/zip_query?get_zip=" + flushed_zip);
+
+    $.get(zip_url);
+
+    // function for loading the json
+    // d3.request(zip_url)
+
+    // .mimeType("application/json")
+
+    // .response(function(xhr) {
+
+    //         return JSON.parse(xhr.responseText);
+
+    //     }
+    // )
+    // .then((data) => {
+        
+    //     console.log(data);
+
+    // })
+
+    // d3.json(zip_url, function(error, response) {
+    //     // Now use response to do some d3 magic
+    //     console.log("test_response " + response);
+    //     console.log("error my ass " + error);
+    // })
+
+
+    
+    $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        url: zip_url,
+        dataType: 'json',
+        async: true,
+        data: "{}", 
+        success: function (msg) {//On Successfull service call   
+            console.log(msg);
+        },
+        error: function (xhr) { console.log(xhr.responseText); } // When Service call fails             
+    });
+        
+        
+
+    // draw_histogram(div_name, pos_data);
+
+    //     },
+    //     error: function (result) {
+
+
+
+    // }
+    // })
+
 }
+
+
+// var xhttp;
+// if (str == "") {
+//   document.getElementById("txtHint").innerHTML = "";
+//   return;
+// }
+// xhttp = new XMLHttpRequest();
+// xhttp.onreadystatechange = function() {
+//   if (this.readyState == 4 && this.status == 200) {
+//   document.getElementById("txtHint").innerHTML = this.responseText;
+//   }
+// };
+// xhttp.open("GET", "getcustomer.php?q="+str, true);
+// xhttp.send();
+// }
+
+
+
+
+
+
+
+
+
+
 
 
 
