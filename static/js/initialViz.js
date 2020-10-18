@@ -8,14 +8,10 @@
 
 // this function holds the zipcode, with constraints, as a variable to be used later
 
-// definition zip_thro():
     
 function zip_test() {
 
     var zip_input = document.getElementById('inputZip').value;
-
-    
-    // check if its string, and 5 letters(?), else return false,
 
     if (typeof zip_input === "string" && zip_input.length == 5) {
 
@@ -31,74 +27,155 @@ function zip_test() {
 
     }
 
-    // return flushed_zip;
-    
-    // var month_input = "March"
-
-    // var zip_url = ("localhost:9090/zip_query?" + flushed_zip);
-
     var zip_url = ("http://127.0.0.1:5000/zipquery?get_zip=" + flushed_zip)
 
-    // var zip_url = ("localhost:9090/zip_query?" + month_input);
+    // $.get(zip_url);
 
+    $.post(zip_url);
 
-    // $.get("http://127.0.0.1:5000/zip_query?get_zip=" + flushed_zip);
+    $.ajax({
 
-    $.get(zip_url);
-
-    // function for loading the json
-    // d3.request(zip_url)
-
-    // .mimeType("application/json")
-
-    // .response(function(xhr) {
-
-    //         return JSON.parse(xhr.responseText);
-
-    //     }
-    // )
-    // .then((data) => {
+        type: "POST",
         
-    //     console.log(data);
+        contentType: "application/json; charset=utf-8",
+        
+        url: zip_url,
+        
+        dataType: 'json',
+        
+        async: true,
+        
+        data: "{}", 
 
-    // })
+        success: function successZip(data) {
+                    // console.log("first " + data);         
+                    
+                    var zipcount = [] 
+                    var sevcount = [] 
 
-    // d3.json(zip_url, function(error, response) {
-    //     // Now use response to do some d3 magic
-    //     console.log("test_response " + response);
-    //     console.log("error my ass " + error);
-    // })
+                    for (var item in data.result) {
+                        zipcount.push(data.result[item].Severity);
+                        sevcount.push(data.result[item].count);
+                      }
+                    
+                    console.log(sevcount);
+                    
+                    
+                        var dataTrace = [
+                            {
+                            x: zipcount,
+                            y: sevcount,
+                            type: 'bar'
+                            }   
+                        ];
+                    var layout = [
+                        {
+                            title: 'Count of Severity in ' + flushed_zip,
+                            showlegend: false,
+                            xaxis: {
+                                tickangle: -45
+                            },
+                            yaxis: {
+                                zeroline: false,
+                                gridwidth: 2
+                            },
+                            bargap :0.05
+                        }
+                    ] 
+                    Plotly.newPlot('bar', dataTrace)
 
+
+
+
+                    // Plotly.newPlot("bar", figure.data, figure.layout);
+
+            },
+    
+        error: (function (xhr) {
+        
+            console.log(xhr.responseText); }) // When Service call fails             
+
+
+    })
+
+};     
 
     
-    $.ajax({
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-        url: zip_url,
-        dataType: 'json',
-        async: true,
-        data: "{}", 
-        success: function (msg) {//On Successfull service call   
-            console.log(msg);
-        },
-        error: function (xhr) { console.log(xhr.responseText); } // When Service call fails             
-    });
-        
-        
+    // for (let i = 0; i < data.result[0].length; i++) {
+                    //     sevcount.push(data.result[0][i].Severity);   }
+    
+    
 
-    // draw_histogram(div_name, pos_data);
 
+
+
+// success: function (msg) {//On Successfull service call   
+    //         console.log(msg);
     //     },
-    //     error: function (result) {
+    //     error: function (xhr) { console.log(xhr.responseText); } // When Service call fails             
+    // });
 
 
 
-    // }
-    // })
 
-}
+// success: function (msg) {//On Successfull service call   
+//             console.log(msg);
+//         },
+//         error: function (xhr) { console.log(xhr.responseText); } // When Service call fails             
+//     });
+        
 
 
+
+// var dataZip = datajson.result[0];
+
+// var HTMLtag = d3.select("#bar");
+
+// HTMLtag.html("");
+
+// var month_count = dataZip.Month;
+
+// var month_name = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ]
+
+// var y1 = []
+
+// for (var i=0; i< month_count.length; i++){
+//     // xl.push(data[i][0])
+//     yl.push(data[i][1]) }
+
+// var trace1 = {
+//     x: month_name,
+//     y: y1,
+//     // (Object.values(month_count.forEach(count => month_name.append(count)++)))
+//     mode: 'markers',
+//     type: 'bar',
+//     orientation:'v'
+// };
+
+// var layout = {
+//     xaxis: {title:"Months"},
+//     yaxis: {title:("Count of Accidents in " + flushed_zip), type: 'category'},
+//     title: ("Count of Accidents in " + flushed_zip + "monthly in 3.5 years")
+
+// };
+
+// Plotly.newplot('bar', [trace1], layout);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// };
 // var xhttp;
 // if (str == "") {
 //   document.getElementById("txtHint").innerHTML = "";
@@ -254,4 +331,3 @@ function zip_test() {
 // //         console.log(data[i].Zipcodeeeee);
 // //     }
 // // })
-

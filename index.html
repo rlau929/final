@@ -20,11 +20,24 @@
       </div>
       <div class="row">
         <div class="topnav">
-          <a href="#thesis">Thesis</a>
-          <a href="#zip_code_colored">Zip Codes</a>
-          <a href="#seasons">Seasonal Trends</a>
-          <a href="#weekdays">Weekdays vs Weekend</a>
-          <a href="#time_day">Time of the day</a>
+          <nav>
+            <ul>
+              <!-- <li><strong>Home</strong></li> -->
+              <li><a href="index.html">Thesis: accidentsHappen</a></li>
+              <li><a href="static/zip_index.html">Decoding Zip Codes </a></li>
+              <li><a href="season.html">Trendy Seasons</a></li>
+              <li><a href="weekdays.html">Work Weekdays</a></li>
+              <li><a href="time.html">Whose time is it anyway?</a></li>
+              <li><a href="la_study.html">Los Angeles: A Case Study</a></li>
+            </ul>
+            <!-- 
+            <a href="#thesis">Thesis</a>
+            <a href="#zip_code_colored">Zip Codes</a>
+            <a href="#seasons">Seasonal Trends</a>
+            <a href="#weekdays">Weekdays vs Weekend</a>
+            <a href="#time_day">Time of the day</a> -->
+          </nav>
+        </div>
           <div class="search-container">
             <form id="zip_form" onsubmit="return false;">
               <!-- these input types put constraints on the our zipcode search, they follow these constraints, otherwise the next step doesnt happen -->
@@ -45,7 +58,7 @@
           </div>
         </div>
         <div class="col-md-12">
-          <div id="zip_code_colored">
+          <div id="bar">
             <h3>Zip Codes</h3>
             <img src="static/images/state_zipcode_zone1.png">
             <img src="static/images/state_zipcode_zone_colored.png">
@@ -56,6 +69,11 @@
               <p>
                 Here we are presented with Top10 Zip Codes that had the most accidents. It would have been a better choice to include city names.
               </p>
+              <!-- <div class="col-md-12">
+                <div id="bar" >
+                  <h3>Hello Test Zip Bar</h3>
+                </div> -->
+              </div>
           </div>
         </div>
         <div class="col-md-12">

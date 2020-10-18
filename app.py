@@ -83,9 +83,11 @@ def zip_query_sql(): # pass js variable how?
 
     s = text(f'SELECT * FROM accidents_usa_v2_db WHERE "Zipcode" = {test_var_js};')
 
+    qop = text(f'SELECT "Severity" , COUNT("Severity") FROM  "accidents_usa_v2_db" WHERE "Zipcode" = {test_var_js} GROUP BY "Severity";')
+
     # s = text(f'SELECT * FROM accidents_usa_v2_db WHERE "Month" = {test_var_js};')
 
-    zip_fetch = conn.execute(s).fetchall()
+    zip_fetch = conn.execute(qop).fetchall()
 
     # return jsonify(zip_fetch)
 
