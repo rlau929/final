@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Initial Dashboard 0.3</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
+  </head>
+  <body class="bg-dark">
+    <div class="container">
+      <div class="row"> 
+        <div class="col-md-12 jumbotron text-center" style="background-color: darkolivegreen;">
+          <h1>Initial Visualiztions of US Car Accidents Dataset</h1>
+            <p>Lets explore the dataset visuals with plotly.js </p>
+                <button class="btn-toggle" style="color:brown;">Toggle Dark Mode</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="topnav">
+          <nav>
+            <!-- <ul> -->
+              <!-- <li><strong>Home</strong></li> -->
+              <a href="index.html">Home</a>
+              <a href="static/zip_index.html">Decoding Zip Codes </a>
+              <a href="static/season.html">Trendy Seasons</a>
+              <a href="static/weekdays.html">Work Weekdays</a>
+              <a href="static/time.html">Whose time is it anyway?</a>
+              <a href="static/la_study.html">Los Angeles: A Case Study</a>
+              <a href="static/ml_sev.html">Severe Machine Learning</a>
+            <!-- </ul> -->
+            <!-- 
+            <a href="#thesis">Thesis</a>
+            <a href="#zip_code_colored">Zip Codes</a>
+            <a href="#seasons">Seasonal Trends</a>
+            <a href="#weekdays">Weekdays vs Weekend</a>
+            <a href="#time_day">Time of the day</a> -->
+          </nav>
+        </div>
+          <div class="search-container">
+            <form id="zip_form" onsubmit="return false;">
+              <!-- these input types put constraints on the our zipcode search, they follow these constraints, otherwise the next step doesnt happen -->
+              <input id="inputZip" type="number" placeholder="Enter 5 Digit Zip Code" name="search" autocomplete="on" pattern="\d{5}" maxlength="5" minlength="5" inputmode="numeric" >
+              <!-- Heres where the magic happens, type in a zip code, and it should activate a function where the zipcode is saved as a variable -->
+              <input style="color:brown;" type="submit" onclick='zip_test2()'>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div id="thesis">
+            <h2>accidentsHappen</h2>
+              <p>A car accident story inspired us to use a dataset to analyze and predict the chances of getting in an accident based on
+                  specific criteria and data. We see great potential in utilizing this dataset to provide interesting insights and research.
+                  By entering certain criteria such as zip codes, seasonal trends, severity, and traffic attributes, one can better forecast the
+                  chances of getting into a car accident. It is a simple and easy tool that any driver can use. 
+                </p>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div id="bar">
+            <h3>Zip Codes</h3>
+            <img src="static/images/state_zipcode_zone1.png">
+            <img src="static/images/state_zipcode_zone_colored.png">
+              <p>By creating a simple cartesian chart based on latitude and longitude, a map similar to the map of the US can be visually represented
+                 by each accident occurred in each zip code. Furthermore, by color filtering from States, we can overlay a map of all the different states in the US.
+                </p>
+              <img src="static/images/top10_zipcodes.png">
+              <p>
+                Here we are presented with Top10 Zip Codes that had the most accidents. It would have been a better choice to include city names.
+              </p>
+              <!-- <div class="col-md-12">
+                <div id="bar" >
+                  <h3>Hello Test Zip Bar</h3>
+                </div> -->
+              </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div id="seasons">
+            <h3>Seasons throughout 4 Years</h3>
+            <img src="static/images/seasonal_counts.png">
+              <p>Throughout the four years, we were hoping to find certain trends but then the months of one year. Thus, we can see there are certain trends,
+                 especially during the summer, that might lead to higher accident rates.</p>
+        </div>
+        <div class="col-md-12">
+          <div id="weekdays">
+            <h3>Weekend vs Weekdays</h3>
+            <img src="static/images/weekday_counts.png">
+              <p>Based on the assumption that a normal work week is Monday to Friday and weekend is Saturday to Sunday, we can surmise that a higher percentage
+                 of accidents occur within the weekday, even though there are five days in a week day and only two days on a weekend.
+                </p>
+        </div>
+        <div class="col-md-12">
+          <div id="time_day">
+            <h3>Time of the Day</h3>
+            <img src="static/images/time_of_day_count.png">
+              <p>We wanted to group the time in parts of the day since we can accurately dig insights onto which parts of the days have more data. we came up with time slots
+                  that are divided in such way: <br><br>
+                  Early Morning (3 am to 6:59 am)<br>
+                  Morning (7 am to 10:59 am),<br>
+                  Afternoon (11 am to 2:59 pm),<br>
+                  Late Afternoon (3 pm to 6:59 pm),<br>
+                  Night (7 pm to 10:59 pm),<br>
+                  Late Night (11 pm to 2:59 am)<br><br><br><br>
+                </p>
+                <p>We are planning on adding interactivity within the next deliverable. Stay tuned! </p>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.js" integrity="sha512-I54fxhTJwRigWTc3uNjgDzgii7LW+WJuyyA8kc6WaaZ7RQQNAf8bOEJLRNav7n/ca09MUwl5FptUukvqrOTUvQ==" crossorigin="anonymous"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="static/js/dark-mode.js"></script>
+    <script src="static/js/initialViz.js"></script>
+    <script src="static/js/jp_viz.js"></script>
+  </body>
+</html>
