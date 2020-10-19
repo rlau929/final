@@ -44,7 +44,7 @@
               <!-- these input types put constraints on the our zipcode search, they follow these constraints, otherwise the next step doesnt happen -->
               <input id="inputZip" type="number" placeholder="Enter 5 Digit Zip Code" name="search" autocomplete="on" pattern="\d{5}" maxlength="5" minlength="5" inputmode="numeric" >
               <!-- Heres where the magic happens, type in a zip code, and it should activate a function where the zipcode is saved as a variable -->
-              <input style="color:brown;" type="submit" onclick='zip_test2()'>
+              <input style="color:brown;" type="submit" onclick='zip_test()'>
             </form>
           </div>
         </div>
@@ -59,7 +59,7 @@
           </div>
         </div>
         <div class="col-md-12">
-          <div id="bar">
+          <div id="bar"></div>
             <h3>Zip Codes</h3>
             <img src="static/images/state_zipcode_zone1.png">
             <img src="static/images/state_zipcode_zone_colored.png">
@@ -70,49 +70,15 @@
               <p>
                 Here we are presented with Top10 Zip Codes that had the most accidents. It would have been a better choice to include city names.
               </p>
-              <!-- <div class="col-md-12">
-                <div id="bar" >
-                  <h3>Hello Test Zip Bar</h3>
-                </div> -->
-              </div>
-          </div>
-        </div>
+
         <div class="col-md-12">
-          <div id="seasons">
-            <h3>Seasons throughout 4 Years</h3>
-            <img src="static/images/seasonal_counts.png">
-              <p>Throughout the four years, we were hoping to find certain trends but then the months of one year. Thus, we can see there are certain trends,
-                 especially during the summer, that might lead to higher accident rates.</p>
-        </div>
-        <div class="col-md-12">
-          <div id="weekdays">
-            <h3>Weekend vs Weekdays</h3>
-            <img src="static/images/weekday_counts.png">
-              <p>Based on the assumption that a normal work week is Monday to Friday and weekend is Saturday to Sunday, we can surmise that a higher percentage
-                 of accidents occur within the weekday, even though there are five days in a week day and only two days on a weekend.
-                </p>
-        </div>
-        <div class="col-md-12">
-          <div id="time_day">
-            <h3>Time of the Day</h3>
-            <img src="static/images/time_of_day_count.png">
-              <p>We wanted to group the time in parts of the day since we can accurately dig insights onto which parts of the days have more data. we came up with time slots
-                  that are divided in such way: <br><br>
-                  Early Morning (3 am to 6:59 am)<br>
-                  Morning (7 am to 10:59 am),<br>
-                  Afternoon (11 am to 2:59 pm),<br>
-                  Late Afternoon (3 pm to 6:59 pm),<br>
-                  Night (7 pm to 10:59 pm),<br>
-                  Late Night (11 pm to 2:59 am)<br><br><br><br>
-                </p>
-                <p>We are planning on adding interactivity within the next deliverable. Stay tuned! </p>
-        </div>
-      </div>
+          <div id="months"></div>
+                  <h3>Months</h3>          
+
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.js" integrity="sha512-I54fxhTJwRigWTc3uNjgDzgii7LW+WJuyyA8kc6WaaZ7RQQNAf8bOEJLRNav7n/ca09MUwl5FptUukvqrOTUvQ==" crossorigin="anonymous"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="static/js/dark-mode.js"></script>
     <script src="static/js/initialViz.js"></script>
-    <script src="static/js/jp_viz.js"></script>
   </body>
 </html>

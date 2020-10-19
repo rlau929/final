@@ -56,7 +56,7 @@ def zip_query_sql(): # pass js variable how?
 
     test_var_js = request.args.get('get_zip')
 
-    s = text(f'SELECT * FROM accidents_usa_v2_db WHERE "Zipcode" = {test_var_js};')
+    s = text(f'SELECT "Severity" , COUNT("Severity") FROM  "accidents_usa_v2_db" WHERE "Zipcode" = {test_var_js} GROUP BY "Severity";')
 
     # s = text(f'SELECT * FROM accidents_usa_v2_db WHERE "Month" = {test_var_js};')
 
@@ -66,24 +66,15 @@ def zip_query_sql(): # pass js variable how?
 
     return jsonify({'result': [dict(row) for row in zip_fetch]})
 
-    # localhost:8080/zip_query?get_zip=95844
-
-    # return (zip_.... jsonify)
-
-@app.route('/')
-def season_page():
-
-    return render_template('season.html') #index.html main page
-
 @app.route('/zipcount', methods=['GET', 'POST'])
 def zip_count_sql(): # pass js variable how?
     # month_fetch = "March"
 
     test_count_js = request.args.get('get_count')
 
-    c = text(f'SELECT "Month", Count("Month") FROM accidents_usa_v2_db WHERE "Zipcode" = {test_count_js} GROUP BY "Month";')
+    count = text(f'SELECT "Month", Count("Month") FROM accidents_usa_v2_db WHERE "Zipcode" = {test_count_js} GROUP BY "Month";')
 
-    count_fetch = conn.execute(c).fetchall()
+    count_fetch = conn.execute(count).fetchall()
 
     return jsonify({'result': [dict(row) for row in count_fetch]})
 
