@@ -20,6 +20,7 @@ function zip_test() {
     };
 
 function runAll() {
+        chart1(),
         chart2()
         
 };
@@ -42,9 +43,9 @@ function chart1() {
         
         async: true,
         
-        data: "{}", 
+        data: {}, 
 
-        success: function successZip(data, dataTrace, layout) {
+        success: function successZip(data) {
             // console.log("first " + data);         
                 
             var zipcount = [] 
@@ -93,49 +94,48 @@ function chart1() {
  
 function chart2() {
 
-    var count_url = ("http://127.0.0.1:5000/zipcount?get_count=" + flushed_zip)
+    var zip_url = ("http://127.0.0.1:5000/zipcount?get_count=" + flushed_zip)
 
-    $.post(count_url);
+    $.post(zip_url);
 
-  
     $.ajax({
 
         type: "POST",
         
         contentType: "application/json; charset=utf-8",
         
-        url: count_url,
+        url: zip_url,
         
         dataType: 'json',
         
         async: true,
         
-        data: "{}",  
+        data: {}, 
 
-        Success: function successZip2(data) {
-        // console.log("first " + data);         
-        
-            var zipcount2 = [] 
-            var sevcount2 = [] 
+        success: function successZip(data) {
+            // console.log("first " + data);         
+                
+            var zipcount = [] 
+            var sevcount = [] 
 
             for (var item in data.result) {
-                zipcount2.push(data.result[item].Month);
-                sevcount2.push(data.result[item].count);
-            }
-        
-            console.log(sevcount2);
-        
-        
-                var dataTrace2 = 
-                    {
-                    x: zipcount2,
-                    y: sevcount2,
-                    type: 'bar'
-                    };
-
-            var layout2 = 
+                zipcount.push(data.result[item].Month);
+                sevcount.push(data.result[item].count);
+                }
+                
+            console.log(sevcount);
+                
+                
+            var dataTrace = [
                 {
-                title: 'Accidents by Month in ' + flushed_zip,
+                x: zipcount,
+                y: sevcount,
+                type: 'bar'
+                }   
+            ];
+            var layout = [
+                {
+                title: 'Count of Severity in ' + flushed_zip,
                 showlegend: false,
                 xaxis: {
                     tickangle: -45
@@ -146,19 +146,16 @@ function chart2() {
                 },
                 bargap :0.05
             }
-        Plotly.newPlot('bar', dataTrace2, layout2)
-
-
-
-
-
+        ] 
+        Plotly.newPlot('months', dataTrace, layout)
 
     },
 
         error: (function (xhr) {
-
+    
             console.log(xhr.responseText); }) // When Service call fails             
 
 
     })
-    };
+    }
+

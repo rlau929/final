@@ -9,14 +9,17 @@ from sqlalchemy import create_engine, func
 from flask import Flask, jsonify, request, render_template
 from sqlalchemy.sql import text
 import json
+import pandas as pd
 from sqlalchemy import JSON
 from sqlalchemy import type_coerce
 from sqlalchemy.dialects import mysql
+import pickle
 
 import sys
 # sys.path.insert(1, '..')
 
 from config import username, password, port, db_name
+
 
 ################################################################
 # Database Setup
@@ -37,6 +40,9 @@ conn = engine.connect()
 ################################################################
 # Flask Setup
 ################################################################
+
+with open('model/machine_learning.pkl', 'rb') as f:
+     model = pickle.load(f)
 
 app = Flask(__name__, template_folder='')
 
@@ -77,6 +83,24 @@ def zip_count_sql(): # pass js variable how?
     count_fetch = conn.execute(count).fetchall()
 
     return jsonify({'result': [dict(row) for row in count_fetch]})
+
+@app.route('/ml_sev',methods=['POST'])
+def predict():
+    # Get the data from the POST request.
+    if request.method == "POST":
+
+        predict_js = request.args.get('get_model')
+        #data = request.get_json(force=True)
+        print(request.form[predict_js])
+        data = float(request.form[predict_js])
+        print("Data", model.predict([[data]]))
+        # Make prediction using model loaded from disk as per the data.
+        prediction = model.predict([[data]])
+
+        # Take the first value of prediction
+        output = prediction[0]
+
+        return jsonify(output)
 
 if __name__ == '__main__':
     # app = Flask(__name__, template_folder='../')

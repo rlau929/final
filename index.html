@@ -20,24 +20,6 @@
       </div>
       <div class="row">
         <div class="topnav">
-          <nav>
-            <!-- <ul> -->
-              <!-- <li><strong>Home</strong></li> -->
-              <a href="index.html">Home</a>
-              <a href="static/zip_index.html">Decoding Zip Codes </a>
-              <a href="static/season.html">Trendy Seasons</a>
-              <a href="static/weekdays.html">Work Weekdays</a>
-              <a href="static/time.html">Whose time is it anyway?</a>
-              <a href="static/la_study.html">Los Angeles: A Case Study</a>
-              <a href="static/ml_sev.html">Severe Machine Learning</a>
-            <!-- </ul> -->
-            <!-- 
-            <a href="#thesis">Thesis</a>
-            <a href="#zip_code_colored">Zip Codes</a>
-            <a href="#seasons">Seasonal Trends</a>
-            <a href="#weekdays">Weekdays vs Weekend</a>
-            <a href="#time_day">Time of the day</a> -->
-          </nav>
         </div>
           <div class="search-container">
             <form id="zip_form" onsubmit="return false;">
@@ -48,29 +30,20 @@
             </form>
           </div>
         </div>
-        <div class="col-md-12">
-          <div id="thesis">
-            <h2>accidentsHappen</h2>
-              <p>A car accident story inspired us to use a dataset to analyze and predict the chances of getting in an accident based on
-                  specific criteria and data. We see great potential in utilizing this dataset to provide interesting insights and research.
-                  By entering certain criteria such as zip codes, seasonal trends, severity, and traffic attributes, one can better forecast the
-                  chances of getting into a car accident. It is a simple and easy tool that any driver can use. 
-                </p>
-          </div>
-        </div>
+        <div class="result">
+          {% if result %}
+              {% for variable, value in original_input.items() %}
+                  <b>{{ variable }}</b> : {{ value }}
+              {% endfor %}
+              <br>
+              <br> Predicted number of bikes in use:
+                 <p style="font-size:50px">{{ result }}</p>
+          {% endif %}
+      </div>
         <div class="col-md-12">
           <div id="bar"></div>
             <h3>Zip Codes</h3>
-            <img src="static/images/state_zipcode_zone1.png">
-            <img src="static/images/state_zipcode_zone_colored.png">
-              <p>By creating a simple cartesian chart based on latitude and longitude, a map similar to the map of the US can be visually represented
-                 by each accident occurred in each zip code. Furthermore, by color filtering from States, we can overlay a map of all the different states in the US.
-                </p>
-              <img src="static/images/top10_zipcodes.png">
-              <p>
-                Here we are presented with Top10 Zip Codes that had the most accidents. It would have been a better choice to include city names.
-              </p>
-
+        </div>
         <div class="col-md-12">
           <div id="months"></div>
                   <h3>Months</h3>          
