@@ -10,6 +10,8 @@ from sqlalchemy import *
 from flask import Flask, jsonify, request, render_template
 from sqlalchemy.sql import text
 import json
+import pickle
+import pandas as pd
 from sqlalchemy import JSON
 from sqlalchemy import type_coerce
 from sqlalchemy.dialects import mysql
@@ -60,6 +62,9 @@ conn = engine.connect()
 # Flask Setup
 ################################################################
 
+with open('model/machine_learning.pkl', 'rb') as f:
+     model = pickle.load(f)
+
 app = Flask(__name__, template_folder='')
 
 
@@ -78,7 +83,7 @@ def main_page():
 @app.route('/zipquery', methods=['GET', 'POST'])
 def zip_query_sql(): # pass js variable how?
     # month_fetch = "March"
-
+    
     test_var_js = request.args.get('get_zip')
 
     s = text(f'SELECT * FROM accidents_usa_v2_db WHERE "Zipcode" = {test_var_js};')
@@ -96,6 +101,49 @@ def zip_query_sql(): # pass js variable how?
     # localhost:8080/zip_query?get_zip=95844
 
     # return (zip_.... jsonify)
+
+@app.route('/ml_sev',methods=['POST'])
+def predict():
+    # Get the data from the POST request.
+    if request.method == "POST":
+        #data = request.get_json(force=True)
+        print(request.form['zipcode'])
+        data = float(request.form['zipcode'])
+        print("Data", model.predict([[data]]))
+        # Make prediction using model loaded from disk as per the data.
+        prediction = model.predict([[data]])
+
+        # Take the first value of prediction
+        output = prediction[0]
+
+        return render_template("static/results.html", output=output, exp=data)
+
+
+
+
+
+
+
+
+
+
+
+
+
+# @app.route('/zip_ml', methods=['GET', 'POST'])
+# def main():
+
+#     return render_template('static/ml_sev.html')
+    
+#     if Flask.request.method == 'POST':
+#         zipcode = Flask.request.form['Zipcode']
+#         # humidity = Flask.request.form['humidity']
+#         # windspeed = Flask.request.form['windspeed']
+#         input_variables = pd.DataFrame([[zipcode]],
+#                                        columns=['Zipcode'],
+#                                        dtype=float)
+#         prediction = model.predict([[input_variables]])[0]
+#         return Flask.render_template('ml_sev.html', original_input={'Zipcode':zipcode}, result=prediction)            
 
 if __name__ == '__main__':
     # app = Flask(__name__, template_folder='../')

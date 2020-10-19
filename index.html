@@ -1,117 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Initial Dashboard 0.3</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/styles.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
-  </head>
-  <body class="bg-dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Initial Dashboard 0.3</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+  integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Nova+Cut&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body id="page-top">
+  <nav class="navbar navbar-expand-lg bg-dark fixed-top text-uppercase" id="mainNav">
     <div class="container">
-      <div class="row"> 
-        <div class="col-md-12 jumbotron text-center" style="background-color: darkolivegreen;">
-          <h1>Initial Visualiztions of US Car Accidents Dataset</h1>
-            <p>Lets explore the dataset visuals with plotly.js </p>
-                <button class="btn-toggle" style="color:brown;">Toggle Dark Mode</button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="topnav">
-          <nav>
-            <!-- <ul> -->
-              <!-- <li><strong>Home</strong></li> -->
-              <a href="index.html">Home</a>
-              <a href="static/zip_index.html">Decoding Zip Codes </a>
-              <a href="static/season.html">Trendy Seasons</a>
-              <a href="static/weekdays.html">Work Weekdays</a>
-              <a href="static/time.html">Whose time is it anyway?</a>
-              <a href="static/la_study.html">Los Angeles: A Case Study</a>
-              <a href="static/ml_sev.html">Severe Machine Learning</a>
-            <!-- </ul> -->
-            <!-- 
-            <a href="#thesis">Thesis</a>
-            <a href="#zip_code_colored">Zip Codes</a>
-            <a href="#seasons">Seasonal Trends</a>
-            <a href="#weekdays">Weekdays vs Weekend</a>
-            <a href="#time_day">Time of the day</a> -->
-          </nav>
-        </div>
-          <div class="search-container">
-            <form id="zip_form" onsubmit="return false;">
-              <!-- these input types put constraints on the our zipcode search, they follow these constraints, otherwise the next step doesnt happen -->
-              <input id="inputZip" type="number" placeholder="Enter 5 Digit Zip Code" name="search" autocomplete="on" pattern="\d{5}" maxlength="5" minlength="5" inputmode="numeric" >
-              <!-- Heres where the magic happens, type in a zip code, and it should activate a function where the zipcode is saved as a variable -->
-              <input style="color:brown;" type="submit" onclick='zip_test()'>
-            </form>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div id="thesis">
-            <h2>accidentsHappen</h2>
-              <p>A car accident story inspired us to use a dataset to analyze and predict the chances of getting in an accident based on
-                  specific criteria and data. We see great potential in utilizing this dataset to provide interesting insights and research.
-                  By entering certain criteria such as zip codes, seasonal trends, severity, and traffic attributes, one can better forecast the
-                  chances of getting into a car accident. It is a simple and easy tool that any driver can use. 
-                </p>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div id="bar">
-            <h3>Zip Codes</h3>
-            <img src="static/images/state_zipcode_zone1.png">
-            <img src="static/images/state_zipcode_zone_colored.png">
-              <p>By creating a simple cartesian chart based on latitude and longitude, a map similar to the map of the US can be visually represented
-                 by each accident occurred in each zip code. Furthermore, by color filtering from States, we can overlay a map of all the different states in the US.
-                </p>
-              <img src="static/images/top10_zipcodes.png">
-              <p>
-                Here we are presented with Top10 Zip Codes that had the most accidents. It would have been a better choice to include city names.
-              </p>
-              <!-- <div class="col-md-12">
-                <div id="bar" >
-                  <h3>Hello Test Zip Bar</h3>
-                </div> -->
-              </div>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div id="seasons">
-            <h3>Seasons throughout 4 Years</h3>
-            <img src="static/images/seasonal_counts.png">
-              <p>Throughout the four years, we were hoping to find certain trends but then the months of one year. Thus, we can see there are certain trends,
-                 especially during the summer, that might lead to higher accident rates.</p>
-        </div>
-        <div class="col-md-12">
-          <div id="weekdays">
-            <h3>Weekend vs Weekdays</h3>
-            <img src="static/images/weekday_counts.png">
-              <p>Based on the assumption that a normal work week is Monday to Friday and weekend is Saturday to Sunday, we can surmise that a higher percentage
-                 of accidents occur within the weekday, even though there are five days in a week day and only two days on a weekend.
-                </p>
-        </div>
-        <div class="col-md-12">
-          <div id="time_day">
-            <h3>Time of the Day</h3>
-            <img src="static/images/time_of_day_count.png">
-              <p>We wanted to group the time in parts of the day since we can accurately dig insights onto which parts of the days have more data. we came up with time slots
-                  that are divided in such way: <br><br>
-                  Early Morning (3 am to 6:59 am)<br>
-                  Morning (7 am to 10:59 am),<br>
-                  Afternoon (11 am to 2:59 pm),<br>
-                  Late Afternoon (3 pm to 6:59 pm),<br>
-                  Night (7 pm to 10:59 pm),<br>
-                  Late Night (11 pm to 2:59 am)<br><br><br><br>
-                </p>
-                <p>We are planning on adding interactivity within the next deliverable. Stay tuned! </p>
-        </div>
+      <button class="navbar-toggler navbar-toggler-right text-uppercase text-white rounded" type="button"
+          data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+              <a class="nav-link " href="#about">About</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#zipsearch">ZipCodes Decode</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#season">Trendy Seasons</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#weekday">Work Weekdays</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#time">Time of Day</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#lastudy">LA: A Case Study</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#severe">Severity ML</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#severe">Severity fML</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#severe">Severity sL</a>
+          </li>
+        </ul>
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.js" integrity="sha512-I54fxhTJwRigWTc3uNjgDzgii7LW+WJuyyA8kc6WaaZ7RQQNAf8bOEJLRNav7n/ca09MUwl5FptUukvqrOTUvQ==" crossorigin="anonymous"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="static/js/dark-mode.js"></script>
-    <script src="static/js/initialViz.js"></script>
-  </body>
+  </nav>
+  <header class="masthead bg-primary text-white text-center">
+    <div class="container">
+      <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
+      <h1>Initial Visualiztions of US Car Accidents Dataset</h1>
+      <p>Lets explore the dataset visuals with plotly.js </p>
+      <button class="btn-toggle" style="color:brown;">Toggle Dark Mode</button>
+    </div>
+  </header>
+    <div class="row"> 
+      <!-- <div class="col-md-12">
+          <div class="topnav">
+            <nav>
+                <a href="#about">About</a>
+                <a href="http://127.0.0.1:5000/zipquery">Decoding Zip Codes </a>
+                <a href="static/season.html">Trendy Seasons</a>
+                <a href="static/weekdays.html">Work Weekdays</a>
+                <a href="static/time.html">Whose time is it anyway?</a>
+                <a href="static/la_study.html">Los Angeles: A Case Study</a>
+                <a href="static/ml_sev.html">Severe Machine Learning</a>
+            </nav>
+          </div>
+      </div> -->
+      <div class="col-md-12" id="about">
+        <h2>accidentsHappen</h2>
+          <p>A car accident story inspired us to use a dataset to analyze and predict the chances of getting in an accident based on
+            specific criteria and data. We see great potential in utilizing this dataset to provide interesting insights and research.
+            By entering certain criteria such as zip codes, seasonal trends, severity, and traffic attributes, one can better forecast the
+            chances of getting into a car accident. It is a simple and easy tool that any driver can use. </p>
+      </div>   
+      <div class="col-md-12">
+        <h3 id="zipsearch">Search your Zip Code</h3>
+        <div class="search-container">
+          <form id="zip_form" onsubmit="return false;">
+            <input id="inputZip" type="number" placeholder="Enter 5 Digit Zip Code" name="search" autocomplete="on" pattern="\d{5}" maxlength="5" minlength="5" inputmode="numeric" >
+            <input style="color:brown;" type="submit" onclick='zip_test()'>
+          </form>
+        </div>
+        <div id="bar"></div>
+          <img src="static/images/state_zipcode_zone1.png">
+          <img src="static/images/state_zipcode_zone_colored.png">  
+          <p>By creating a simple cartesian chart based on latitude and longitude, a map similar to the map of the US can be visually represented
+            by each accident occurred in each zip code. Furthermore, by color filtering from States, we can overlay a map of all the different states in the US.</p>
+          <img src="static/images/top10_zipcodes.png">
+            <p> Here we are presented with Top10 Zip Codes that had the most accidents. It would have been a better choice to include city names.</p>
+      </div> 
+      <div class="col-md-12">
+        <div id="season">
+          <h3>Seasons throughout 4 Years</h3>
+          <img src="static/images/seasonal_counts.png">
+            <p>Throughout the four years, we were hoping to find certain trends but then the months of one year. Thus, we can see there are certain trends,
+              especially during the summer, that might lead to higher accident rates.</p>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div id="weekday">
+          <h3>Weekend vs Weekdays</h3>
+          <img src="static/images/weekday_counts.png">
+            <p>Based on the assumption that a normal work week is Monday to Friday and weekend is Saturday to Sunday, we can surmise that a higher percentage
+              of accidents occur within the weekday, even though there are five days in a week day and only two days on a weekend.</p>
+          </div>
+      </div>
+      <div class="col-md-12">
+        <div id="time">
+          <h3>Time of the Day</h3>
+          <img src="static/images/time_of_day_count.png">
+            <p>We wanted to group the time in parts of the day since we can accurately dig insights onto which parts of the days have more data. we came up with time slots
+                that are divided in such way: <br><br> Early Morning (3 am to 6:59 am)<br> Morning (7 am to 10:59 am),<br> Afternoon (11 am to 2:59 pm),<br> Late Afternoon (3 pm to 6:59 pm),<br>
+                Night (7 pm to 10:59 pm),<br> Late Night (11 pm to 2:59 am)<br><br><br><br></p>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div id="credit">
+          <h6>Credit and Licensing</h6>
+            <p style="font-size: x-small;"> Raw Dataset Availble at <a href="https://www.kaggle.com/sobhanmoosavi/us-accidents">Kaggle<br></a>
+                Licensed under CC BY-NC-SA 4.0 and Credited to:<br>
+                Moosavi, Sobhan, Mohammad Hossein Samavatian, Srinivasan Parthasarathy, and Rajiv Ramnath. <a href="https://arxiv.org/abs/1906.05409">“A Countrywide Traffic Accident Dataset.</a>”, 2019.<br>
+                Moosavi, Sobhan, Mohammad Hossein Samavatian, Srinivasan Parthasarathy, Radu Teodorescu, and Rajiv Ramnath. <a href="https://arxiv.org/abs/1909.09638">"Accident Risk Prediction based on Heterogeneous Sparse Data: New Dataset and Insights.</a>" In proceedings of the 27th ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems, ACM, 2019.</p>
+        </div>
+      </div>
+      <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+      <div class="col-md-12">
+        <footer id="footer_about">
+          <h4>accidentsHappen: A Collaborative Project brought to you by:<br><br>
+              Robert Lau, Kim Ngo, Joshua Rivera, and Simranjot Singh <br><br>
+              University of California Berkeley Extension <br>
+              Data Analytics and Visualization Bootcamp (May-Oct 2020)</h4>
+          <a href="https://github.com/rlau929/final">Project Gitbub</a>
+        </footer>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"
+        integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.js" integrity="sha512-I54fxhTJwRigWTc3uNjgDzgii7LW+WJuyyA8kc6WaaZ7RQQNAf8bOEJLRNav7n/ca09MUwl5FptUukvqrOTUvQ==" crossorigin="anonymous"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="static/js/sideslideNav.js"></script>
+  <script src="static/js/dark-mode.js"></script>
+  <script src="static/js/scrollUp.js"></script>
+  <script src="static/js/initialViz.js"></script>
+</body>
 </html>
+
+
+<!-- <div id="zip_ml_div" class="col-md-12; result" align="center">   
+            <div id="gauge">
+            {% if result %}
+                {% for variable, value in original_input.items() %}
+                    <b>{{ variable }}</b> : {{ value }}
+                {% endfor %}
+                <br>
+                <br> Predicted severity of a car accident:
+                <p style="font-size:50px">{{ result }}</p>
+            {% endif %}
+            </div>
+          </div>         -->
+<!-- <div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="index.html">Home</a>
+  <a href="static/zip_index.html">Decoding Zip Codes </a>
+  <a href="static/season.html">Trendy Seasons</a>
+  <a href="static/weekdays.html">Work Weekdays</a>
+  <a href="static/time.html">Whose time is it anyway?</a>
+  <a href="static/la_study.html">Los Angeles: A Case Study</a>
+  <a href="static/ml_sev.html">Severe Machine Learning</a>
+</div>
+<div id="main">
+<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span> -->

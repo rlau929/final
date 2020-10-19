@@ -28,7 +28,7 @@ function zip_test() {
     }
 
     var zip_url = ("http://127.0.0.1:5000/zipquery?get_zip=" + flushed_zip)
-
+    
     // $.get(zip_url);
 
     $.post(zip_url);
@@ -85,9 +85,13 @@ function zip_test() {
                     Plotly.newPlot('bar', dataTrace)
 
 
+                   
 
 
-                    // Plotly.newPlot("bar", figure.data, figure.layout);
+
+
+
+        
 
             },
     
@@ -99,9 +103,109 @@ function zip_test() {
     })
 
 };     
+ // // Loading gauge chart
+                    // var data = [
+                    //     {
+                    //     domain: { x: [0, 1], y: [0, 1] },
+                    //     value: result.wfreq,
+                    //     title: { text: "<b>Car Accident Severity</b> <br>by Zipcode</br>" },
+                    //     type: "indicator",
+                    //     mode: "gauge+number",
+                    //     rotation: 90,
+                    //     gauge: {
+                    //         axis: { range: [0, 9] },
+                    //         bar: { color: "red" },
+                    //         steps: [
+                    //         { range: [0, 1], color: "rgba(232, 226, 202, .5)" },
+                    //         { range: [1, 2], color: "rgba(210, 206, 145, .5)" },
+                    //         { range: [2, 3], color: "rgba(190, 190, 120, .5)" },
+                    //         { range: [3, 4], color: "rgba(180, 190, 120, 1)" },
+                    //         { range: [4, 5], color: "rgba(150, 206, 60, 1)" },
+                    //         { range: [5, 6], color: "rgba(120, 190, 50, 1)" },
+                    //         { range: [6, 7], color: "rgba(80, 160, 42, 1)"  },
+                    //         { range: [7, 8], color: "rgba(40, 147, 22, 1)" },
+                    //         { range: [8, 9], color: "rgba(14, 127, 0, 1)" },
+                    //         { range: [""], color: "rgba(255, 255, 255, 0)" },
+                    //         ],
+                    //         textinfo: "text",
+                    //         textposition: "inside",
+                    //         threshold: {
+                    //         line: { color: "red", width: 4 },
+                    //         thickness: 0.75,
+                    //         value: 9
+                    //         },
 
-    
-    // for (let i = 0; i < data.result[0].length; i++) {
+                    //     }
+                    // }
+                    // ];
+                    
+                    // var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+                    // Plotly.newPlot('gauge', data, layout);  
+   
+// function zip_func_ml() {
+
+//     var zip_input = document.getElementById('inputZip').value;
+
+//     if (typeof zip_input === "string" && zip_input.length == 5) {
+
+//         flushed_zip = zip_input;
+
+//         console.log(typeof flushed_zip);
+
+//         console.log(flushed_zip)
+
+//     } else {
+        
+//         console.log("Zip is not of a valid format")
+
+//     }
+
+
+//     var zip_ml_url = ("http://127.0.0.1:5000/zip_ml?get_zip_ml=" + flushed_zip)
+
+
+
+
+
+
+
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// for (let i = 0; i < data.result[0].length; i++) {
                     //     sevcount.push(data.result[0][i].Severity);   }
     
     
