@@ -9,11 +9,9 @@ from sqlalchemy import create_engine, func
 from flask import Flask, jsonify, request, render_template
 from sqlalchemy.sql import text
 import json
-import pandas as pd
 from sqlalchemy import JSON
 from sqlalchemy import type_coerce
 from sqlalchemy.dialects import mysql
-import pickle
 
 import sys
 # sys.path.insert(1, '..')
@@ -41,11 +39,7 @@ conn = engine.connect()
 # Flask Setup
 ################################################################
 
-with open('model/machine_learning.pkl', 'rb') as f:
-     model = pickle.load(f)
-
 app = Flask(__name__, template_folder='')
-
 
 @app.route('/hello_world')
 def test_hello():
@@ -84,24 +78,15 @@ def zip_count_sql(): # pass js variable how?
 
     return jsonify({'result': [dict(row) for row in count_fetch]})
 
-@app.route('/ml_sev',methods=['POST'])
-def predict():
-    # Get the data from the POST request.
-    if request.method == "POST":
+@app.route('/zipall', methods=['GET', 'POST'])
+def zip_all_sql(): # pass js variable how?
+    # month_fetch = "March"
 
-        predict_js = request.args.get('get_model')
-        #data = request.get_json(force=True)
-        print(request.form[predict_js])
-        data = float(request.form[predict_js])
-        print("Data", model.predict([[data]]))
-        # Make prediction using model loaded from disk as per the data.
-        prediction = model.predict([[data]])
+    test_all_js = request.args.get('get_all')
 
-        # Take the first value of prediction
-        output = prediction[0]
+    all = text(f'SELECT \"Time_of_Day\", COUNT(\"Time_of_Day\") FROM accidents_usa_v2_db WHERE \"Zipcode\" = {test_all_js} GROUP BY \"Time_of_Day\" ORDER BY CASE WHEN \"Time_of_Day\" = \'Early Morning\' then 1 WHEN \"Time_of_Day\" = \'Morning\' then 2 WHEN \"Time_of_Day\" = \'Afternoon\' then 3 WHEN \"Time_of_Day\" = \'Late Afternoon\' then 4 WHEN \"Time_of_Day\" = \'Night\' then 5 WHEN \"Time_of_Day\" = \'Late Night\' then 6 ELSE NULL END;')
 
-        return jsonify(output)
+    all_fetch = conn.execute(all).fetchall()
 
-if __name__ == '__main__':
-    # app = Flask(__name__, template_folder='../')
-    app.run(debug=True)
+    return jsonify({'result': [dict(row) for row in all_fetch]})
+
