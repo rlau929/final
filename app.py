@@ -9,6 +9,8 @@ from sqlalchemy import create_engine, func
 from flask import Flask, jsonify, request, render_template
 from sqlalchemy.sql import text
 import json
+import pickle
+import pandas as pd
 from sqlalchemy import JSON
 from sqlalchemy import type_coerce
 from sqlalchemy.dialects import mysql
@@ -38,6 +40,9 @@ conn = engine.connect()
 ################################################################
 # Flask Setup
 ################################################################
+
+with open('model/machine_learning.pkl', 'rb') as f:
+     model = pickle.load(f)
 
 app = Flask(__name__, template_folder='')
 
@@ -90,3 +95,10 @@ def zip_all_sql(): # pass js variable how?
 
     return jsonify({'result': [dict(row) for row in all_fetch]})
 
+#@app.route('/submit', methods=['GET', 'POST'])  
+#def make_prediction():
+  #features = [int(x) for x in request.form.values()]
+  #final_features = [np.array(features)]       
+  #prediction = model.predict(final_features)  
+  #prediction = prediction[0]    
+  #return render_template('prediction.html', prediction = prediction)

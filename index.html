@@ -18,18 +18,46 @@
                 <button class="btn-toggle" style="color:brown;">Toggle Dark Mode</button>
         </div>
       </div>
-      <div class="row">
         <div class="topnav">
         </div>
           <div class="search-container">
             <form id="zip_form" onsubmit="return false;">
-              <!-- these input types put constraints on the our zipcode search, they follow these constraints, otherwise the next step doesnt happen -->
               <input id="inputZip" type="number" placeholder="Enter 5 Digit Zip Code" name="search" autocomplete="on" pattern="\d{5}" maxlength="5" minlength="5" inputmode="numeric" >
-              <!-- Heres where the magic happens, type in a zip code, and it should activate a function where the zipcode is saved as a variable -->
-              <input style="color:brown;" type="submit" onclick='zip_test()'>
+              <input style="color:brown;" type="submit" onclick= zip_test()>
             </form>
+
           </div>
         </div>
+        <section>
+          <h1>Prediction</h1>
+            <form action="/submit" method='POST'>
+              <p>
+                <button type="submit" value="Predict" name="Predict"> Predict </button> 
+              </p>
+              <input type="hidden" name="Speed_Bump" value="0" />
+              <input type="checkbox" id="Speed_Bump" name="Speed_Bump" value=1 >
+              <label for="Speed_Bump">Speed Bump</label>
+              <input type="hidden" name="Yield_Sign" value="0" />
+              <input type="checkbox" id="Yield_Sign" name="Yield_Sign" value=1>
+              <label for="Yield_Sign">Yield Sign</label>
+              <input type="hidden" name="Speed_Bump" value="0" />
+              <input type="checkbox" id="Speed_Bump" name="Speed_Bump" value=1 >
+              <label for="Speed_Bump">Speed Bump</label>
+              <input type="hidden" name="Yield_Sign" value="0" />
+              <input type="checkbox" id="Yield_Sign" name="Yield_Sign" value=1>
+              <label for="Yield_Sign">Yield Sign</label>
+              <input type="hidden" name="Speed_Bump" value="0" />
+              <input type="checkbox" id="Speed_Bump" name="Speed_Bump" value=1 >
+              <label for="Speed_Bump">Speed Bump</label>
+              <input type="hidden" name="Yield_Sign" value="0" />
+              <input type="checkbox" id="Yield_Sign" name="Yield_Sign" value=1>
+              <label for="Yield_Sign">Yield Sign</label>
+              <input type="hidden" name="Speed_Bump" value="0" />
+              <input type="checkbox" id="Speed_Bump" name="Speed_Bump" value=1 >
+              <label for="Speed_Bump">Speed Bump</label>
+              <input type="hidden" name="Yield_Sign" value="0" />
+              <input type="checkbox" id="Yield_Sign" name="Yield_Sign" value=1>
+              <label for="Yield_Sign">Yield Sign</label>
         <div class="col-md-12">
           <div id="scatter"></div>
         </div>
