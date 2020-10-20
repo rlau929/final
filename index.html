@@ -4,79 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Initial Dashboard 0.3</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-  integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-  <link href="https://fonts.googleapis.com/css2?family=Nova+Cut&display=swap" rel="stylesheet">
+  <title>Initial Dashboard 0.4</title>
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" /> -->
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" /> -->
+  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+  integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" /> -->
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Nova+Cut&display=swap" rel="stylesheet"> -->
   <link rel="stylesheet" href="static/css/styles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.js" integrity="sha512-I54fxhTJwRigWTc3uNjgDzgii7LW+WJuyyA8kc6WaaZ7RQQNAf8bOEJLRNav7n/ca09MUwl5FptUukvqrOTUvQ==" crossorigin="anonymous"></script>
 </head>
 <body id="page-top">
-  <nav class="navbar navbar-expand-lg bg-dark fixed-top text-uppercase" id="mainNav">
-    <div class="container">
-      <button class="navbar-toggler navbar-toggler-right text-uppercase text-white rounded" type="button"
-          data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-          aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-              <a class="nav-link " href="#about">About</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="#zipsearch">ZipCodes Decode</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="#season">Trendy Seasons</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="#weekday">Work Weekdays</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#time">Time of Day</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#lastudy">LA: A Case Study</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#severe">Severity ML</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#severe">Severity fML</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#severe">Severity sL</a>
-          </li>
-        </ul>
+  <div class="container">
+    <div class="row"> 
+      <div class="col-md-12 jumbotron text-center" style="background-color: darkolivegreen;">
+        <h1>Initial Visualiztions of US Car Accidents Dataset</h1>
+          <p>Lets explore the dataset visuals with plotly.js </p>
+            <button class="btn-toggle" style="color:brown;">Toggle Dark Mode</button>
       </div>
     </div>
-  </nav>
-  <header class="masthead bg-primary text-white text-center">
-    <div class="container">
-      <!-- $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ -->
-      <h1>Initial Visualiztions of US Car Accidents Dataset</h1>
-      <p>Lets explore the dataset visuals with plotly.js </p>
-      <button class="btn-toggle" style="color:brown;">Toggle Dark Mode</button>
-    </div>
-  </header>
     <div class="row"> 
-      <!-- <div class="col-md-12">
+      <div class="col-md-12">
           <div class="topnav">
             <nav>
-                <a href="#about">About</a>
-                <a href="http://127.0.0.1:5000/zipquery">Decoding Zip Codes </a>
-                <a href="static/season.html">Trendy Seasons</a>
-                <a href="static/weekdays.html">Work Weekdays</a>
-                <a href="static/time.html">Whose time is it anyway?</a>
-                <a href="static/la_study.html">Los Angeles: A Case Study</a>
-                <a href="static/ml_sev.html">Severe Machine Learning</a>
+              <a class="nav-link " href="#about">About</a>
+              <a class="nav-link" href="#zipsearch">ZipCodes Decode</a>
+              <a class="nav-link" href="#season">Trendy Seasons</a>
+              <a class="nav-link" href="#weekday">Work Weekdays</a>
+              <a class="nav-link" href="#time">Time of Day</a>
+              <a class="nav-link" href="#lastudy">LA: A Case Study</a>
+              <a class="nav-link" href="#severe">Severity ML</a>
             </nav>
           </div>
-      </div> -->
+      </div>
       <div class="col-md-12" id="about">
         <h2>accidentsHappen</h2>
           <p>A car accident story inspired us to use a dataset to analyze and predict the chances of getting in an accident based on
@@ -89,16 +53,27 @@
         <div class="search-container">
           <form id="zip_form" onsubmit="return false;">
             <input id="inputZip" type="number" placeholder="Enter 5 Digit Zip Code" name="search" autocomplete="on" pattern="\d{5}" maxlength="5" minlength="5" inputmode="numeric" >
-            <input style="color:brown;" type="submit" onclick='zip_test()'>
+            <input style="color:brown;" type="submit" onclick= zip_test()>
           </form>
         </div>
-        <div id="bar"></div>
-          <img src="static/images/state_zipcode_zone1.png">
+        <div id="plotlygraph1">
+          <div id="bar"></div>
+        </div>
+        <div id="plotlygraph2">
+          <div id="months"></div>
+        </div>
+        <div id="plotlygraph3">
+          <div id="testMap"></div>
+        </div>
+        <div id="plotlygraph4">
+          <div id="scatter"></div>
+        </div>
+          <!-- <img src="static/images/state_zipcode_zone1.png">
           <img src="static/images/state_zipcode_zone_colored.png">  
           <p>By creating a simple cartesian chart based on latitude and longitude, a map similar to the map of the US can be visually represented
             by each accident occurred in each zip code. Furthermore, by color filtering from States, we can overlay a map of all the different states in the US.</p>
           <img src="static/images/top10_zipcodes.png">
-            <p> Here we are presented with Top10 Zip Codes that had the most accidents. It would have been a better choice to include city names.</p>
+            <p> Here we are presented with Top10 Zip Codes that had the most accidents. It would have been a better choice to include city names.</p> -->
       </div> 
       <div class="col-md-12">
         <div id="season">
@@ -146,7 +121,7 @@
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -156,7 +131,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"
-        integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk=" crossorigin="anonymous"></script>
+        integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk=" crossorigin="anonymous"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.js" integrity="sha512-I54fxhTJwRigWTc3uNjgDzgii7LW+WJuyyA8kc6WaaZ7RQQNAf8bOEJLRNav7n/ca09MUwl5FptUukvqrOTUvQ==" crossorigin="anonymous"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="static/js/sideslideNav.js"></script>
@@ -191,3 +166,44 @@
 </div>
 <div id="main">
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span> -->
+
+<!-- <nav class="navbar navbar-expand-lg bg-dark fixed-top text-uppercase" id="mainNav">
+    <div class="container">
+      <button class="navbar-toggler navbar-toggler-right text-uppercase text-white rounded" type="button"
+          data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+              <a class="nav-link " href="#about">About</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#zipsearch">ZipCodes Decode</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#season">Trendy Seasons</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="#weekday">Work Weekdays</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#time">Time of Day</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#lastudy">LA: A Case Study</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#severe">Severity ML</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#severe">Severity fML</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#severe">Severity sL</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav> -->

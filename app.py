@@ -37,26 +37,6 @@ session = Session(engine)
 
 conn = engine.connect()
 
-# zip_input function
-# test_var_js = "95240"
-
-# s = text(f'SELECT * FROM accidents_usa_v2_db WHERE "Zipcode" = {test_var_js};')
-
-# zip_fetch = conn.execute(s).fetchall()
-# for row in conn.execute(s).fetchall():
-#     print(row)
-
-
-# new flask instance (singular version)
-# using double underscores as magic methods
-
-
-# @app.route('/data')
-# def data():
-#     # here we want to get the value of user (i.e. ?user=some-value)
-#     user = request.args.get('user')
-
-
 
 ################################################################
 # Flask Setup
@@ -68,39 +48,50 @@ with open('model/machine_learning.pkl', 'rb') as f:
 app = Flask(__name__, template_folder='')
 
 
-@app.route('/hello_world')
-def test_hello():
-    return "Hello_World!"
-
-
-
 @app.route('/')
 def main_page():
 
     return render_template('index.html') #index.html main page
 
 
-@app.route('/zipquery', methods=['GET', 'POST'])
+@app.route('/queryzip', methods=['GET', 'POST'])
 def zip_query_sql(): # pass js variable how?
     # month_fetch = "March"
     
-    test_var_js = request.args.get('get_zip')
+    request_zipcode = request.args.get('get_zip')
 
-    s = text(f'SELECT * FROM accidents_usa_v2_db WHERE "Zipcode" = {test_var_js};')
+    sql_zip = text(f'SELECT "Severity" , COUNT("Severity") FROM  "accidents_usa_v2_db" WHERE "Zipcode" = {request_zipcode} GROUP BY "Severity";')
 
-    qop = text(f'SELECT "Severity" , COUNT("Severity") FROM  "accidents_usa_v2_db" WHERE "Zipcode" = {test_var_js} GROUP BY "Severity";')
+    fetch_zip = conn.execute(sql_zip).fetchall()
 
-    # s = text(f'SELECT * FROM accidents_usa_v2_db WHERE "Month" = {test_var_js};')
+    return jsonify({'result': [dict(row) for row in fetch_zip]})
 
-    zip_fetch = conn.execute(qop).fetchall()
+    
 
-    # return jsonify(zip_fetch)
+@app.route('/monthquery', methods=['GET', 'POST'])
+def zip_count_sql():
 
-    return jsonify({'result': [dict(row) for row in zip_fetch]})
+    request_month = request.args.get('get_month')
 
-    # localhost:8080/zip_query?get_zip=95844
+    sql_month = text(f'SELECT \"Month\", Count(\"Month\") FROM accidents_usa_v2_db WHERE \"Zipcode\" = {request_month} GROUP BY \"Month\" ORDER BY CASE WHEN \"Month\" = \'January\' then 1 WHEN \"Month\" = \'February\' then 2 WHEN \"Month\" = \'March\' then 3 WHEN \"Month\" = \'April\' then 4 WHEN \"Month\" = \'May\' then 5 WHEN \"Month\" = \'June\' then 6 WHEN \"Month\" = \'July\' then 7 WHEN \"Month\" = \'August\' then 8 WHEN \"Month\" = \'September\' then 9 WHEN \"Month\" = \'October\' then 10 WHEN \"Month\" = \'November\' then 11 WHEN \"Month\" = \'December\' then 12 ELSE NULL END;')
 
-    # return (zip_.... jsonify)
+    fetch_month = conn.execute(sql_month).fetchall()
+
+    return jsonify({'result': [dict(row) for row in fetch_month]})
+
+
+@app.route('/timequery', methods=['GET', 'POST'])
+def zip_all_sql(): # pass js variable how?
+    # month_fetch = "March"
+
+    request_time  = request.args.get('get_time')
+
+    sql_time = text(f'SELECT \"Time_of_Day\", COUNT(\"Time_of_Day\") FROM accidents_usa_v2_db WHERE \"Zipcode\" = {request_time} GROUP BY \"Time_of_Day\" ORDER BY CASE WHEN \"Time_of_Day\" = \'Early Morning\' then 1 WHEN \"Time_of_Day\" = \'Morning\' then 2 WHEN \"Time_of_Day\" = \'Afteroon\' then 3 WHEN \"Time_of_Day\" = \'Late Afternoon\' then 4 WHEN \"Time_of_Day\" = \'Night\' then 5 WHEN \"Time_of_Day\" = \'Late Night\' then 6 ELSE NULL END;')
+
+    fetch_time = conn.execute(sql_time).fetchall()
+
+    return jsonify({'result': [dict(row) for row in fetch_time]})
+
 
 @app.route('/ml_sev',methods=['POST'])
 def predict():
@@ -121,6 +112,24 @@ def predict():
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# f'SELECT \"Time_of_Day\", COUNT(\"Time_of_Day\") FROM accidents_usa_v2_db WHERE \"Zipcode\" = {test_count_js} GROUP BY \"Time_of_Day\" ORDER BY CASE WHEN \"Time_of_Day\" = \'Early Morning\' then 1 WHEN \"Time_of_Day\" = \'Morning\' then 2 WHEN \"Time_of_Day\" = \'Afternoon\' then 3 WHEN \"Time_of_Day\" = \'Late Afternoon\' then 4 WHEN \"Time_of_Day\" = \'Night\' then 5 WHEN \"Time_of_Day\" = \'Late Night\' then 6 ELSE NULL END;'
 
 
 
