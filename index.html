@@ -5,15 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Initial Dashboard 0.4</title>
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" /> -->
-  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" /> -->
-  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-  integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" /> -->
-  <!-- <link href="https://fonts.googleapis.com/css2?family=Nova+Cut&display=swap" rel="stylesheet"> -->
   <link rel="stylesheet" href="static/css/styles.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.js" integrity="sha512-I54fxhTJwRigWTc3uNjgDzgii7LW+WJuyyA8kc6WaaZ7RQQNAf8bOEJLRNav7n/ca09MUwl5FptUukvqrOTUvQ==" crossorigin="anonymous"></script>
@@ -37,7 +31,8 @@
               <a class="nav-link" href="#weekday">Work Weekdays</a>
               <a class="nav-link" href="#time">Time of Day</a>
               <a class="nav-link" href="#lastudy">LA: A Case Study</a>
-              <a class="nav-link" href="#severe">Severity ML</a>
+              <a class="nav-link" href="#sev_county">Severity ML</a>
+              <a class="nav-link" href="#cred">Credit</a>
             </nav>
           </div>
       </div>
@@ -49,32 +44,104 @@
             chances of getting into a car accident. It is a simple and easy tool that any driver can use. </p>
       </div>   
       <div class="col-md-12">
-        <h3 id="zipsearch">Search your Zip Code</h3>
-        <div class="search-container">
-          <form id="zip_form" onsubmit="return false;">
-            <input id="inputZip" type="number" placeholder="Enter 5 Digit Zip Code" name="search" autocomplete="on" pattern="\d{5}" maxlength="5" minlength="5" inputmode="numeric" >
-            <input style="color:brown;" type="submit" onclick= zip_test()>
-          </form>
-        </div>
+        <h3 id="zipsearch">Search your County in California</h3>
+        <form id="county_form" onsubmit="return false;">
+          <div class="dropdown">
+            <label for="County">Choose a County:</label>
+              <select name="County" id="county_select" required onchange="county_start()">
+                <option value="Alameda">Alameda</option>
+                <option value="Alpine">Alpine</option>
+                <option value="Amador">Amador</option>
+                <option value="Butte">Butte</option>
+                <option value="Calaveras">Calaveras</option>
+                <option value="Colusa">Colusa</option>
+                <option value="Contra Costa">Contra Costa</option>
+                <option value="Del Norte">Del Norte</option>
+                <option value="El Dorado">El Dorado</option>
+                <option value="Fresno">Fresno</option>
+                <option value="Glenn">Glenn</option>
+                <option value="Humboldt">Humboldt</option>
+                <option value="Imperial">Imperial</option>
+                <option value="Inyo">Inyo</option>
+                <option value="Kern">Kern</option>
+                <option value="Kings">Kings</option>
+                <option value="Lake">Lake</option>
+                <option value="Lassen">Lassen</option>
+                <option value="Los Angeles">Los Angeles</option>
+                <option value="Madera">Madera</option>
+                <option value="Marin">Marin</option>
+                <option value="Mariposa">Mariposa</option>
+                <option value="Mendocino">Mendocino</option>
+                <option value="Merced">Merced</option>
+                <option value="Modoc">Modoc</option>
+                <option value="Mono">Mono</option>
+                <option value="Monterey">Monterey</option>
+                <option value="Napa">Napa</option>
+                <option value="Nevada">Nevada</option>
+                <option value="Orange">Orange</option>
+                <option value="Placer">Placer</option>
+                <option value="Plumas">Plumas</option>
+                <option value="Riverside">Riverside</option>
+                <option value="Sacramento">Sacramento</option>
+                <option value="San Benito">San Benito</option>
+                <option value="San Bernardino">San Bernardino</option>
+                <option value="San Diego">San Diego</option>
+                <option value="San Francisco">San Francisco</option>
+                <option value="San Joaquin">San Joaquin</option>
+                <option value="San Luis Obispo">San Luis Obispo</option>
+                <option value="San Mateo">San Mateo</option>
+                <option value="Santa Barbara">Santa Barbara</option>
+                <option value="Santa Clara">Santa Clara</option>
+                <option value="Santa Cruz">Santa Cruz</option>
+                <option value="Shasta">Shasta</option>
+                <option value="Sierra">Sierra</option>
+                <option value="Siskiyou">Siskiyou</option>
+                <option value="Solano">Solano</option>
+                <option value="Sonoma">Sonoma</option>
+                <option value="Stanislaus">Stanislaus</option>
+                <option value="Sutter">Sutter</option>
+                <option value="Tehama">Tehama</option>
+                <option value="Trinity">Trinity</option>
+                <option value="Tulare">Tulare</option>
+                <option value="Tuolumne">Tuolumne</option>
+                <option value="Ventura">Ventura</option>
+                <option value="Yolo">Yolo</option>
+                <option value="Yuba">Yuba</option>
+              </select>
+          </div>  
+        </form>
+      </div>
+      <div class="col-md-12">
         <div id="plotlygraph1">
           <div id="bar"></div>
         </div>
+      </div> 
+      <div class="col-md-12">
         <div id="plotlygraph2">
           <div id="months"></div>
         </div>
+      </div>
+      <div class="col-md-12">
         <div id="plotlygraph3">
           <div id="testMap"></div>
         </div>
+      </div>
+      <div class="col-md-12">
         <div id="plotlygraph4">
           <div id="scatter"></div>
         </div>
+      </div>
+      <div class="col-md-12">
+        <div id="plotlygraph5">
+          <div id="dense"></div>
+        </div>
+      </div>
           <!-- <img src="static/images/state_zipcode_zone1.png">
           <img src="static/images/state_zipcode_zone_colored.png">  
           <p>By creating a simple cartesian chart based on latitude and longitude, a map similar to the map of the US can be visually represented
             by each accident occurred in each zip code. Furthermore, by color filtering from States, we can overlay a map of all the different states in the US.</p>
           <img src="static/images/top10_zipcodes.png">
-            <p> Here we are presented with Top10 Zip Codes that had the most accidents. It would have been a better choice to include city names.</p> -->
-      </div> 
+            <p> Here we are presented with Top10 Zip Codes that had the most accidents. It would have been a better choice to include city names.</p> --> 
       <div class="col-md-12">
         <div id="season">
           <h3>Seasons throughout 4 Years</h3>
@@ -98,6 +165,109 @@
             <p>We wanted to group the time in parts of the day since we can accurately dig insights onto which parts of the days have more data. we came up with time slots
                 that are divided in such way: <br><br> Early Morning (3 am to 6:59 am)<br> Morning (7 am to 10:59 am),<br> Afternoon (11 am to 2:59 pm),<br> Late Afternoon (3 pm to 6:59 pm),<br>
                 Night (7 pm to 10:59 pm),<br> Late Night (11 pm to 2:59 am)<br><br><br><br></p>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <form action="/predict" method="POST" class="form"></form>
+          <div id="sev_county">
+            <h3>Severity Machine Learning</h3>
+              <div class="dropdown">
+                <label for="County">Choose a CA County:</label>
+                <select name="County" id="county_select">
+                  <option value="Alameda">Alameda</option>
+                  <option value="Alpine">Alpine</option>
+                  <option value="Amador">Amador</option>
+                  <option value="Butte">Butte</option>
+                  <option value="Calaveras">Calaveras</option>
+                  <option value="Colusa">Colusa</option>
+                  <option value="Contra Costa">Contra Costa</option>
+                  <option value="Del Norte">Del Norte</option>
+                  <option value="El Dorado">El Dorado</option>
+                  <option value="Fresno">Fresno</option>
+                  <option value="Glenn">Glenn</option>
+                  <option value="Humboldt">Humboldt</option>
+                  <option value="Imperial">Imperial</option>
+                  <option value="Inyo">Inyo</option>
+                  <option value="Kern">Kern</option>
+                  <option value="Kings">Kings</option>
+                  <option value="Lake">Lake</option>
+                  <option value="Lassen">Lassen</option>
+                  <option value="Los Angeles">Los Angeles</option>
+                  <option value="Madera">Madera</option>
+                  <option value="Marin">Marin</option>
+                  <option value="Mariposa">Mariposa</option>
+                  <option value="Mendocino">Mendocino</option>
+                  <option value="Merced">Merced</option>
+                  <option value="Modoc">Modoc</option>
+                  <option value="Mono">Mono</option>
+                  <option value="Monterey">Monterey</option>
+                  <option value="Napa">Napa</option>
+                  <option value="Nevada">Nevada</option>
+                  <option value="Orange">Orange</option>
+                  <option value="Placer">Placer</option>
+                  <option value="Plumas">Plumas</option>
+                  <option value="Riverside">Riverside</option>
+                  <option value="Sacramento">Sacramento</option>
+                  <option value="San Benito">San Benito</option>
+                  <option value="San Bernardino">San Bernardino</option>
+                  <option value="San Diego">San Diego</option>
+                  <option value="San Francisco">San Francisco</option>
+                  <option value="San Joaquin">San Joaquin</option>
+                  <option value="San Luis Obispo">San Luis Obispo</option>
+                  <option value="San Mateo">San Mateo</option>
+                  <option value="Santa Barbara">Santa Barbara</option>
+                  <option value="Santa Clara">Santa Clara</option>
+                  <option value="Santa Cruz">Santa Cruz</option>
+                  <option value="Shasta">Shasta</option>
+                  <option value="Sierra">Sierra</option>
+                  <option value="Siskiyou">Siskiyou</option>
+                  <option value="Solano">Solano</option>
+                  <option value="Sonoma">Sonoma</option>
+                  <option value="Stanislaus">Stanislaus</option>
+                  <option value="Sutter">Sutter</option>
+                  <option value="Tehama">Tehama</option>
+                  <option value="Trinity">Trinity</option>
+                  <option value="Tulare">Tulare</option>
+                  <option value="Tuolumne">Tuolumne</option>
+                  <option value="Ventura">Ventura</option>
+                  <option value="Yolo">Yolo</option>
+                  <option value="Yuba">Yuba</option>
+                <input style="color:brown;" type="submit" onclick= county_start()>
+    
+            <div class="slidecontainer">
+                <label> Temperature (F): <span class="limit"></span></label>
+                <input type="range" min="0" max="120" value="20" class="slider" id="Temperature_F" step="1">
+            </div>
+  
+            <div class="slidecontainer">
+              <label> Visibility (mi): <span class="limit"></span></label>
+              <input type="range" min="0" max="10" value="5" class="slider" >
+            </div>
+  
+            <div class="slidecontainer">
+              <label> Precipitation (in): <span class="limit"></span></label>
+              <input type="range" min="0" max="10" value="5" class="slider">
+            </div>
+  
+              <form action="/predict" method="post">
+                <label for="features">Choose a street feature:</label>
+                <select name="Country" id="Country" multiple>
+                  <option id="Amenity" value="1">Amenity Zones</option>
+                  <option id="Crossing" value="1">Crosswalk</option>
+                  <option id="Junction" value="1">Intersection</option>
+                  <option id="Roudabout" value="1">Roundabout</option>
+                  <option id="Bump" value="1">Speed Bumps</option>
+                  <option id="Traffic_Signal" value="1">Stop Light</option>
+                  <option id="Stop" value="1">Stop Sign</option>
+                  <option id="Traffic_Calming" value="1">Traffic</option>
+                  <option id="Turning_Loop" value="1">Turning Loop</option>
+                  <option id="Wrong_Way" value="1">Wrong Way</option>
+                  <option id="Give_Way" value="1">Yield Sign</option>
+                </select>
+                <br><br>
+                <input type="submit" value="submit">
+              </form>
+            </div> 
         </div>
       </div>
       <div class="col-md-12">
@@ -141,6 +311,12 @@
 </body>
 </html>
 
+
+<!-- <input style="color:brown;" type="submit" onclick= county_start()> -->
+
+<!-- <input id="inputZip" type="number" placeholder="Enter 5 Digit Zip Code" name="search" autocomplete="on" pattern="\d{5}" maxlength="5" minlength="5" inputmode="numeric" >
+            <input style="color:brown;" type="submit" onclick= zip_test()> -->
+          <!-- </form> -->
 
 <!-- <div id="zip_ml_div" class="col-md-12; result" align="center">   
             <div id="gauge">

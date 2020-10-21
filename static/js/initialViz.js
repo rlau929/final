@@ -7,117 +7,91 @@
 // // - 
 
 // this function holds the zipcode, with constraints, as a variable to be used later
-  
-function zip_test() {
 
-    var zip_input = document.getElementById('inputZip').value;
+// function county_test() {
 
-    if (typeof zip_input === "string" && zip_input.length == 5) {
+//     var county_url = ("http://127.0.0.1:5000/countyquery?")
 
-        flushed_zip = zip_input;
+//     $.get(county_url);
 
-        console.log(typeof flushed_zip);
+//     $.ajax({
 
-        console.log(flushed_zip)
-
-        runAll()
-
-    } else {
+//         type: "GET",
         
-        console.log("Zip is not of a valid format")
+//         contentType: "application/json; charset=utf-8",
+        
+//         url: county_url,
+        
+//         dataType: 'json',
+        
+//         async: true,
+        
+//         data: [], 
 
-        }
-    };
+//         success: function successZip(data) {
+
+//             var county_input = document.getElementById('County').value;
+
+//             if (county_input === data) {
+
+//                 flushed_zip = county_input
+
+//                 console.log(county_input);
+
+//                 runAll()
+
+//             } else {
+        
+//                 console.log("County Data not Available.  Drive Somewhere Else")
+
+//             }
+//         },
+
+//         error: (function (xhr) {
+    
+//         console.log(xhr.responseText); }) // When Service call fails             
+
+//     })
+// };
 
 
-    function runAll() {
+function county_start() {
+
+    var test_ctInput = document.getElementById('county_select').value;
+
+    ctInput = test_ctInput
+
+    console.log(ctInput);
+
+    runAll()
+
+};
+
+
+
+
+function runAll() {
         chart1(),
         chart2(),
         chart3(),
         chart4()
+        // prediction()
         
 };
 
 function chart1() {
 
-    var zip_url = ("http://127.0.0.1:5000/queryzip?get_zip=" + flushed_zip)
+    var ct_url = ("http://127.0.0.1:5000/ctsevquery?get_sev=" + ctInput)
 
-    $.post(zip_url);
-
-    $.ajax({
-
-        type: "POST",
-        
-        contentType: "application/json; charset=utf-8",
-        
-        url: zip_url,
-        
-        dataType: 'json',
-        
-        async: true,
-        
-        data: {}, 
-
-        success: function successZip(data) {     
-                
-            var zipcount = [] 
-            var sevcount = [] 
-
-            for (var item in data.result) {
-                zipcount.push(data.result[item].Severity);
-                sevcount.push(data.result[item].count);
-                }
-                
-            console.log(sevcount);
-                
-                
-                var dataTrace = [
-                    {
-                    x: zipcount,
-                    y: sevcount,
-                    type: 'bar'
-                    }   
-                ];
-            var layout = 
-                {
-                title: 'Count of Severity in ' + flushed_zip,
-                showlegend: false,
-                xaxis: {
-                    title: "Severity Levels",
-                    tickformat: (",d")
-                },
-                yaxis: {
-                    zeroline: false,
-                    gridwidth: 2,
-                    title: "Accidents in " + flushed_zip
-                },
-                bargap :0.05
-            }
-        Plotly.newPlot('bar', dataTrace, layout)
-
-    },
-
-        error: (function (xhr) {
-    
-            console.log(xhr.responseText); }) // When Service call fails             
-
-
-    })
-};
- 
-function chart2() {
-
-    var zip_url = ("http://127.0.0.1:5000/monthquery?get_month=" + flushed_zip)
-
-    $.post(zip_url);
+    $.get(ct_url);
 
     $.ajax({
 
-        type: "POST",
+        type: "GET",
         
         contentType: "application/json; charset=utf-8",
         
-        url: zip_url,
+        url: ct_url,
         
         dataType: 'json',
         
@@ -128,58 +102,117 @@ function chart2() {
         success: function successZip(data) {
             // console.log("first " + data);         
                 
-            var zipcount = [] 
-            var sevcount = [] 
+            var jsonkeyary = [] 
+            var jsonvalary = [] 
 
             for (var item in data.result) {
-                zipcount.push(data.result[item].Month);
-                sevcount.push(data.result[item].count);
+                jsonkeyary.push(data.result[item].Severity);
+                jsonvalary.push(data.result[item].count);
                 }
-                
-            console.log(sevcount);
-                
-                
+                 
             var dataTrace = [
-                {
-                x: zipcount,
-                y: sevcount,
-                type: 'bar'
-                }   
-            ];
+                    {
+                    x: jsonkeyary,
+                    y: jsonvalary,
+                    type: 'bar'
+                    }   
+                ];
             var layout = 
                 {
-                title: 'Monthly Accident Counts in ' + flushed_zip,
+                title: 'Count of Severity in ' + ctInput + ' County',
                 showlegend: false,
                 xaxis: {
-                    title: "Months",
-                    tickformat: ("%B")
+                    title: 'Severity Levels',
+                    tickformat: (",d")
                 },
                 yaxis: {
                     zeroline: false,
                     gridwidth: 2,
-                    title: "Accidents in " +flushed_zip
-
+                    title: "Accidents in " + ctInput + ' County'
                 },
                 bargap :0.05
             }
-        
-        Plotly.newPlot('months', dataTrace, layout)
+         
+        Plotly.newPlot('bar', dataTrace, layout)
 
     },
 
         error: (function (xhr) {
     
-            console.log(xhr.responseText); }) // When Service call fails             
+            console.log(xhr.responseText); })           
 
     })
-
 };
+ 
+function chart2() {
+
+    var ct_url = ("http://127.0.0.1:5000/ctmonquery?get_count=" + ctInput)
+
+    $.get(ct_url);
+
+    $.ajax({
+
+        type: "GET",
+        
+        contentType: "application/json; charset=utf-8",
+        
+        url: ct_url,
+        
+        dataType: 'json',
+        
+        async: true,
+        
+        data: {}, 
+
+        success: function successZip(data) {
+                      
+            var jsonkeyary = [] 
+            var jsonvalary = [] 
+
+            for (var item in data.result) {
+                jsonkeyary.push(data.result[item].Month);
+                jsonvalary.push(data.result[item].count);
+                }
+             
+            var dataTrace = [
+                {
+                x: jsonkeyary,
+                y: jsonvalary,
+                type: 'bar'
+                }   
+            ];
+            var layout = 
+                {
+                title: 'Monthly Accidents in ' + ctInput + ' County',
+                showlegend: false,
+                xaxis: {
+                    title: "Months" 
+                },
+                yaxis: {
+                    zeroline: false,
+                    gridwidth: 2,
+                    title: 'Accidents in ' + ctInput + ' County' 
+                },
+                bargap :0.05
+            }
+         
+            Plotly.newPlot('months', dataTrace, layout)
+
+    },
+
+        error: (function (xhr) {
+    
+            console.log(xhr.responseText); })
+
+    })
+};
+    
 
 function chart3() {
 
-    var zip_url = ("http://127.0.0.1:5000/timequery?get_time=" + flushed_zip)
+    var ct_url = ("http://127.0.0.1:5000/cttimequery?get_all=" + ctInput)
     
-    $.get(zip_url);
+    $.get(ct_url);
     
     $.ajax({
     
@@ -187,7 +220,7 @@ function chart3() {
             
         contentType: "application/json; charset=utf-8",
             
-        url: zip_url,
+        url: ct_url,
             
         dataType: 'json',
             
@@ -198,38 +231,34 @@ function chart3() {
         success: function successZip(data) {
             // console.log("first " + data);         
                     
-            var zipcount = [] 
-            var sevcount = [] 
+            var jsonkeyary = [] 
+            var jsonvalary = [] 
     
             for (var item in data.result) {
-                zipcount.push(data.result[item].Time_of_Day);
-                sevcount.push(data.result[item].count);
-                }
-                    
-            // console.log("chart 3" + zipcount);
-            // console.log("chart 3.a " + sevcount);
-                    
+                jsonkeyary.push(data.result[item].Time_of_Day);
+                jsonvalary.push(data.result[item].count);
+                }   
                     
             var dataTrace = [{
-                x: zipcount,
-                y: sevcount,
+                x: jsonkeyary,
+                y: jsonvalary,
                 type: 'scatter',
                 }];
             
             var layout = {
-                title: 'Time of Day Accidents in ' + flushed_zip,
+                title: 'Time of Day Accidents in ' + ctInput + ' County',
+                showlegend: false,
                 xaxis: {
-                    title: 'Time of Day'
+                    title: "Time of Day" 
                 },
-                yaxis:{
-                    title: 'Accidents in ' + flushed_zip
+                yaxis: {
+                    title: 'Accidents in ' + ctInput + ' County' 
                 },
-                showlegend: false
-                // height: 500,
-                // width: 1000
-            }
+                height: 500,
+                width: 1000
+            };
         
-        Plotly.newPlot('scatter', dataTrace, layout)
+            Plotly.newPlot('scatter', dataTrace, layout)
     
     },
     
@@ -238,7 +267,67 @@ function chart3() {
             console.log(xhr.responseText); }) // When Service call fails             
     
     })
+};
 
+function prediction() {
+
+    var prediction_url = ("http://127.0.0.1:5000/predict?")
+        
+    $.get(prediction_url);
+        
+    $.ajax({
+        
+        type: "GET",
+                
+        contentType: "application/json; charset=utf-8",
+                
+        url: prediction_url,
+                
+        dataType: 'json',
+                
+        async: true,
+                
+        data: [], 
+        
+        success: function successZip(data) {
+            
+            var image1 =    document.getElementById('image1');
+            var image2 =    document.getElementById('image2');
+
+            if(data == 1) {
+                image1.style.display = 'block';
+                image2.style.display = 'none';
+                image3.style.display = 'none';
+                image4.style.display = 'none';
+                
+            if(data == 2) {
+                image2.style.display = 'block';
+                image1.style.display = 'none';
+                image3.style.display = 'none';
+                image4.style.display = 'none';
+            }
+            if(data == 3) {
+                image3.style.display = 'block';
+                image1.style.display = 'none';
+                image2.style.display = 'none';
+                image4.style.display = 'none';
+        }
+             else {
+                image4.style.display = 'block';
+                image1.style.display = 'none';
+                image2.style.display = 'none';
+                image3.style.display = 'none';
+            }
+    }
+
+        },
+        
+            error: (function (xhr) {
+            
+                console.log(xhr.responseText); }) // When Service call fails             
+        
+        
+        })
 };
 
 
@@ -246,9 +335,9 @@ function chart3() {
 
 function chart4() {
 
-    var zip_url = ("http://127.0.0.1:5000/timequery?get_time=" + flushed_zip)
+    var ct_url = ("http://127.0.0.1:5000/mapboxctquery?get_map=" + ctInput)
     
-    $.get(zip_url);
+    $.get(ct_url);
     
     $.ajax({
     
@@ -256,7 +345,7 @@ function chart4() {
             
         contentType: "application/json; charset=utf-8",
             
-        url: zip_url,
+        url: ct_url,
             
         dataType: 'json',
             
@@ -265,44 +354,120 @@ function chart4() {
         data: {}, 
     
         success: function successZip(data) {
-            // console.log("first " + data);         
+            console.log(data);         
                     
-            var zipcount = [] 
-            var sevcount = [] 
+            // var jsonkeyary = [] 
+            // var jsonvalary = []
+            var lats_ct = []
+            var lng_ct = []
+            var sev_ct = []
     
             for (var item in data.result) {
-                zipcount.push(data.result[item].Time_of_Day);
-                sevcount.push(data.result[item].count);
+                lats_ct.push(data.result[item].Latitude);
+                lng_ct.push(data.result[item].Longitude);
+                sev_ct.push(data.result[item].Severity);
                 }
+
+            function arrayAverage(arr){
+                var sum = 0;
+                for(var i in arr) {
+                    sum += arr[i];}
+                return (sum / arr.length);
+            }
                     
-            // console.log("chart 3" + zipcount);
-            // console.log("chart 3.a " + sevcount);
+            var data = [{
+                
+                type: "densitymapbox",
                     
-                    
-            var data = [
-                {type: "densitymapbox", lon: [10, 20, 30], lat: [15, 25, 35], z: [1, 3, 2],
-                 radius: 50, colorbar: {y: 1, yanchor: 'top', len: 0.45}},
-                {type: 'densitymapbox', lon: [-10, -20, -30], lat: [15, 25, 35],
-                 radius: [50, 100, 10],  colorbar: {y: 0, yanchor: 'bottom', len: 0.45}
-                }];
-              
-            var layout = {mapbox: {style: 'light', center: {lat: 20}}, width: 600, height: 400};
-              
+                lon: lng_ct,
+                
+                lat: lats_ct,
+                
+                z: sev_ct,  
+                
+                radius: 8,
+
+                // coloraxis: 'coloraxis',
+
+                colorscale: "Viridis",
+                
+                colorbar: {
+                    y: 1,
+                    yanchor: 'top',
+                    len: 0.45,
+                    // color: "purple",
+                    title: {
+                        side:'top',
+                        text:"Severity Gradient"
+                    }
+                } 
+            
+            }];
+  
+    
+            var layout = {
+                
+                mapbox: {
+                    style: 'outdoors',
+                    center: {
+                        lon: arrayAverage(lng_ct),
+                        lat: arrayAverage(lats_ct)                    
+                    },
+                    zoom: 8
+                   },
+                // coloraxis: {colorscale: "turbid"},
+                title: {text: "Accident Severity Gradient in " + ctInput + " County"},
+                width: 1000,
+                height: 600,
+            };
+                   
+            
+    
             var config = {mapboxAccessToken: mpAPI};
-              
-            Plotly.newPlot('mapBox', data, layout, config);
+  
+   
+            Plotly.newPlot('dense', data, layout, config);
     
     },
     
         error: (function (xhr) {
         
-            console.log(xhr.responseText); }) // When Service call fails             
+            console.log(xhr.responseText); })            
     
     })
 
 };
 
 
+// Plotly.d3.csv('https://raw.githubusercontent.com/plotly/datasets/master/earthquakes-23k.csv',
+//   function(err, rows){function unpack(rows, key) {return rows.map(function(row){ return row[key];
+// })};
+
+// var data = [{
+//     lon: unpack(rows, 'Longitude'),
+//     lat: unpack(rows, 'Latitude'), 
+//     radius:10,
+//     z: unpack(rows, 'Magnitude'),
+//     type: "densitymapbox",
+//     coloraxis: 'coloraxis',
+//     hoverinfo: 'skip'}];
+
+// var layout = {
+//     mapbox: {
+//         center: {lon: 60, lat: 30}, 
+//         style: "outdoors", 
+//         zoom: 2},
+//     coloraxis: {colorscale: "Viridis"},
+//     title: {text: "Earthquake Magnitude"},
+//     width: 600,
+//     height: 400, 
+//     margin: {t: 30, b: 0}};
+
+// var config = {mapboxAccessToken: "your access token"};
+
+// Plotly.newPlot('myDiv', data, layout, config);
+// })
+    
 
 
 
@@ -325,18 +490,390 @@ function chart4() {
 
 
 
-var data = [
-    {type: "densitymapbox", lon: [10, 20, 30], lat: [15, 25, 35], z: [1, 3, 2],
-     radius: 50, colorbar: {y: 1, yanchor: 'top', len: 0.45}},
-    {type: 'densitymapbox', lon: [-10, -20, -30], lat: [15, 25, 35],
-     radius: [50, 100, 10],  colorbar: {y: 0, yanchor: 'bottom', len: 0.45}
-    }];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function zip_test() {
+
+//     var zip_input = document.getElementById('inputZip').value;
+
+//     if (typeof zip_input === "string" && zip_input.length == 5) {
+
+//         flushed_zip = zip_input;
+
+//         console.log(typeof flushed_zip);
+
+//         console.log(flushed_zip)
+
+//         runAll()
+
+//     } else {
+        
+//         console.log("Zip is not of a valid format")
+
+//         }
+//     };
+
+
+//     function runAll() {
+//         chart1(),
+//         chart2(),
+//         chart3(),
+//         chart4()
+        
+// };
+
+// function chart1() {
+
+//     var zip_url = ("http://127.0.0.1:5000/queryzip?get_zip=" + flushed_zip)
+
+//     $.post(zip_url);
+
+//     $.ajax({
+
+//         type: "POST",
+        
+//         contentType: "application/json; charset=utf-8",
+        
+//         url: zip_url,
+        
+//         dataType: 'json',
+        
+//         async: true,
+        
+//         data: {}, 
+
+//         success: function successZip(data) {     
+                
+//             var zipcount = [] 
+//             var sevcount = [] 
+
+//             for (var item in data.result) {
+//                 zipcount.push(data.result[item].Severity);
+//                 sevcount.push(data.result[item].count);
+//                 }
+                
+//             console.log(sevcount);
+                
+                
+//                 var dataTrace = [
+//                     {
+//                     x: zipcount,
+//                     y: sevcount,
+//                     type: 'bar'
+//                     }   
+//                 ];
+//             var layout = 
+//                 {
+//                 title: 'Count of Severity in ' + flushed_zip,
+//                 showlegend: false,
+//                 xaxis: {
+//                     title: "Severity Levels",
+//                     tickformat: (",d")
+//                 },
+//                 yaxis: {
+//                     zeroline: false,
+//                     gridwidth: 2,
+//                     title: "Accidents in " + flushed_zip
+//                 },
+//                 bargap :0.05
+//             }
+//         Plotly.newPlot('bar', dataTrace, layout)
+
+//     },
+
+//         error: (function (xhr) {
+    
+//             console.log(xhr.responseText); }) // When Service call fails             
+
+
+//     })
+// };
+ 
+// function chart2() {
+
+//     var zip_url = ("http://127.0.0.1:5000/monthquery?get_month=" + flushed_zip)
+
+//     $.post(zip_url);
+
+//     $.ajax({
+
+//         type: "POST",
+        
+//         contentType: "application/json; charset=utf-8",
+        
+//         url: zip_url,
+        
+//         dataType: 'json',
+        
+//         async: true,
+        
+//         data: {}, 
+
+//         success: function successZip(data) {
+//             // console.log("first " + data);         
+                
+//             var zipcount = [] 
+//             var sevcount = [] 
+
+//             for (var item in data.result) {
+//                 zipcount.push(data.result[item].Month);
+//                 sevcount.push(data.result[item].count);
+//                 }
+                
+//             console.log(sevcount);
+                
+                
+//             var dataTrace = [
+//                 {
+//                 x: zipcount,
+//                 y: sevcount,
+//                 type: 'bar'
+//                 }   
+//             ];
+//             var layout = 
+//                 {
+//                 title: 'Monthly Accident Counts in ' + flushed_zip,
+//                 showlegend: false,
+//                 xaxis: {
+//                     title: "Months",
+//                     tickformat: ("%B")
+//                 },
+//                 yaxis: {
+//                     zeroline: false,
+//                     gridwidth: 2,
+//                     title: "Accidents in " +flushed_zip
+
+//                 },
+//                 bargap :0.05
+//             }
+        
+//         Plotly.newPlot('months', dataTrace, layout)
+
+//     },
+
+//         error: (function (xhr) {
+    
+//             console.log(xhr.responseText); }) // When Service call fails             
+
+//     })
+
+// };
+
+// function chart3() {
+
+//     var zip_url = ("http://127.0.0.1:5000/timequery?get_time=" + flushed_zip)
+    
+//     $.get(zip_url);
+    
+//     $.ajax({
+    
+//         type: "GET",
+            
+//         contentType: "application/json; charset=utf-8",
+            
+//         url: zip_url,
+            
+//         dataType: 'json',
+            
+//         async: true,
+            
+//         data: {}, 
+    
+//         success: function successZip(data) {
+//             // console.log("first " + data);         
+                    
+//             var zipcount = [] 
+//             var sevcount = [] 
+    
+//             for (var item in data.result) {
+//                 zipcount.push(data.result[item].Time_of_Day);
+//                 sevcount.push(data.result[item].count);
+//                 }
+                    
+//             // console.log("chart 3" + zipcount);
+//             // console.log("chart 3.a " + sevcount);
+                    
+                    
+//             var dataTrace = [{
+//                 x: zipcount,
+//                 y: sevcount,
+//                 type: 'scatter',
+//                 }];
+            
+//             var layout = {
+//                 title: 'Time of Day Accidents in ' + flushed_zip,
+//                 xaxis: {
+//                     title: 'Time of Day'
+//                 },
+//                 yaxis:{
+//                     title: 'Accidents in ' + flushed_zip
+//                 },
+//                 showlegend: false
+//                 // height: 500,
+//                 // width: 1000
+//             }
+        
+//         Plotly.newPlot('scatter', dataTrace, layout)
+    
+//     },
+    
+//         error: (function (xhr) {
+        
+//             console.log(xhr.responseText); }) // When Service call fails             
+    
+//     })
+
+// };
+
+
+
+
+// function chart4() {
+
+//     var zip_url = ("http://127.0.0.1:5000/timequery?get_time=" + flushed_zip)
+    
+//     $.get(zip_url);
+    
+//     $.ajax({
+    
+//         type: "GET",
+            
+//         contentType: "application/json; charset=utf-8",
+            
+//         url: zip_url,
+            
+//         dataType: 'json',
+            
+//         async: true,
+            
+//         data: {}, 
+    
+//         success: function successZip(data) {
+//             // console.log("first " + data);         
+                    
+//             var zipcount = [] 
+//             var sevcount = [] 
+    
+//             for (var item in data.result) {
+//                 zipcount.push(data.result[item].Time_of_Day);
+//                 sevcount.push(data.result[item].count);
+//                 }
+                    
+//             // console.log("chart 3" + zipcount);
+//             // console.log("chart 3.a " + sevcount);
+                    
+                    
+//             var data = [
+//                 {type: "densitymapbox", lon: [10, 20, 30], lat: [15, 25, 35], z: [1, 3, 2],
+//                  radius: 50, colorbar: {y: 1, yanchor: 'top', len: 0.45}},
+//                 {type: 'densitymapbox', lon: [-10, -20, -30], lat: [15, 25, 35],
+//                  radius: [50, 100, 10],  colorbar: {y: 0, yanchor: 'bottom', len: 0.45}
+//                 }];
+              
+//             var layout = {mapbox: {style: 'light', center: {lat: 20}}, width: 600, height: 400};
+              
+//             var config = {mapboxAccessToken: mpAPI};
+              
+//             Plotly.newPlot('mapBox', data, layout, config);
+    
+//     },
+    
+//         error: (function (xhr) {
+        
+//             console.log(xhr.responseText); }) // When Service call fails             
+    
+//     })
+
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// var data = [
+//     {type: "densitymapbox", lon: [10, 20, 30], lat: [15, 25, 35], z: [1, 3, 2],
+//      radius: 50, colorbar: {y: 1, yanchor: 'top', len: 0.45}},
+//     {type: 'densitymapbox', lon: [-10, -20, -30], lat: [15, 25, 35],
+//      radius: [50, 100, 10],  colorbar: {y: 0, yanchor: 'bottom', len: 0.45}
+//     }];
   
-  var layout = {mapbox: {style: 'light', center: {lat: 20}}, width: 600, height: 400};
+//   var layout = {mapbox: {style: 'light', center: {lat: 20}}, width: 600, height: 400};
   
-  var config = {mapboxAccessToken: "your access token"};
+//   var config = {mapboxAccessToken: "your access token"};
   
-  Plotly.newPlot('myDiv', data, layout, config);
+//   Plotly.newPlot('myDiv', data, layout, config);
 
 
 
