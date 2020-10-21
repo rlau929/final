@@ -60,6 +60,7 @@ We've tested three models: random forest classifier, logistic regression classif
 
 In the future of machine learning, we can reduce the number of features be removing or transforming other attributes such as wind direction, wind speed, and weather conditions. Wind speed and direction might not play a huge role in accident severity. Weather conditions can be transformed and simplified. For example, if we have light rain and heavy rain, we can transform and combine into one rain category. Similar situation for cloudy and partly cloudy. We can combine into one cloudy category. By reducing or removing some features, we can improve our accuracy percentage.
 
+## Heatmap Correlation of Features
 ![Heatmap Correlation of Features](correlationheatmap.png)
 
 ## Machine Learning Update
