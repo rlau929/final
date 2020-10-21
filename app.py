@@ -76,7 +76,7 @@ def zip_query_sql(): # pass js variable how?
 
     test_var_js = request.args.get('get_zip')
 
-    s = text(f'SELECT "Severity" , COUNT("Severity") FROM  "accidents_usa_v2_db" WHERE "Zipcode" = {test_var_js} GROUP BY "Severity";')
+    s = text(f'SELECT "Severity" , COUNT("Severity") FROM  "accidents_usa_v2_db" WHERE "County" = {test_var_js} GROUP BY "Severity";')
 
     # s = text(f'SELECT * FROM accidents_usa_v2_db WHERE "Month" = {test_var_js};')
 
@@ -92,7 +92,7 @@ def zip_count_sql(): # pass js variable how?
 
     test_count_js = request.args.get('get_count')
 
-    count = text(f'SELECT "Month", Count("Month") FROM accidents_usa_v2_db WHERE "Zipcode" = {test_count_js} GROUP BY "Month";')
+    count = text(f'SELECT "Month", Count("Month") FROM accidents_usa_v2_db WHERE "County" = {test_count_js} GROUP BY "Month";')
 
     count_fetch = conn.execute(count).fetchall()
 
@@ -104,17 +104,11 @@ def zip_all_sql(): # pass js variable how?
 
     test_all_js = request.args.get('get_all')
 
-    all = text(f'SELECT \"Time_of_Day\", COUNT(\"Time_of_Day\") FROM accidents_usa_v2_db WHERE \"Zipcode\" = {test_all_js} GROUP BY \"Time_of_Day\" ORDER BY CASE WHEN \"Time_of_Day\" = \'Early Morning\' then 1 WHEN \"Time_of_Day\" = \'Morning\' then 2 WHEN \"Time_of_Day\" = \'Afternoon\' then 3 WHEN \"Time_of_Day\" = \'Late Afternoon\' then 4 WHEN \"Time_of_Day\" = \'Night\' then 5 WHEN \"Time_of_Day\" = \'Late Night\' then 6 ELSE NULL END;')
+    all = text(f'SELECT \"Time_of_Day\", COUNT(\"Time_of_Day\") FROM accidents_usa_v2_db WHERE \"County\" = {test_all_js} GROUP BY \"Time_of_Day\" ORDER BY CASE WHEN \"Time_of_Day\" = \'Early Morning\' then 1 WHEN \"Time_of_Day\" = \'Morning\' then 2 WHEN \"Time_of_Day\" = \'Afternoon\' then 3 WHEN \"Time_of_Day\" = \'Late Afternoon\' then 4 WHEN \"Time_of_Day\" = \'Night\' then 5 WHEN \"Time_of_Day\" = \'Late Night\' then 6 ELSE NULL END;')
 
     all_fetch = conn.execute(all).fetchall()
 
     return jsonify({'result': [dict(row) for row in all_fetch]})  
-
-@app.route('/weather', methods=['POST'])
-def render_results():
-    zip_code = request.form['zipCode']
-    
-    return "Zip Code: " + zip_code
 
 @app.route('/predict', methods=['GET', 'POST'])  
 def make_prediction():

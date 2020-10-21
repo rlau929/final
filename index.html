@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Initial Dashboard 0.3</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
     <link rel="stylesheet" href="static/css/styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
   </head>
@@ -17,14 +19,14 @@
             <p>Lets explore the dataset visuals with plotly.js </p>
                 <button class="btn-toggle" style="color:brown;">Toggle Dark Mode</button>
         </div>
-      </div>
-        <div class="topnav">
-        </div>
+      </div> 
+        <div class="col-md-3">
           <div class="dropdown">
             <label for="County">Choose a CA County:</label>
             <select name="County" id="County">
               <option value="Alameda">Alameda</option>
               <option value="Alpine">Alpine</option>
+              <option value="Amador">Amador</option>
               <option value="Butte">Butte</option>
               <option value="Calaveras">Calaveras</option>
               <option value="Colusa">Colusa</option>
@@ -80,44 +82,113 @@
               <option value="Ventura">Ventura</option>
               <option value="Yolo">Yolo</option>
               <option value="Yuba">Yuba</option>
-            <input style="color:brown;" type="submit" onclick= county_test()>
-            </form>
-
-          <div class="slidecontainer">
-              <label> Temperature (F): <span class="limit"></span></label>
-              <input type="range" min="0" max="120" value="20" class="slider" id="Temperature_F" step="1">
-          </div>
-
-          <div class="slidecontainer">
-            <label> Visibility (mi): <span class="limit"></span></label>
-            <input type="range" min="0" max="10" value="5" class="slider" >
-          </div>
-
-          <div class="slidecontainer">
-            <label> Precipitation (in): <span class="limit"></span></label>
-            <input type="range" min="0" max="10" value="5" class="slider">
-          </div>
-
-            <form action="/predict" method="post">
-              <label for="features">Choose a street feature:</label>
-              <select name="Country" id="Country" multiple>
-                <option id="Amenity" value="1">Amenity Zones</option>
-                <option id="Crossing" value="1">Crosswalk</option>
-                <option id="Junction" value="1">Intersection</option>
-                <option id="Roudabout" value="1">Roundabout</option>
-                <option id="Bump" value="1">Speed Bumps</option>
-                <option id="Traffic_Signal" value="1">Stop Light</option>
-                <option id="Stop" value="1">Stop Sign</option>
-                <option id="Traffic_Calming" value="1">Traffic</option>
-                <option id="Turning_Loop" value="1">Turning Loop</option>
-                <option id="Wrong_Way" value="1">Wrong Way</option>
-                <option id="Give_Way" value="1">Yield Sign</option>
-              </select>
-              <br><br>
-              <input type="submit" value="submit">
-            </form>
-          </div>
+            </select>
+        <br>
+        <br>
+        <div class="dropdown">
+          <label for="Month">Choose Month:</label>
+          <select name="Month" id="Month">
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+          </select>
         </div>
+        <br>
+
+        <div class="dropdown">
+          <label for="Part_of_Week">Choose Day of Week:</label>
+          <select name="Part_of_Week" id="Part_of_Week">
+            <option value="Sunday">Sunday</option>
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+          </select>
+        </div>
+        <br>
+
+        <div class="dropdown">
+          <label for="Time">Choose Time:</label>
+          <select name="Time" id="Time">
+            <option value="0">12:00am</option>
+            <option value="1">1:00am</option>
+            <option value="2">2:00am</option>
+            <option value="3">3:00am</option>
+            <option value="4">4:00am</option>
+            <option value="5">5:00am</option>
+            <option value="6">6:00am</option>
+            <option value="7">7:00am</option>
+            <option value="8">8:00am</option>
+            <option value="9">9:00am</option>
+            <option value="10">10:00am</option>
+            <option value="11">11:00am</option>
+            <option value="12">12:00pm</option>
+            <option value="13">1:00pm</option>
+            <option value="14">2:00pm</option>
+            <option value="15">3:00pm</option>
+            <option value="16">4:00pm</option>
+            <option value="17">5:00pm</option>
+            <option value="18">6:00pm</option>
+            <option value="19">7:00pm</option>
+            <option value="20">8:00pm</option>
+            <option value="21">9:00pm</option>
+            <option value="22">10:00pm</option>
+            <option value="23">11:00pm</option>
+          </select>
+        </div>
+        <br>  
+  
+        
+
+        <label> Temperature (F): <span id="Temperature_F" style="color:rgb(0, 0, 0);font-weight:bold;"></span></label>
+        <input type=range min="1" max="120" value="60" oninput="this.nextElementSibling.value = this.value">
+        <output>80</output>
+        <br>
+        <label> Visibility (mi): <span id="Visibility_mi" style="color:rgb(0, 0, 0);font-weight:bold;"></span></label>
+        <input type=range min="0" max="10" value="5" oninput="this.nextElementSibling.value = this.value"> 
+        <output>5</output>
+        <br>
+        <label> Precipitation (in): <span id="Precipitation_in"style="color:rgb(0, 0, 0);font-weight:bold;"></span></label>
+        <input type=range min="0" max="10" value="5" oninput="this.nextElementSibling.value = this.value">
+        <output>5</output>
+        
+        <h4>Attributes</h4>
+        <input type="checkbox" id="Crossing" name="Crossing" value="1">
+        <label for="Crossing">Cross Walk</label><br>
+        <input type="checkbox" id="Junction" name="Junction" value="1">
+        <label for="Junction" value="1">Intersection</label><br>
+        <input type="checkbox" id="Crossing" name="Crossing" value="1">
+        <label for="Roundabout" value="1">Roundabout</label><br>
+        <input type="checkbox" id="Crossing" name="Crossing" value="1">
+        <label for="Bump" value="1">Speed Bumps</label><br>
+        <input type="checkbox" id="Crossing" name="Crossing" value="1">
+        <label for="Traffic_Signal" value="1">Stop Light</label><br>
+        <input type="checkbox" id="Crossing" name="Crossing" value="1"> 
+        <label for="Stop" value="1">Stop Sign</label><br>
+        <input type="checkbox" id="Crossing" name="Crossing" value="1">
+        <label for="Traffic_Calming" value="1">Traffic</label><br>
+        <input type="checkbox" id="Crossing" name="Crossing" value="1">
+        <label for="Turning_Loop" value="1">Turning Loop</label><br>
+        <input type="checkbox" id="Crossing" name="Crossing" value="1">
+        <label for="Wrong_Way" value="1">Wrong Way</label><br>
+        <input type="checkbox" id="Crossing" name="Crossing" value="1">
+        <label for="Give_Way" value="1">Yield Sign</label><br>
+        <br>
+        <br>
+        
+      <input type="submit" value="PREDICT">
+
         <img src="images/image1" style="display: none; background: #fcfbfb;" id="image1"/>
         <img src="images/image2" style="display: none; background: #fcfbfb;" id="image2"/>
         <img src="images/image3" style="display: none; background: #fcfbfb;" id="image3"/>
@@ -133,7 +204,8 @@
         </div>
         <div class="col-md-12">
           <div id="months"></div>
-                  <h3>Months</h3>          
+                  <h3>Months</h3>     
+
 
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.js" integrity="sha512-I54fxhTJwRigWTc3uNjgDzgii7LW+WJuyyA8kc6WaaZ7RQQNAf8bOEJLRNav7n/ca09MUwl5FptUukvqrOTUvQ==" crossorigin="anonymous"></script>
@@ -143,6 +215,7 @@
     <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
     <script src="static/js/dark-mode.js"></script>
     <script src="static/js/initialViz.js"></script>
-    <script src="static/js/script.js"></script>
+    <script src="static/js/slider.js"></script>
+    <script src="static/js/checkbox.js"></script>
   </body>
 </html>

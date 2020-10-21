@@ -1,12 +1,11 @@
-function updateLabel() {
-    var limit = this.parentElement.getElementsByClassName("limit")[0];
-    limit.innerHTML = this.value;
+function updateTempInput(val) {
+    document.getElementById('Temperature_F').value=val; 
   }
-  
-    var slideContainers = document.getElementsByClassName("slidecontainer");
-  
-    for (var i = 0; i < slideContainers.length; i++) {
-        var slider = slideContainers[i].getElementsByClassName("slider")[0];
-        updateLabel.call(slider);
-        slider.oninput = updateLabel;
-    }
+
+function updateVisInput(val) {
+document.getElementById('Visibility_mi').value=val; 
+}
+
+function updatePrecInput(val) {
+    document.getElementById('Precipitation_in').value=val; 
+}
