@@ -20,30 +20,87 @@
       </div>
         <div class="topnav">
         </div>
-          <div class="search-container">
-            <form id="zip_form" onsubmit="return false;">
-              <input id="inputZip" type="number" placeholder="Enter 5 Digit Zip Code" name="search" autocomplete="on" pattern="\d{5}" maxlength="5" minlength="5" inputmode="numeric" >
-              <input style="color:brown;" type="submit" onclick= zip_test()>
+          <div class="dropdown">
+            <label for="County">Choose a CA County:</label>
+            <select name="County" id="County">
+              <option value="Alameda">Alameda</option>
+              <option value="Alpine">Alpine</option>
+              <option value="Butte">Butte</option>
+              <option value="Calaveras">Calaveras</option>
+              <option value="Colusa">Colusa</option>
+              <option value="Contra Costa">Contra Costa</option>
+              <option value="Del Norte">Del Norte</option>
+              <option value="El Dorado">El Dorado</option>
+              <option value="Fresno">Fresno</option>
+              <option value="Glenn">Glenn</option>
+              <option value="Humboldt">Humboldt</option>
+              <option value="Imperial">Imperial</option>
+              <option value="Inyo">Inyo</option>
+              <option value="Kern">Kern</option>
+              <option value="Kings">Kings</option>
+              <option value="Lake">Lake</option>
+              <option value="Lassen">Lassen</option>
+              <option value="Los Angeles">Los Angeles</option>
+              <option value="Madera">Madera</option>
+              <option value="Marin">Marin</option>
+              <option value="Mariposa">Mariposa</option>
+              <option value="Mendocino">Mendocino</option>
+              <option value="Merced">Merced</option>
+              <option value="Modoc">Modoc</option>
+              <option value="Mono">Mono</option>
+              <option value="Monterey">Monterey</option>
+              <option value="Napa">Napa</option>
+              <option value="Nevada">Nevada</option>
+              <option value="Orange">Orange</option>
+              <option value="Placer">Placer</option>
+              <option value="Plumas">Plumas</option>
+              <option value="Riverside">Riverside</option>
+              <option value="Sacramento">Sacramento</option>
+              <option value="San Benito">San Benito</option>
+              <option value="San Bernardino">San Bernardino</option>
+              <option value="San Diego">San Diego</option>
+              <option value="San Francisco">San Francisco</option>
+              <option value="San Joaquin">San Joaquin</option>
+              <option value="San Luis Obispo">San Luis Obispo</option>
+              <option value="San Mateo">San Mateo</option>
+              <option value="Santa Barbara">Santa Barbara</option>
+              <option value="Santa Clara">Santa Clara</option>
+              <option value="Santa Cruz">Santa Cruz</option>
+              <option value="Shasta">Shasta</option>
+              <option value="Sierra">Sierra</option>
+              <option value="Siskiyou">Siskiyou</option>
+              <option value="Solano">Solano</option>
+              <option value="Sonoma">Sonoma</option>
+              <option value="Stanislaus">Stanislaus</option>
+              <option value="Sutter">Sutter</option>
+              <option value="Tehama">Tehama</option>
+              <option value="Trinity">Trinity</option>
+              <option value="Tulare">Tulare</option>
+              <option value="Tuolumne">Tuolumne</option>
+              <option value="Ventura">Ventura</option>
+              <option value="Yolo">Yolo</option>
+              <option value="Yuba">Yuba</option>
+            <input style="color:brown;" type="submit" onclick= county_test()>
             </form>
 
           <div class="slidecontainer">
-              <label> Temperature (F): <span id="Temperature_F"></span></label>
-              <input type="range" min="0" max="120" class="slider" id="Temperature_F" step="1">
+              <label> Temperature (F): <span class="limit"></span></label>
+              <input type="range" min="0" max="120" value="20" class="slider" id="Temperature_F" step="1">
           </div>
 
           <div class="slidecontainer">
-            <label> Visibility (mi): <span id="Visibility_miles"></span></label>
-            <input type="range" min="0" max="10" class="slider" id="Visibility_miles" step="1">
+            <label> Visibility (mi): <span class="limit"></span></label>
+            <input type="range" min="0" max="10" value="5" class="slider" >
           </div>
 
           <div class="slidecontainer">
-            <label> Precipitation (in): <span id="Precipitation_inches"></span></label>
-            <input type="range" min="0" max="10" class="slider" id="Precipitation_inches" step="1">
+            <label> Precipitation (in): <span class="limit"></span></label>
+            <input type="range" min="0" max="10" value="5" class="slider">
           </div>
 
             <form action="/predict" method="post">
               <label for="features">Choose a street feature:</label>
-              <select name="cars" id="cars" multiple>
+              <select name="Country" id="Country" multiple>
                 <option id="Amenity" value="1">Amenity Zones</option>
                 <option id="Crossing" value="1">Crosswalk</option>
                 <option id="Junction" value="1">Intersection</option>
@@ -61,26 +118,10 @@
             </form>
           </div>
         </div>
-        <form action="/predict" method="post">
-          <label for="features">Choose a street feature:</label>
-          <select name="cars" id="cars" multiple>
-            <option id="Amenity" value="1">Amenity Zones</option>
-            <option id="Crossing" value="1">Crosswalk</option>
-            <option id="Junction" value="1">Intersection</option>
-            <option id="Roudabout" value="1">Roundabout</option>
-            <option id="Bump" value="1">Speed Bumps</option>
-            <option id="Traffic_Signal" value="1">Stop Light</option>
-            <option id="Stop" value="1">Stop Sign</option>
-            <option id="Traffic_Calming" value="1">Traffic</option>
-            <option id="Turning_Loop" value="1">Turning Loop</option>
-            <option id="Wrong_Way" value="1">Wrong Way</option>
-            <option id="Give_Way" value="1">Yield Sign</option>
-          </select>
-          <br><br>
-          <input type="submit" value="submit">
-        </form>
-
-
+        <img src="images/image1" style="display: none; background: #fcfbfb;" id="image1"/>
+        <img src="images/image2" style="display: none; background: #fcfbfb;" id="image2"/>
+        <img src="images/image3" style="display: none; background: #fcfbfb;" id="image3"/>
+        <img src="images/image4" style="display: none; background: #fcfbfb;" id="image4"/>
 
         <div class="col-md-12">
           <div id="scatter"></div>
@@ -102,5 +143,6 @@
     <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
     <script src="static/js/dark-mode.js"></script>
     <script src="static/js/initialViz.js"></script>
+    <script src="static/js/script.js"></script>
   </body>
 </html>

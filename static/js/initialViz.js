@@ -1,28 +1,55 @@
-function zip_test() {
+function county_test() {
 
-    var zip_input = document.getElementById('inputZip').value;
+    var county_url = ("http://127.0.0.1:5000/countyquery?")
 
-    if (typeof zip_input === "string" && zip_input.length == 5) {
+    $.get(county_url);
 
-        flushed_zip = zip_input;
+    $.ajax({
 
-        console.log(typeof flushed_zip);
-
-        console.log(flushed_zip)
-
-        runAll()
-
-    } else {
+        type: "GET",
         
-        console.log("Zip is not of a valid format")
+        contentType: "application/json; charset=utf-8",
+        
+        url: county_url,
+        
+        dataType: 'json',
+        
+        async: true,
+        
+        data: [], 
 
-        }
-    };
+        success: function successZip(data) {
+
+            var county_input = document.getElementById('County').value;
+
+            if (county_input === data) {
+
+                flushed_zip = county_input
+
+                console.log(county_input);
+
+                runAll()
+
+            } else {
+        
+                console.log("County Data not Available.  Drive Somewhere Else")
+
+            }
+        },
+
+        error: (function (xhr) {
+    
+        console.log(xhr.responseText); }) // When Service call fails             
+
+    })
+};
+
 
 function runAll() {
         chart1(),
-        chart2()
-        chart3()
+        chart2(),
+        chart3(),
+        prediction()
         
 };
 
@@ -216,4 +243,65 @@ function chart3() {
     
     
     })
+    };
+
+function prediction() {
+
+    var prediction_url = ("http://127.0.0.1:5000/prediction?")
+        
+    $.get(prediction_url);
+        
+    $.ajax({
+        
+        type: "GET",
+                
+        contentType: "application/json; charset=utf-8",
+                
+        url: prediction_url,
+                
+        dataType: 'json',
+                
+        async: true,
+                
+        data: [], 
+        
+        success: function successZip(data) {
+            
+            var image1 =    document.getElementById('image1');
+            var image2 =    document.getElementById('image2');
+
+            if(data == 1) {
+                image1.style.display = 'block';
+                image2.style.display = 'none';
+                image3.style.display = 'none';
+                image4.style.display = 'none';
+                
+            if(data == 2) {
+                image2.style.display = 'block';
+                image1.style.display = 'none';
+                image3.style.display = 'none';
+                image4.style.display = 'none';
+            }
+            if(data == 3) {
+                image3.style.display = 'block';
+                image1.style.display = 'none';
+                image2.style.display = 'none';
+                image4.style.display = 'none';
+        }
+             else {
+                image4.style.display = 'block';
+                image1.style.display = 'none';
+                image2.style.display = 'none';
+                image3.style.display = 'none';
+            }
+    }
+
+        },
+        
+            error: (function (xhr) {
+            
+                console.log(xhr.responseText); }) // When Service call fails             
+        
+        
+        })
     };

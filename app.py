@@ -56,6 +56,20 @@ def main_page():
 
     return render_template('index.html') #index.html main page
 
+@app.route('/countyquery', methods=['GET', 'POST'])
+def county_query_sql(): # pass js variable how?
+    # month_fetch = "March"
+
+    county = text(f'SELECT "County" FROM  "accidents_usa_v2_db" GROUP BY "County";')
+
+    # s = text(f'SELECT * FROM accidents_usa_v2_db WHERE "Month" = {test_var_js};')
+
+    zip_fetch = conn.execute(county).fetchall()
+
+    # return jsonify(zip_fetch)
+
+    return jsonify({'result': [dict(row) for row in zip_fetch]})
+
 @app.route('/zipquery', methods=['GET', 'POST'])
 def zip_query_sql(): # pass js variable how?
     # month_fetch = "March"
@@ -96,12 +110,18 @@ def zip_all_sql(): # pass js variable how?
 
     return jsonify({'result': [dict(row) for row in all_fetch]})  
 
-@app.route('/predict, methods=['GET', 'POST'])  
+@app.route('/weather', methods=['POST'])
+def render_results():
+    zip_code = request.form['zipCode']
+    
+    return "Zip Code: " + zip_code
+
+@app.route('/predict', methods=['GET', 'POST'])  
 def make_prediction():
     features = [int(x) for x in request.form.values()]
     final_features = [np.array(features)]       
     prediction = model.predict(final_features)  
- # return render_template('prediction.html', prediction = prediction[0] )
+    return jsonify([prediction[0]] )
 
 if __name__ == '__main__':
     app.run(debug=True)
