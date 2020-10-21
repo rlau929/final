@@ -58,7 +58,12 @@ We've tested three models: random forest classifier, logistic regression classif
 
 In the future of machine learning, we can reduce the number of features be removing or transforming other attributes such as wind direction, wind speed, and weather conditions. Wind speed and direction might not play a huge role in accident severity. Weather conditions can be transformed and simplified. For example, if we have light rain and heavy rain, we can transform and combine into one rain category. Similar situation for cloudy and partly cloudy. We can combine into one cloudy category. By reducing or removing some features, we can improve our accuracy percentage. 
 
+## Machine Learning Update
+
 In the last week of deliverables, we've updated our data and machine learning algorithm. We removed KNN model since it is not time efficient, but we added Decision Tree model to have more models to compare. We narrowed our data to just California instead of the United States. Our accuracy score decreased slightly to 71% for all machine learning models. We chose Decision Tree because the accuracy score is slightly higher than the rest of the models. 
+
+## Bar Graph of Machine Learning Model Comparison 
+![Machine Learning Model Comparison ](mlmodels.png)
 
 We've also ran a confusion matrix to find any true positive, true negatives, false positives, and false negatives. 
 
