@@ -53,6 +53,8 @@ X_scaler = scaler.fit(X_train)
 X_train_scaled = X_scaler.transform(X_train)
 X_test_scaled = X_scaler.transform(X_test)
 ```
+## Important Features Bar Graph
+![Machine Learning Important Features](importantfeatures.png)
 
 We've tested three models: random forest classifier, logistic regression classifier, and K-Nearest Neighbors. KNN prsesented improved results at 72% testing accuracy compared to random forest and logistic regression at 68% testing accuracy for each model. Although KNN showed increased testing accuracy, it's less efficient. The KNN model was running for 8 hours compared to 1 hour of random forest and 1 hour of logistic regression. Additionally, logistic regression's training accuracy is at 31%. KNN is more robust, but it lacks in efficiency. Overall, the best machine learning model is random forest.
 
@@ -63,7 +65,7 @@ In the future of machine learning, we can reduce the number of features be remov
 In the last week of deliverables, we've updated our data and machine learning algorithm. We removed KNN model since it is not time efficient, but we added Decision Tree model to have more models to compare. We narrowed our data to just California instead of the United States. Our accuracy score decreased slightly to 71% for all machine learning models. We chose Decision Tree because the accuracy score is slightly higher than the rest of the models. 
 
 ## Bar Graph of Machine Learning Model Comparison 
-![Machine Learning Model Comparison ](mlmodels.png)
+![Machine Learning Model Comparison](mlmodels.png)
 
 We've also ran a confusion matrix to find any true positive, true negatives, false positives, and false negatives. 
 
