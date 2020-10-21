@@ -42,7 +42,7 @@ conn = engine.connect()
 # Flask Setup
 ################################################################
 
-with open('model/machine_learning.pkl', 'rb') as f:
+with open('model/decision_tree_v2.pkl', 'rb') as f:
      model = pickle.load(f)
 
 app = Flask(__name__, template_folder='')
@@ -56,66 +56,63 @@ def main_page():
 
     return render_template('index.html') #index.html main page
 
-@app.route('/countyquery', methods=['GET', 'POST'])
-def county_query_sql(): # pass js variable how?
-    # month_fetch = "March"
+@app.route('/ctsevquery', methods=['GET', 'POST'])
+def zip_query_sql(): 
 
-    county = text(f'SELECT "County" FROM  "accidents_usa_v2_db" GROUP BY "County";')
+    test_var_js = request.args.get('get_sev')
 
-    # s = text(f'SELECT * FROM accidents_usa_v2_db WHERE "Month" = {test_var_js};')
-
-    zip_fetch = conn.execute(county).fetchall()
-
-    # return jsonify(zip_fetch)
-
-    return jsonify({'result': [dict(row) for row in zip_fetch]})
-
-@app.route('/zipquery', methods=['GET', 'POST'])
-def zip_query_sql(): # pass js variable how?
-    # month_fetch = "March"
-
-    test_var_js = request.args.get('get_zip')
-
-    s = text(f'SELECT "Severity" , COUNT("Severity") FROM  "accidents_usa_v2_db" WHERE "County" = {test_var_js} GROUP BY "Severity";')
-
-    # s = text(f'SELECT * FROM accidents_usa_v2_db WHERE "Month" = {test_var_js};')
+    s = text(f'SELECT "Severity" , COUNT("Severity") FROM  "accidents_CA_only_v2_tbl" WHERE "County" = \'{test_var_js}\' GROUP BY "Severity";')
 
     zip_fetch = conn.execute(s).fetchall()
 
-    # return jsonify(zip_fetch)
-
     return jsonify({'result': [dict(row) for row in zip_fetch]})
 
-@app.route('/zipcount', methods=['GET', 'POST'])
-def zip_count_sql(): # pass js variable how?
-    # month_fetch = "March"
+@app.route('/ctmonquery', methods=['GET', 'POST'])
+def zip_count_sql():
 
     test_count_js = request.args.get('get_count')
 
-    count = text(f'SELECT "Month", Count("Month") FROM accidents_usa_v2_db WHERE "County" = {test_count_js} GROUP BY "Month";')
+    count = text(f'SELECT \"Month\", Count(\"Month\") FROM \"accidents_CA_only_v2_tbl\"  WHERE \"County\" = \'{test_count_js}\' GROUP BY \"Month\" ORDER BY CASE WHEN \"Month\" = \'January\' then 1 WHEN \"Month\" = \'February\' then 2 WHEN \"Month\" = \'March\' then 3 WHEN \"Month\" = \'April\' then 4 WHEN \"Month\" = \'May\' then 5 WHEN \"Month\" = \'June\' then 6 WHEN \"Month\" = \'July\' then 7 WHEN \"Month\" = \'August\' then 8 WHEN \"Month\" = \'September\' then 9 WHEN \"Month\" = \'October\' then 10 WHEN \"Month\" = \'November\' then 11 WHEN \"Month\" = \'December\' then 12 ELSE NULL END;')
 
     count_fetch = conn.execute(count).fetchall()
 
     return jsonify({'result': [dict(row) for row in count_fetch]})
 
-@app.route('/zipall', methods=['GET', 'POST'])
-def zip_all_sql(): # pass js variable how?
-    # month_fetch = "March"
+@app.route('/cttimequery', methods=['GET', 'POST'])
+def zip_all_sql(): 
 
     test_all_js = request.args.get('get_all')
 
-    all = text(f'SELECT \"Time_of_Day\", COUNT(\"Time_of_Day\") FROM accidents_usa_v2_db WHERE \"County\" = {test_all_js} GROUP BY \"Time_of_Day\" ORDER BY CASE WHEN \"Time_of_Day\" = \'Early Morning\' then 1 WHEN \"Time_of_Day\" = \'Morning\' then 2 WHEN \"Time_of_Day\" = \'Afternoon\' then 3 WHEN \"Time_of_Day\" = \'Late Afternoon\' then 4 WHEN \"Time_of_Day\" = \'Night\' then 5 WHEN \"Time_of_Day\" = \'Late Night\' then 6 ELSE NULL END;')
+    all = text(f'SELECT \"Time_of_Day\", COUNT(\"Time_of_Day\") FROM \"accidents_CA_only_v2_tbl\"  WHERE \"County\" = \'{test_all_js}\' GROUP BY \"Time_of_Day\" ORDER BY CASE WHEN \"Time_of_Day\" = \'Early Morning\' then 1 WHEN \"Time_of_Day\" = \'Morning\' then 2 WHEN \"Time_of_Day\" = \'Afteroon\' then 3 WHEN \"Time_of_Day\" = \'Late Afternoon\' then 4 WHEN \"Time_of_Day\" = \'Night\' then 5 WHEN \"Time_of_Day\" = \'Late Night\' then 6 ELSE NULL END;')
 
     all_fetch = conn.execute(all).fetchall()
 
-    return jsonify({'result': [dict(row) for row in all_fetch]})  
+    return jsonify({'result': [dict(row) for row in all_fetch]})
+
+@app.route('/mapboxctquery', methods=['GET', 'POST'])
+def map_sql(): 
+
+    test_map_js = request.args.get('get_map')
+
+    all = text(f'Select \"Latitude\", \"Longitude\", \"Severity\" From \"accidents_CA_only_v2_tbl\" Where \"County\" = \'{test_map_js}\' Group by \"Latitude\", \"Longitude\", \"Severity\" Order by \"Latitude\" ASC;')
+
+    all_fetch = conn.execute(all).fetchall()
+
+    return jsonify({'result': [dict(row) for row in all_fetch]})
 
 @app.route('/predict', methods=['GET', 'POST'])  
-def make_prediction():
+def make_prediction(): 
+
+    print(list(request.form.values()))
+
     features = [int(x) for x in request.form.values()]
+    
     final_features = [np.array(features)]       
+    
     prediction = model.predict(final_features)  
-    return jsonify([prediction[0]] )
+    
+    return render_template('prediction_html', prediction = prediction[0])
+
 
 if __name__ == '__main__':
     app.run(debug=True)
