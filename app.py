@@ -9,6 +9,7 @@ from sqlalchemy import create_engine, func
 from flask import Flask, jsonify, request, render_template
 from sqlalchemy.sql import text
 import json
+import numpy as np
 import pickle
 import pandas as pd
 from sqlalchemy import JSON
@@ -93,12 +94,14 @@ def zip_all_sql(): # pass js variable how?
 
     all_fetch = conn.execute(all).fetchall()
 
-    return jsonify({'result': [dict(row) for row in all_fetch]})
+    return jsonify({'result': [dict(row) for row in all_fetch]})  
 
-#@app.route('/submit', methods=['GET', 'POST'])  
-#def make_prediction():
-  #features = [int(x) for x in request.form.values()]
-  #final_features = [np.array(features)]       
-  #prediction = model.predict(final_features)  
-  #prediction = prediction[0]    
-  #return render_template('prediction.html', prediction = prediction)
+@app.route('/predict, methods=['GET', 'POST'])  
+def make_prediction():
+    features = [int(x) for x in request.form.values()]
+    final_features = [np.array(features)]       
+    prediction = model.predict(final_features)  
+ # return render_template('prediction.html', prediction = prediction[0] )
+
+if __name__ == '__main__':
+    app.run(debug=True)
