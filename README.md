@@ -35,7 +35,7 @@ y = filtered_cleaned_df['Severity']
 
 All of our data consists of accidents with different severity levels. Therefore, we chose severity as our target because we can perform a prediction on the severity level of a car accident. 
 
-After choosing our target variable, we had to use pd.get_dummies to convert our columns from object to float or integer. The values will be separated into new columns with a value of 0 and 1. 
+After choosing our target variable, we had to use pd.get_dummies to convert our columns from object to float or integer. The values will be separated into new columns with a value of 0 and 1. We will use get_dummies for these columns: County, Month, Time, and Part_of_Week.
 
 To split the data, the y value will be our target and our x value will be our features. We will use the code below and use StandardScaler to scale the data:
 
