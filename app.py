@@ -128,31 +128,30 @@ def make_prediction():
     
     prediction = model.predict(final_features)  
     
-    return jsonify([prediction[0]])
+    return render_template('prediction_html', prediction = prediction[0])
 
+# @app.route('/ml_sev',methods=['POST'])
+# def predict():
+#     # Get the data from the POST request.
+#     if request.method == "POST":
+        
+#         #data = request.get_json(force=True)
+        
+#         print(request.form['zipcode'])
+        
+#         data = float(request.form['zipcode'])
+        
+#         print("Data", model.predict([[data]]))
+        
+#         # Make prediction using model loaded from disk as per the data.
+        
+#         prediction = model.predict([[data]])
 
-@app.route('/ml_sev',methods=['POST'])
-def predict():
-    # Get the data from the POST request.
-    if request.method == "POST":
+#         # Take the first value of prediction
         
-        #data = request.get_json(force=True)
-        
-        print(request.form['zipcode'])
-        
-        data = float(request.form['zipcode'])
-        
-        print("Data", model.predict([[data]]))
-        
-        # Make prediction using model loaded from disk as per the data.
-        
-        prediction = model.predict([[data]])
+#         output = prediction[0]
 
-        # Take the first value of prediction
-        
-        output = prediction[0]
-
-        return render_template("static/results.html", output=output, exp=data)
+#         return render_template("static/results.html", output=output, exp=data)
 
 
 

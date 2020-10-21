@@ -1,0 +1,111 @@
+Severity
+Temperature_F
+Visibility_miles
+Precipitation_inches
+Speed_Bump
+Cross_Walk
+Yield_Sign
+Intersection
+No_Exit
+Railway
+Roundabout
+Stop_Sign
+Traffic
+Traffic_Light
+Turning_Loop
+County_Alameda
+County_Alpine
+County_Amador
+County_Butte
+County_Calaveras
+County_Colusa
+County_Contra Costa
+County_Del Norte
+County_El Dorado
+County_Fresno
+County_Glenn
+County_Humboldt
+County_Imperial
+County_Inyo
+County_Kern
+County_Kings
+County_Lake
+County_Lassen
+County_Los Angeles
+County_Madera
+County_Marin
+County_Mariposa
+County_Mendocino
+County_Merced
+County_Modoc
+County_Mono
+County_Monterey
+County_Napa
+County_Nevada
+County_Orange
+County_Placer
+County_Plumas
+County_Riverside
+County_Sacramento
+County_San Benito
+County_San Bernardino
+County_San Diego
+County_San Francisco
+County_San Joaquin
+County_San Luis Obispo
+County_San Mateo
+County_Santa Barbara
+County_Santa Clara
+County_Santa Cruz
+County_Shasta
+County_Sierra
+County_Siskiyou
+County_Solano
+County_Sonoma
+County_Stanislaus
+County_Sutter
+County_Tehama
+County_Trinity
+County_Tulare
+County_Tuolumne
+County_Ventura
+County_Yolo
+County_Yuba
+Month_April
+Month_August
+Month_December
+Month_February
+Month_January
+Month_July
+Month_June
+Month_March
+Month_May
+Month_November
+Month_October
+Month_September
+Time_0.0
+Time_1.0
+Time_2.0
+Time_3.0
+Time_4.0
+Time_5.0
+Time_6.0
+Time_7.0
+Time_8.0
+Time_9.0
+Time_10.0
+Time_11.0
+Time_12.0
+Time_13.0
+Time_14.0
+Time_15.0
+Time_16.0
+Time_17.0
+Time_18.0
+Time_19.0
+Time_20.0
+Time_21.0
+Time_22.0
+Time_23.0
+Part_of_Week_Weekday
+Part_of_Week_Weekend

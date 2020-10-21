@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="static/css/styles.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <!-- <link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
+  <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.js" integrity="sha512-I54fxhTJwRigWTc3uNjgDzgii7LW+WJuyyA8kc6WaaZ7RQQNAf8bOEJLRNav7n/ca09MUwl5FptUukvqrOTUvQ==" crossorigin="anonymous"></script>
@@ -36,144 +38,20 @@
             </nav>
           </div>
       </div>
-      <div class="col-md-12" id="about">
-        <h2>accidentsHappen</h2>
-          <p>A car accident story inspired us to use a dataset to analyze and predict the chances of getting in an accident based on
-            specific criteria and data. We see great potential in utilizing this dataset to provide interesting insights and research.
-            By entering certain criteria such as zip codes, seasonal trends, severity, and traffic attributes, one can better forecast the
-            chances of getting into a car accident. It is a simple and easy tool that any driver can use. </p>
-      </div>   
-      <div class="col-md-12">
-        <h3 id="zipsearch">Search your County in California</h3>
-        <form id="county_form" onsubmit="return false;">
-          <div class="dropdown">
-            <label for="County">Choose a County:</label>
-              <select name="County" id="county_select" required onchange="county_start()">
-                <option value="Alameda">Alameda</option>
-                <option value="Alpine">Alpine</option>
-                <option value="Amador">Amador</option>
-                <option value="Butte">Butte</option>
-                <option value="Calaveras">Calaveras</option>
-                <option value="Colusa">Colusa</option>
-                <option value="Contra Costa">Contra Costa</option>
-                <option value="Del Norte">Del Norte</option>
-                <option value="El Dorado">El Dorado</option>
-                <option value="Fresno">Fresno</option>
-                <option value="Glenn">Glenn</option>
-                <option value="Humboldt">Humboldt</option>
-                <option value="Imperial">Imperial</option>
-                <option value="Inyo">Inyo</option>
-                <option value="Kern">Kern</option>
-                <option value="Kings">Kings</option>
-                <option value="Lake">Lake</option>
-                <option value="Lassen">Lassen</option>
-                <option value="Los Angeles">Los Angeles</option>
-                <option value="Madera">Madera</option>
-                <option value="Marin">Marin</option>
-                <option value="Mariposa">Mariposa</option>
-                <option value="Mendocino">Mendocino</option>
-                <option value="Merced">Merced</option>
-                <option value="Modoc">Modoc</option>
-                <option value="Mono">Mono</option>
-                <option value="Monterey">Monterey</option>
-                <option value="Napa">Napa</option>
-                <option value="Nevada">Nevada</option>
-                <option value="Orange">Orange</option>
-                <option value="Placer">Placer</option>
-                <option value="Plumas">Plumas</option>
-                <option value="Riverside">Riverside</option>
-                <option value="Sacramento">Sacramento</option>
-                <option value="San Benito">San Benito</option>
-                <option value="San Bernardino">San Bernardino</option>
-                <option value="San Diego">San Diego</option>
-                <option value="San Francisco">San Francisco</option>
-                <option value="San Joaquin">San Joaquin</option>
-                <option value="San Luis Obispo">San Luis Obispo</option>
-                <option value="San Mateo">San Mateo</option>
-                <option value="Santa Barbara">Santa Barbara</option>
-                <option value="Santa Clara">Santa Clara</option>
-                <option value="Santa Cruz">Santa Cruz</option>
-                <option value="Shasta">Shasta</option>
-                <option value="Sierra">Sierra</option>
-                <option value="Siskiyou">Siskiyou</option>
-                <option value="Solano">Solano</option>
-                <option value="Sonoma">Sonoma</option>
-                <option value="Stanislaus">Stanislaus</option>
-                <option value="Sutter">Sutter</option>
-                <option value="Tehama">Tehama</option>
-                <option value="Trinity">Trinity</option>
-                <option value="Tulare">Tulare</option>
-                <option value="Tuolumne">Tuolumne</option>
-                <option value="Ventura">Ventura</option>
-                <option value="Yolo">Yolo</option>
-                <option value="Yuba">Yuba</option>
-              </select>
-          </div>  
-        </form>
-      </div>
-      <div class="col-md-12">
-        <div id="plotlygraph1">
-          <div id="bar"></div>
-        </div>
-      </div> 
-      <div class="col-md-12">
-        <div id="plotlygraph2">
-          <div id="months"></div>
-        </div>
-      </div>
-      <div class="col-md-12">
-        <div id="plotlygraph3">
-          <div id="testMap"></div>
-        </div>
-      </div>
-      <div class="col-md-12">
-        <div id="plotlygraph4">
-          <div id="scatter"></div>
-        </div>
-      </div>
-      <div class="col-md-12">
-        <div id="plotlygraph5">
-          <div id="dense"></div>
-        </div>
-      </div>
-          <!-- <img src="static/images/state_zipcode_zone1.png">
-          <img src="static/images/state_zipcode_zone_colored.png">  
-          <p>By creating a simple cartesian chart based on latitude and longitude, a map similar to the map of the US can be visually represented
-            by each accident occurred in each zip code. Furthermore, by color filtering from States, we can overlay a map of all the different states in the US.</p>
-          <img src="static/images/top10_zipcodes.png">
-            <p> Here we are presented with Top10 Zip Codes that had the most accidents. It would have been a better choice to include city names.</p> --> 
-      <div class="col-md-12">
-        <div id="season">
-          <h3>Seasons throughout 4 Years</h3>
-          <img src="static/images/seasonal_counts.png">
-            <p>Throughout the four years, we were hoping to find certain trends but then the months of one year. Thus, we can see there are certain trends,
-              especially during the summer, that might lead to higher accident rates.</p>
-        </div>
-      </div>
-      <div class="col-md-12">
-        <div id="weekday">
-          <h3>Weekend vs Weekdays</h3>
-          <img src="static/images/weekday_counts.png">
-            <p>Based on the assumption that a normal work week is Monday to Friday and weekend is Saturday to Sunday, we can surmise that a higher percentage
-              of accidents occur within the weekday, even though there are five days in a week day and only two days on a weekend.</p>
-          </div>
-      </div>
-      <div class="col-md-12">
-        <div id="time">
-          <h3>Time of the Day</h3>
-          <img src="static/images/time_of_day_count.png">
-            <p>We wanted to group the time in parts of the day since we can accurately dig insights onto which parts of the days have more data. we came up with time slots
-                that are divided in such way: <br><br> Early Morning (3 am to 6:59 am)<br> Morning (7 am to 10:59 am),<br> Afternoon (11 am to 2:59 pm),<br> Late Afternoon (3 pm to 6:59 pm),<br>
-                Night (7 pm to 10:59 pm),<br> Late Night (11 pm to 2:59 am)<br><br><br><br></p>
-        </div>
-      </div>
-      <div class="col-md-12">
-        <form action="/predict" method="POST" class="form"></form>
-          <div id="sev_county">
-            <h3>Severity Machine Learning</h3>
-              <div class="dropdown">
-                <label for="County">Choose a CA County:</label>
-                <select name="County" id="county_select">
+      <div class="leftcolumn">
+        <div class="col-md-12" id="about">
+          <h2>accidentsHappen</h2>
+            <p>A car accident story inspired us to use a dataset to analyze and predict the chances of getting in an accident based on
+              specific criteria and data. We see great potential in utilizing this dataset to provide interesting insights and research.
+              By entering certain criteria such as zip codes, seasonal trends, severity, and traffic attributes, one can better forecast the
+              chances of getting into a car accident. It is a simple and easy tool that any driver can use. </p>
+        </div>   
+        <div class="col-md-12">
+          <h3 id="zipsearch">Search your County in California</h3>
+          <form id="county_form" onsubmit="return false;">
+            <div class="dropdown">
+              <label for="County">Choose a County:</label>
+                <select name="County" id="county_select" required onchange="county_start()">
                   <option value="Alameda">Alameda</option>
                   <option value="Alpine">Alpine</option>
                   <option value="Amador">Amador</option>
@@ -232,44 +110,252 @@
                   <option value="Ventura">Ventura</option>
                   <option value="Yolo">Yolo</option>
                   <option value="Yuba">Yuba</option>
-                <input style="color:brown;" type="submit" onclick= county_start()>
-    
-            <div class="slidecontainer">
-                <label> Temperature (F): <span class="limit"></span></label>
-                <input type="range" min="0" max="120" value="20" class="slider" id="Temperature_F" step="1">
-            </div>
-  
-            <div class="slidecontainer">
-              <label> Visibility (mi): <span class="limit"></span></label>
-              <input type="range" min="0" max="10" value="5" class="slider" >
-            </div>
-  
-            <div class="slidecontainer">
-              <label> Precipitation (in): <span class="limit"></span></label>
-              <input type="range" min="0" max="10" value="5" class="slider">
-            </div>
-  
-              <form action="/predict" method="post">
-                <label for="features">Choose a street feature:</label>
-                <select name="Country" id="Country" multiple>
-                  <option id="Amenity" value="1">Amenity Zones</option>
-                  <option id="Crossing" value="1">Crosswalk</option>
-                  <option id="Junction" value="1">Intersection</option>
-                  <option id="Roudabout" value="1">Roundabout</option>
-                  <option id="Bump" value="1">Speed Bumps</option>
-                  <option id="Traffic_Signal" value="1">Stop Light</option>
-                  <option id="Stop" value="1">Stop Sign</option>
-                  <option id="Traffic_Calming" value="1">Traffic</option>
-                  <option id="Turning_Loop" value="1">Turning Loop</option>
-                  <option id="Wrong_Way" value="1">Wrong Way</option>
-                  <option id="Give_Way" value="1">Yield Sign</option>
                 </select>
-                <br><br>
-                <input type="submit" value="submit">
-              </form>
-            </div> 
+            </div>  
+          </form>
+        </div>
+        <div class="col-md-12">
+          <div id="plotlygraph1">
+            <div id="bar"></div>
+          </div>
+        </div> 
+        <div class="col-md-12">
+          <div id="plotlygraph2">
+            <div id="months"></div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div id="plotlygraph3">
+            <div id="testMap"></div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div id="plotlygraph4">
+            <div id="scatter"></div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div id="plotlygraph5">
+            <div id="dense"></div>
+          </div>
+        </div>
+            <!-- <img src="static/images/state_zipcode_zone1.png">
+            <img src="static/images/state_zipcode_zone_colored.png">  
+            <p>By creating a simple cartesian chart based on latitude and longitude, a map similar to the map of the US can be visually represented
+              by each accident occurred in each zip code. Furthermore, by color filtering from States, we can overlay a map of all the different states in the US.</p>
+            <img src="static/images/top10_zipcodes.png">
+              <p> Here we are presented with Top10 Zip Codes that had the most accidents. It would have been a better choice to include city names.</p> --> 
+        <div class="col-md-12">
+          <div id="season">
+            <h3>Seasons throughout 4 Years</h3>
+            <img src="static/images/seasonal_counts.png">
+              <p>Throughout the four years, we were hoping to find certain trends but then the months of one year. Thus, we can see there are certain trends,
+                especially during the summer, that might lead to higher accident rates.</p>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div id="weekday">
+            <h3>Weekend vs Weekdays</h3>
+            <img src="static/images/weekday_counts.png">
+              <p>Based on the assumption that a normal work week is Monday to Friday and weekend is Saturday to Sunday, we can surmise that a higher percentage
+                of accidents occur within the weekday, even though there are five days in a week day and only two days on a weekend.</p>
+            </div>
+        </div>
+        <div class="col-md-12">
+          <div id="time">
+            <h3>Time of the Day</h3>
+            <img src="static/images/time_of_day_count.png">
+              <p>We wanted to group the time in parts of the day since we can accurately dig insights onto which parts of the days have more data. we came up with time slots
+                  that are divided in such way: <br><br> Early Morning (3 am to 6:59 am)<br> Morning (7 am to 10:59 am),<br> Afternoon (11 am to 2:59 pm),<br> Late Afternoon (3 pm to 6:59 pm),<br>
+                  Night (7 pm to 10:59 pm),<br> Late Night (11 pm to 2:59 am)<br><br><br><br></p>
+          </div>
         </div>
       </div>
+      <div class="rightcolumn">
+        <div class="col-md-12">
+          <form action="/predict" method="POST" class="full_form" id="full_form" name="full_form">
+            <div id="sev_county">
+              <h3>Severity Machine Learning</h3>
+                <div class="dropdown">
+                  <label for="County">Choose a CA County:</label>
+                  <select name="County" id="county_select" required>
+                    <option name="County_Alameda" value=1>Alameda</option>
+                    <option name="County_Alpine" value=1>Alpine</option>
+                    <option name="County_Amador"  value=1>Amador</option>
+                    <option name="County_Butte"  value=1>Butte</option>
+                    <option name="County_Calaveras"  value=1>Calaveras</option>
+                    <option name="County_Colusa"  value=1>Colusa</option>
+                    <option name="County_Contra Costa"  value=1>Contra Costa</option>
+                    <option name="County_Del Norte"  value=1>Del Norte</option>
+                    <option name="County_El Dorado"  value=1>El Dorado</option>
+                    <option name="County_Fresno"  value=1>Fresno</option>
+                    <option name="County_Glenn"  value=1>Glenn</option>
+                    <option name="County_Humbolt"  value=1>Humboldt</option>
+                    <option name="County_Imperial"  value=1>Imperial</option>
+                    <option name="County_Inyo"  value=1>Inyo</option>
+                    <option name="County_Kern"  value=1>Kern</option>
+                    <option name="County_Kings"  value=1>Kings</option>
+                    <option name="County_Lake"  value=1>Lake</option>
+                    <option name="County_Lassen"  value=1>Lassen</option>
+                    <option name="County_Los Angeles"  value=1>Los Angeles</option>
+                    <option name="County_Madera"  value=1>Madera</option>
+                    <option name="County_Marin"  value=1>Marin</option>
+                    <option name="County_Mariposa"  value=1>Mariposa</option>
+                    <option name="County_Mendocino"  value=1>Mendocino</option>
+                    <option name="County_Merced"  value=1>Merced</option>
+                    <option name="County_Modoc"  value=1>Modoc</option>
+                    <option name="County_Mono"  value=1>Mono</option>
+                    <option name="County_Monterey"  value>Monterey</option>
+                    <option name="County_Napa"  value=1>Napa</option>
+                    <option name="County_Nevada"  value=1>Nevada</option>
+                    <option name="County_Orange"  value=1>Orange</option>
+                    <option name="County_Placer"  value=1>Placer</option>
+                    <option name="County_Plumas"  value=1>Plumas</option>
+                    <option name="County_Riverside"  value=1>Riverside</option>
+                    <option name="County_Sacramento"  value=1>Sacramento</option>
+                    <option name="County_San Benito"  value=1>San Benito</option>
+                    <option name="County_San Bernardino"  value=1>San Bernardino</option>
+                    <option name="County_San Diego"  value=1>San Diego</option>
+                    <option name="County_San Francisco"  value=1>San Francisco</option>
+                    <option name="County_San Joaquin"  value=1>San Joaquin</option>
+                    <option name="County_San Luis Obispo"  value=1>San Luis Obispo</option>
+                    <option name="County_San Mateo"  value=1>San Mateo</option>
+                    <option name="County_Santa Barbara"  value=1>Santa Barbara</option>
+                    <option name="County_Santa Clara"  value=1>Santa Clara</option>
+                    <option name="County_Santa Cruz"  value=1>Santa Cruz</option>
+                    <option name="County_Shasta" value=1>Shasta</option>
+                    <option name="County_Sierra"  value=1>Sierra</option>
+                    <option name="County_Siskiyou" value=1>Siskiyou</option>
+                    <option name="County_Solano"  value=1>Solano</option>
+                    <option name="County_Sonoma"  value=1>Sonoma</option>
+                    <option name="County_Stanislaus"  value=1>Stanislaus</option>
+                    <option name="County_Sutter"  value=1>Sutter</option>
+                    <option name="County_Tehama"  value=1>Tehama</option>
+                    <option name="County_Trinity"  value=1>Trinity</option>
+                    <option name="County_Tulare"  value=1>Tulare</option>
+                    <option name="County_Tuolumne"  value=1>Tuolumne</option>
+                    <option name="County_Ventura"  value=1>Ventura</option>
+                    <option name="County_Yolo"  value=1>Yolo</option>
+                    <option name="County_Yuba"  value=1>Yuba</option>
+                  </select>
+                </div>
+                <br> 
+                <div class="dropdown">
+                  <label for="Month">Choose Month:</label> <br>
+                  <select name="Month" id="Month">
+                    <option name="Month_January" value=1>January</option>
+                    <option name="Month_February"  value="February">February</option>
+                    <option name="Month_March"  value="March">March</option>
+                    <option name="Month_April"  value="April">April</option>
+                    <option name="Month_May"  value="May">May</option>
+                    <option name="Month_June"  value="June">June</option>
+                    <option name="Month_July"  value="July">July</option>
+                    <option name="Month_August" value="August">August</option>
+                    <option name="Month_September"  value="September">September</option>
+                    <option name="Month_October"  value="October">October</option>
+                    <option name="Month_November"  value="November">November</option>
+                    <option name="Month_December"  value="December">December</option>
+                  </select>
+                </div>
+                <br>
+          
+                <div class="dropdown">
+                  <label for="Part_of_Week">Choose Day of Week:</label> <br>
+                  <select name="Part_of_Week" id="Part_of_Week">
+                    <option name="Part_of_Week_Weekday" value=1>Weekday</option>
+                    <option name="Part_of_Week_Weekend" value="Weekend">Weekend</option>
+                  </select>
+                </div>
+                <br>
+          
+                <div class="dropdown">
+                  <label for="Time">Choose Time:</label> <br>
+                  <select name="Time" id="Time">
+                    <option name="Time_0.0" value="1">12:00am</option>
+                    <option name="Time_1.0"  value="1.0">1:00am</option>
+                    <option name="Time_2.0"  value="2.0">2:00am</option>
+                    <option name="Time_3.0"  value="3.0">3:00am</option>
+                    <option name="Time_4.0"  value="4.0">4:00am</option>
+                    <option name="Time_5.0"  value="5.0">5:00am</option>
+                    <option name="Time_6.0"  value="6.0">6:00am</option>
+                    <option name="Time_7.0"  value="7.0">7:00am</option>
+                    <option name="Time_8.0"  value="8.0">8:00am</option>
+                    <option name="Time_9.0"  value="9.0">9:00am</option>
+                    <option name="Time_10.0"  value="10.0">10:00am</option>
+                    <option name="Time_11.0"  value="11.0">11:00am</option>
+                    <option name="Time_12.0"  value="12.0">12:00pm</option>
+                    <option name="Time_13.0"  value="13.0">1:00pm</option>
+                    <option name="Time_14.0"  value="14.0">2:00pm</option>
+                    <option name="Time_15.0"  value="15.0">3:00pm</option>
+                    <option name="Time_16.0"  value="16.0">4:00pm</option>
+                    <option name="Time_17.0"  value="17.0">5:00pm</option>
+                    <option name="Time_18.0"  value="18.0">6:00pm</option>
+                    <option name="Time_19.0"  value="19.0">7:00pm</option>
+                    <option name="Time_20.0"  value="20.0">8:00pm</option>
+                    <option name="Time_21.0"  value="21.0">9:00pm</option>
+                    <option name="Time_22.0"  value="22.0">10:00pm</option>
+                    <option name="Time_23.0"  value="23.0">11:00pm</option>
+                  </select>
+                </div>
+                <br>    
+                  <!-- <input style="color:brown;" type="submit" onclick= county_start()> -->
+
+      
+              <div class="slidecontainer">
+                  <label> Temperature (F): <span  class="limit"></span></label>
+                  <input name="Temperature_F" type="range" min="0" max="120" value="20" class="slider" id="Temperature_F" step="1" oninput="this.nextElementSibling.value = this.value">
+                  <output name="Temperature_F" id="Temperature_F">80</output>
+              </div>
+    
+              <div class="slidecontainer">
+                <label> Visibility (mi): <span  class="limit"></span></label>
+                <input name="Visibility_miles" type="range" min="0" max="10" value="5" class="slider" oninput="this.nextElementSibling.value = this.value"> 
+                <output name="Visibility_miles" id="Visibility_mi">5</output> 
+              </div>
+    
+              <div class="slidecontainer">
+                <label> Precipitation (in): <span  class="limit"></span></label>
+                <input name="Precipitation_inches" type="range" min="0" max="10" value="5" class="slider" oninput="this.nextElementSibling.value = this.value">
+                <output name= "Precipitation_inches" id="Precipitation_in">5</output>
+              </div>
+    
+              <h4>Road Attributes</h4>
+              <input type="checkbox" id="Crossing" name="Cross_Walk" value="1">
+              <label for="Crossing">Cross Walk</label><br>
+              
+              <input type="checkbox" id="Junction" name="Intersection" value="1">
+              <label for="Junction" value="1">Intersection</label><br>
+              
+              <input type="checkbox" id="Crossing" name="Roundabout" value="1">
+              <label for="Roundabout" value="1">Roundabout</label><br>
+              
+              <input type="checkbox" id="Crossing" name="Speed_Bump" value="1">
+              <label for="Bump" value="1">Speed Bumps</label><br>
+              
+              <input type="checkbox" id="Crossing" name="Traffic_Light" value="1">
+              <label for="Traffic_Signal" value="1">Stop Light</label><br>
+              
+              <input type="checkbox" id="Crossing" name="Stop_Sign" value="1"> 
+              <label for="Stop" value="1">Stop Sign</label><br>
+              
+              <input type="checkbox" id="Crossing" name="Traffic" value="1">
+              <label for="Traffic_Calming" value="1">Traffic</label><br>
+              
+              <input type="checkbox" id="Crossing" name="Turning_Loop" value="1">
+              <label for="Turning_Loop" value="1">Turning Loop</label><br>
+              
+              <input type="checkbox" id="Crossing" name="No_Exit" value="1">
+              <label for="Wrong_Way" value="1">Wrong Way</label><br>
+              
+              <input type="checkbox" id="Crossing" name="Yield_Sign" value="1">
+              <label for="Give_Way" value="1">Yield Sign</label><br>
+            <button type="submit">Submit</button></p>  
+            <br>
+            <br>
+            </div>
+          </form>   
+        </div>
+      </div>  
       <div class="col-md-12">
         <div id="credit">
           <h6>Credit and Licensing</h6>
@@ -308,6 +394,7 @@
   <script src="static/js/dark-mode.js"></script>
   <script src="static/js/scrollUp.js"></script>
   <script src="static/js/initialViz.js"></script>
+  <script src="static/js/slider.js"></script>
 </body>
 </html>
 
