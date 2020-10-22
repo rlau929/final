@@ -42,7 +42,7 @@ conn = engine.connect()
 # Flask Setup
 ################################################################
 
-with open('model/dt_gini_1021.pkl', 'rb') as f:
+with open('model/dt_gini_1021_APPLY_THIS_MODEL.pkl', 'rb') as f:
      model = pickle.load(f)
 
 app = Flask(__name__, template_folder='')

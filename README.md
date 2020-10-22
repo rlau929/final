@@ -1,24 +1,82 @@
-# final
-Final group project
-## Team Name
-accidentsHappen
+# accidentsHappen
+A Group Project For UC Berkeley Extension Data Analysis and Visualization Bootcamp (May-Oct 2020)
 
-## Google Slides
-[Slides Link](https://drive.google.com/file/d/1ud5LxVQhqDQVythqhW2E_3Y9M8qgcm1X/view)
-
+---
 ## Team Members
 Joshuapaul Rivera, Robert Lau, Simranjot Singh, and Kim Ngo
 
-## DatasetA 
-Kaggle dataset of [car accidents](https://www.kaggle.com/sobhanmoosavi/us-accidents) in the contingent US from 2016-2020*
-
-Reason Our team became interested in this project topic because one of our members was involved in a severe caraccident. Due to bad road conditions, their car skidded across the freeway, onto the center divider. As a result, our member was hospitalized.Their story inspired us to use a dataset to analyze and predict the chances of getting in an accident based on specific criteria and data.We see great potential in utilizing this dataset to provide interesting insights and research.
-
-## Programs 
-ETL: Python, Jupyter Notebook, PostgreSQLVisualizations and Dashboard: JavaScript, CSS, HTMLForecasting and Analysis: Supervised Machine Learning
+## Google Slides
+[Google Slides Link](https://drive.google.com/file/d/1ud5LxVQhqDQVythqhW2E_3Y9M8qgcm1X/view)
 
 ## Objectives 
-By entering certain criteria such as zip codes, seasonal trends, severity, and traffic attributes, one can better forecast the chances of getting into a car accident. It is a simple and easy tool that any driver can use. 
+
+Driving on the road is simple, rather long and tideious. However, we can't help but look away at a car accident that happens to be on our route. It is known as rubbernecking, a human trait also know as morbid curiosity, that steals our attention at the scene of tragedy and disaster. An interesting aspect to attribute to our natural trait is adding ***severity*** to hopefully combine the act of looking at tragedy with the rate of traffic. 
+
+### Addressing Severity
+
+We will define ***Severity*** of an accident - how severe an accident is -- as a measure of damage and harm done on objects and people, as well as the affect on traffic flow during the time of certain events. The Severity Level is a range of numbers from 1 to 4, which indicates impact on traffic in our dataset:
+
+1. Indicates a short traffic delay and/or a minor accident
+    - Traffic comes to a slow (butterfly effect)
+    - Minor bump or accident
+2. Indicates traffic delay and/or visible damage 
+    - Traffic comes to a stop for a short period time, road work ahead
+    - Accident with visible dents, possible damage to the car, some harm done to persons involved
+3. Indicates complete traffic standstill and/or major accident
+    - Rush Hour traffic during peak commuting times
+    - Possible irreversible damage to the car
+    - Significant affect on motor functions and balance right after the accident, possible concussion
+4. Indicates major road/lane block and/or multiple accidents invovled
+    - Unmoving traffic, requires redirection and assistance of enforcement
+    - Multiple accidents, car-piling, and possiblity of incapicattion and/or death 
+
+
+By entering certain criteria such as county names, seasonal trends, and road attributes, one can visually ascertain the count of accidents in different timeframes and locations as weel as the severity of an accident if one were to select certain attributes. A simple and elegent dashboard created with datasets to fulfill the need for rubbernecking on the internet. 
+
+---
+## Programs 
+- ETL: Python, Jupyter Notebook, PostgreSQL
+- Visualizations and Dashboard: JavaScript, CSS, HTML, Sqlalchemy, AJAX
+- Forecasting and Analysis: Supervised Machine Learning, Decision Tree, Random Forest
+- Modules and Libraries such as Pandas, Numpy, Psycopg2, Plotly, D3.js, Mapbox Bootstrap, Seaborn, Pickle, Sklearn Metrics, and  Tensorflow
+
+## Dataset and Database
+Kaggle dataset of [car accidents](https://www.kaggle.com/sobhanmoosavi/us-accidents) in the contingent US from 2016-2020* 
+
+The reason our team became interested in this project topic because one of our members was involved in a severe car accident. Due to bad road conditions, their car skidded across the freeway, onto the center divider and as a result, our member was hospitalized. Their story inspired us to use a dataset to analyze and predict the chances of getting in an accident based on specific criteria and data. We see great potential in utilizing this dataset to provide interesting insights and research.
+
+While the original dataset had +3 million rows, the cleaned dataset, post ETL, still had 1.3 million rows, causing concern for ML models and potential problems in reading CSV since we are hosting this project locally.
+
+![ETL raw dataset](notebooks/etl1.jpg)
+We started the ETL process by dropping many columns such as Airport_Code, End_Lat, Street, Country, Timezone, Weather_Timestamp, Astronomical_Twilight since they added no values to our insights or that they did not add interest in out analysis. We added new columns combined from dropped ones such as Days of the Week and Part of the Day because we think they can add more value in our dataset research.
+
+After careful consideration, we dropped all states except California, and kept our focus on the "County" variable as our main search query. It was in best interest to reduce the load to make our ML and Visualizations more efficianet and balanced.
+
+![Import to PostgreSQL](notebooks/etl2_2sql.jpg)
+
+Lastly, we used Sqlalchemy to import our dataset to PostgreSQL. Since we had one large dataset complied, we felt it was not neccessary to create additional tables and split/join tables since that may increase our workload. Furthurmore, we had to keep track of SQL queries since they assisted our dashboard workload. We did not use cloud databases since we were hestiant to consider the pay-as-go models for most databases. Plus, uploading the raw dataset could have been an hindrance. 
+
+![SQL queries](notebooks/post_qry.jpg)
+
+---
+
+## Dashboard and Visualizations
+
+We created a HTML dashboard because it has potential for infinite customiztion and story telling. Here's our final product:  
+![Dash Final](notebooks/dash_done.jpg)
+
+We began by adding custom layouts and styles with Javascript and CSS. We decided early on that, as part of rubric, we wanted to include visual graphs with interactivity as well as a Machine Learning filter selection that predicts Severity.
+
+Initially, our complete US accidents csv dataset was not being read by D3.csv and Plotly.d3.csv since javascript is client side, it has to load all scripts and files first in order to run anything. Even if the dataset managed to load, configuring graphs would also take time to render. We tried different methods such as Mpld3 input, Papaparse, and subsetting our dataset in smaller, more sizable tables. These methods lead to deadends such as imcomprehensible HTML code and complicated code to join many small tables. Therefore, in order to make a our dashboard viable, we created a js -> <- flask -> <- sql loop to publish live results, with the help of AJAX jquery and Sqlalchemy. Sqlalchemy
+
+At the whim of the user, such as selecting a California County, the input's value from HTML is saved as a javascript variable by getElement. We confine the varibale with various restrictions and coercion to pass, then it is passed onto a url string to be read by Flask request with search query and app routes. At this point, Sqlalchemy readies it engines and is ready to pass on query strings with Flask request. To put it simply, we created a readymade SQL queries as text which get forwarded to query a smaller, subset table, which is returned as a JSON object array. Next, the JSON is loaded from the server using a HTTP GET request. If the JSON is returned, the success function is launhced, which elegantly gets iterated to match tracing and layout for a plotly graph. Lastly, the graph is plotted with the correct ID tag.
+
+From this loop, we added queries for severity count, monthly accident trends, time of day accidents, and, most importantly, an interactive density gradient of mapped severity values, and all of this is rendered by a user selecting a county from dashboard dropdown. 
+![LA gradient](notebooks/la_pltly.jpg)
+
+
+
+---
 
 ## Machine Learning
 
@@ -54,25 +112,25 @@ X_train_scaled = X_scaler.transform(X_train)
 X_test_scaled = X_scaler.transform(X_test)
 ```
 ## Important Features Bar Graph
-![Machine Learning Important Features](importantfeatures.png)
+![Machine Learning Important Features](model/importantfeatures.png)
 
 We've tested three models: random forest classifier, logistic regression classifier, and K-Nearest Neighbors. KNN prsesented improved results at 72% testing accuracy compared to random forest and logistic regression at 68% testing accuracy for each model. Although KNN showed increased testing accuracy, it's less efficient. The KNN model was running for 8 hours compared to 1 hour of random forest and 1 hour of logistic regression. Additionally, logistic regression's training accuracy is at 31%. KNN is more robust, but it lacks in efficiency. Overall, the best machine learning model is random forest.
 
 In the future of machine learning, we can reduce the number of features be removing or transforming other attributes such as wind direction, wind speed, and weather conditions. Wind speed and direction might not play a huge role in accident severity. Weather conditions can be transformed and simplified. For example, if we have light rain and heavy rain, we can transform and combine into one rain category. Similar situation for cloudy and partly cloudy. We can combine into one cloudy category. By reducing or removing some features, we can improve our accuracy percentage.
 
 ## Heatmap Correlation of Features
-![Heatmap Correlation of Features](correlationheatmap.png)
+![Heatmap Correlation of Features](model/correlationheatmap.png)
 
 ## Machine Learning Update
 
 In the last week of deliverables, we've updated our data and machine learning algorithm. We removed KNN model since it is not time efficient, but we added Decision Tree model to have more models to compare. We narrowed our data to just California instead of the United States. Our accuracy score decreased slightly to 71% for all machine learning models. We chose Decision Tree because the accuracy score is slightly higher than the rest of the models. 
 
 ## Bar Graph of Machine Learning Model Comparison 
-![Machine Learning Model Comparison](mlmodels.png)
+![Machine Learning Model Comparison](model/mlmodels.png)
 
 We've also ran a confusion matrix to find any true positive, true negatives, false positives, and false negatives. 
 
 ## Table of Confusion Matrix
-![Confusion Matrix](confusionmatrix.png)
+![Confusion Matrix](model/confusionmatrix.png)
 
 Our analysis showed 0% precision for level 1 severity, 99% precision for level 2 severity, 96% precision for level 3 severity, and 100% precision for level 4 severity. The overall accuracy score for the confusion matrix is 98%. There are false positives in predicting severity level 2 and level 3. For severity level 2, it predicted values that are actually in severity level 1 and level 4. For severity level 3, it predicted values that are actually in severity level 4. Overall, the high accuracy score will allow users to confidently and accurately predict the level of severity if they get into an accident.

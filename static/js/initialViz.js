@@ -423,7 +423,7 @@ function chart4() {
                    
             
     
-            var config = {mapboxAccessToken: "0"};
+            var config = {mapboxAccessToken: mpAPI};
   
    
             Plotly.newPlot('dense', data, layout, config);
