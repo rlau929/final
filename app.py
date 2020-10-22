@@ -42,7 +42,7 @@ conn = engine.connect()
 # Flask Setup
 ################################################################
 
-with open('model/decision_tree_v2.pkl', 'rb') as f:
+with open('model/dt_gini_1021.pkl', 'rb') as f:
      model = pickle.load(f)
 
 app = Flask(__name__, template_folder='')
@@ -122,13 +122,19 @@ def map_sql():
 @app.route('/predict', methods=['GET', 'POST'])  
 def make_prediction():
 
+    print(list(request.form.values()))
+
     features = [int(x) for x in request.form.values()]
     
+    print(features)
+
     final_features = [np.array(features)]       
     
     prediction = model.predict(final_features)  
+
+    # prediction = model.predict_on_batch(final_features)
     
-    return render_template('prediction_html', prediction = prediction[0])
+    return render_template('prediction.html', prediction = prediction[0])
 
 # @app.route('/ml_sev',methods=['POST'])
 # def predict():
