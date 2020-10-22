@@ -31,6 +31,7 @@ MANIFEST
 
 # config file
 config.py
+config.js
 
 # Resources Folder - Datasets
 resources/

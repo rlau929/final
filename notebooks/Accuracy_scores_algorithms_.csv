@@ -1,0 +1,4 @@
+Algorithm,Accuracy_Score
+Logistic Regression,0.712142
+Random Forest,0.705877
+Decision Tree,0.715026

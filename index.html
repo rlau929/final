@@ -1,90 +1,474 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Initial Dashboard 0.1</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/styles.css">
-  </head>
-  <body class="bg-dark">
-    <div class="container">
-      <div class="row"> 
-        <div class="col-md-12 jumbotron text-center" style="background-color: darkolivegreen;">
-          <h1>Initial Visualiztions of US Car Accidents Dataset</h1>
-            <p>Lets explore the dataset visuals with plotly.js </p>
-                <button class="btn-toggle" style="color:brown;">Toggle Dark Mode</button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="topnav">
-          <a href="#thesis">Thesis</a>
-          <a href="#zip_code_colored">Zip Codes</a>
-          <a href="#seasons">Seasonal Trends</a>
-          <a href="#weekdays">Weekdays vs Weekend</a>
-          <a href="#time_day">Time_of_the_day</a>
-        </div>
-        <div class="col-md-8">
-          <div id="thesis">
-            <h2>accidentsHappen</h2>
-              <p>A car accident story inspired us to use a dataset to analyze and predict the chances of getting in an accident based on
-                  specific criteria and data. We see great potential in utilizing this dataset to provide interesting insights and research.
-                  By entering certain criteria such as zip codes, seasonal trends, severity, and traffic attributes, one can better forecast the
-                  chances of getting into a car accident. It is a simple and easy tool that any driver can use. 
-                </p>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div id="zip_code_colored">
-            <h3>Zip Codes</h3>
-            <img src="static/images/state_zipcode_zone1.png">
-            <img src="static/images/state_zipcode_zone_colored.png">
-              <p>By creating a simple cartesian chart based on latitude and longitude, a map similar to the map of the US can be visually represented
-                 by each accident occurred in each zip code. Furthermore, by color filtering from States, we can overlay a map of all the different states in the US.
-                </p>
-              <img src="static/images/top10_zipcodes.png">
-              <p>
-                Here we are presented with Top10 Zip Codes that had the most accidents. It would have been a better choice to include city names.
-              </p>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div id="seasons">
-            <h3>Seasons throughout 4 Years</h3>
-            <img src="static/images/seasonal_counts.png">
-              <p>Throughout the four years, we were hoping to find certain trends but then the months of one year. Thus, we can see there are certain trends,
-                 especially during the summer, that might lead to higher accident rates.</p>
-        </div>
-        <div class="col-md-8">
-          <div id="weekdays">
-            <h3>Weekend vs Weekdays</h3>
-            <img src="static/images/weekday_counts.png">
-              <p>Based on the assumption that a normal work week is Monday to Friday and weekend is Saturday to Sunday, we can surmise that a higher percentage
-                 of accidents occur within the weekday, even though there are five days in a week day and only two days on a weekend.
-                </p>
-        </div>
-        <div class="col-md-8">
-          <div id="time_day">
-            <h3>Time of the Day</h3>
-            <img src="static/images/time_of_day_count.png">
-              <p>We wanted to group the time in parts of the day since we can accurately dig insights onto which parts of the days have more data. we came up with time slots
-                  that are divided in such way: <br><br>
-                  Early Morning (3 am to 6:59 am)<br>
-                  Morning (7 am to 10:59 am),<br>
-                  Afternoon (11 am to 2:59 pm),<br>
-                  Late Afternoon (3 pm to 6:59 pm),<br>
-                  Night (7 pm to 10:59 pm),<br>
-                  Late Night (11 pm to 2:59 am)<br><br><br><br>
-                </p>
-                <p>We are planning on adding interactivity within the next deliverable. Stay tuned! </p>
-        </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>accidentsHappen Dashboard</title>
+  <link rel="stylesheet" href="static/css/styles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.js" integrity="sha512-I54fxhTJwRigWTc3uNjgDzgii7LW+WJuyyA8kc6WaaZ7RQQNAf8bOEJLRNav7n/ca09MUwl5FptUukvqrOTUvQ==" crossorigin="anonymous"></script>
+</head>
+<body id="page-top">
+  <div class="container">
+    <div class="row"> 
+      <div class="col-md-12 jumbotron text-center" style="background-color: darkolivegreen;">
+        <h1>Visualizations and Prediction of California Car Accidents</h1>
+          <p>Explore visuals and forecast the severity of an accident</p>
+            <button class="btn-toggle" style="color:brown;">Toggle Dark Mode</button>
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.js" integrity="sha512-I54fxhTJwRigWTc3uNjgDzgii7LW+WJuyyA8kc6WaaZ7RQQNAf8bOEJLRNav7n/ca09MUwl5FptUukvqrOTUvQ==" crossorigin="anonymous"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <!-- <script src="static/js/papaParse.js"></script> -->
-    <script src="static/js/dark-mode.js"></script>
-    <script src="static/js/initialViz.js"></script>
-  </body>
+    <div class="row"> 
+      <div class="col-md-12">
+          <div class="topnav">
+            <nav>
+              <a class="nav-link " href="#about">About</a>
+              <a class="nav-link" href="#countycc">County Count</a>
+              <a class="nav-link" href="#season">Trendy Seasons</a>
+              <a class="nav-link" href="#time">Time of Day</a>
+              <a class="nav-link" href="#gradi">Density Gradient</a>
+              <a class="nav-link" href="#sev_county">Severity ML</a>
+              <a class="nav-link" href="#cred">Credit</a>
+            </nav>
+          </div>
+      </div>
+      <div class="leftcolumn">
+        <div class="col-md-12" id="about">
+          <h2>accidentsHappen</h2>
+            <p>A story about our teammates car inspired us to use a dataset to analyze and predict the chances of getting in an accident based on
+              specific criteria and data. We see great potential in utilizing this dataset to provide interesting insights and research.
+              By entering certain criteria such as zip codes, seasonal trends, severity, and traffic attributes, one can better forecast the
+              chances of getting into a car accident. It is a simple and easy tool that any driver can use.</p><br>
+            <p>The Severity of an accident is a measure of the degree of damage and harm done on objects and people, as well as the affecting the natural
+              flow traffic in the during the accident.
+              The Severity Level, a range of numbers 1 to 4, indicates impact on traffic, such as 1 being short delay as a result
+               of the accident and 4 indicates a significant impact on traffic (i.e., long delay).              
+            </p>
+        </div>   
+        <div class="col-md-12">
+          <h3 id="zipsearch" style="font-size:40px">Search your County in California</h3>
+          <form id="county_form" onsubmit="return false;">
+            <div class="dropdown">
+              <label for="County">Choose a County:</label>
+                <select name="County" id="county_select" required onchange="county_start()" style="color:rgb(0, 0, 0)">
+                  <option value="Alameda">Alameda</option>
+                  <option value="Alpine">Alpine</option>
+                  <option value="Amador">Amador</option>
+                  <option value="Butte">Butte</option>
+                  <option value="Calaveras">Calaveras</option>
+                  <option value="Colusa">Colusa</option>
+                  <option value="Contra Costa">Contra Costa</option>
+                  <option value="Del Norte">Del Norte</option>
+                  <option value="El Dorado">El Dorado</option>
+                  <option value="Fresno">Fresno</option>
+                  <option value="Glenn">Glenn</option>
+                  <option value="Humboldt">Humboldt</option>
+                  <option value="Imperial">Imperial</option>
+                  <option value="Inyo">Inyo</option>
+                  <option value="Kern">Kern</option>
+                  <option value="Kings">Kings</option>
+                  <option value="Lake">Lake</option>
+                  <option value="Lassen">Lassen</option>
+                  <option value="Los Angeles">Los Angeles</option>
+                  <option value="Madera">Madera</option>
+                  <option value="Marin">Marin</option>
+                  <option value="Mariposa">Mariposa</option>
+                  <option value="Mendocino">Mendocino</option>
+                  <option value="Merced">Merced</option>
+                  <option value="Modoc">Modoc</option>
+                  <option value="Mono">Mono</option>
+                  <option value="Monterey">Monterey</option>
+                  <option value="Napa">Napa</option>
+                  <option value="Nevada">Nevada</option>
+                  <option value="Orange">Orange</option>
+                  <option value="Placer">Placer</option>
+                  <option value="Plumas">Plumas</option>
+                  <option value="Riverside">Riverside</option>
+                  <option value="Sacramento">Sacramento</option>
+                  <option value="San Benito">San Benito</option>
+                  <option value="San Bernardino">San Bernardino</option>
+                  <option value="San Diego">San Diego</option>
+                  <option value="San Francisco">San Francisco</option>
+                  <option value="San Joaquin">San Joaquin</option>
+                  <option value="San Luis Obispo">San Luis Obispo</option>
+                  <option value="San Mateo">San Mateo</option>
+                  <option value="Santa Barbara">Santa Barbara</option>
+                  <option value="Santa Clara">Santa Clara</option>
+                  <option value="Santa Cruz">Santa Cruz</option>
+                  <option value="Shasta">Shasta</option>
+                  <option value="Sierra">Sierra</option>
+                  <option value="Siskiyou">Siskiyou</option>
+                  <option value="Solano">Solano</option>
+                  <option value="Sonoma">Sonoma</option>
+                  <option value="Stanislaus">Stanislaus</option>
+                  <option value="Sutter">Sutter</option>
+                  <option value="Tehama">Tehama</option>
+                  <option value="Trinity">Trinity</option>
+                  <option value="Tulare">Tulare</option>
+                  <option value="Tuolumne">Tuolumne</option>
+                  <option value="Ventura">Ventura</option>
+                  <option value="Yolo">Yolo</option>
+                  <option value="Yuba">Yuba</option>
+                </select>
+            </div>  
+          </form>
+        </div>
+        <div class="col-md-12">
+          <div id="plotlygraph1" id="countycc">
+            <div id="bar"></div>
+            <p style="font-size:18px">A bar graph showing the total count of severity levels in a certain county.</p>
+          </div>
+        </div> 
+        <div class="col-md-12">
+          <div id="plotlygraph2" id="season">
+            <div id="months"></div>
+            <p style="font-size:18px">A bar graph showing the total count of accidents in a certain month by county over 4 years.</p>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div id="plotlygraph4" id="time">
+            <div id="scatter"></div>
+            <p style="font-size:18px">A scatter plot of accidents in a certain county by the time of day:</p>
+            <p style="font-size: smaller;">Early Morning (3 am to 6:59 am)<br> Morning (7 am to 10:59 am),<br> Afternoon (11 am to 2:59 pm),<br> Late Afternoon (3 pm to 6:59 pm),<br>
+              Night (7 pm to 10:59 pm),<br> Late Night (11 pm to 2:59 am)<br><br></p>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div id="plotlygraph5" id="gradi">
+            <div id="dense"></div>
+            <p style="font-size:18px">A density map of accident severity gradient in a certain county.</p>
+          </div>
+        </div>
+      </div>
+    
+      <div class="rightcolumn">
+        <div class="col-md-12">
+          <form action="/predict" method="POST" class="full_form" id="full_form" name="full_form">
+            <div id="sev_county">
+              <h3 style="color:rgb(0, 0, 0)">Severity Machine Learning</h3>
+                <div class="dropdown">
+                  <label for="County" style="color:rgb(0, 0, 0)">Choose a CA County:</label>
+                  <select name="County" id="county_select" required style="color:rgb(0, 0, 0)">
+                    <option name="County_Alameda" value=1>Alameda</option>
+                    <option name="County_Alpine" value=1>Alpine</option>
+                    <option name="County_Amador"  value=1>Amador</option>
+                    <option name="County_Butte"  value=1>Butte</option>
+                    <option name="County_Calaveras"  value=1>Calaveras</option>
+                    <option name="County_Colusa"  value=1>Colusa</option>
+                    <option name="County_Contra Costa"  value=1>Contra Costa</option>
+                    <option name="County_Del Norte"  value=1>Del Norte</option>
+                    <option name="County_El Dorado"  value=1>El Dorado</option>
+                    <option name="County_Fresno"  value=1>Fresno</option>
+                    <option name="County_Glenn"  value=1>Glenn</option>
+                    <option name="County_Humbolt"  value=1>Humboldt</option>
+                    <option name="County_Imperial"  value=1>Imperial</option>
+                    <option name="County_Inyo"  value=1>Inyo</option>
+                    <option name="County_Kern"  value=1>Kern</option>
+                    <option name="County_Kings"  value=1>Kings</option>
+                    <option name="County_Lake"  value=1>Lake</option>
+                    <option name="County_Lassen"  value=1>Lassen</option>
+                    <option name="County_Los Angeles"  value=1>Los Angeles</option>
+                    <option name="County_Madera"  value=1>Madera</option>
+                    <option name="County_Marin"  value=1>Marin</option>
+                    <option name="County_Mariposa"  value=1>Mariposa</option>
+                    <option name="County_Mendocino"  value=1>Mendocino</option>
+                    <option name="County_Merced"  value=1>Merced</option>
+                    <option name="County_Modoc"  value=1>Modoc</option>
+                    <option name="County_Mono"  value=1>Mono</option>
+                    <option name="County_Monterey" value=1>Monterey</option>
+                    <option name="County_Napa"  value=1>Napa</option>
+                    <option name="County_Nevada"  value=1>Nevada</option>
+                    <option name="County_Orange"  value=1>Orange</option>
+                    <option name="County_Placer"  value=1>Placer</option>
+                    <option name="County_Plumas"  value=1>Plumas</option>
+                    <option name="County_Riverside"  value=1>Riverside</option>
+                    <option name="County_Sacramento"  value=1>Sacramento</option>
+                    <option name="County_San Benito"  value=1>San Benito</option>
+                    <option name="County_San Bernardino"  value=1>San Bernardino</option>
+                    <option name="County_San Diego"  value=1>San Diego</option>
+                    <option name="County_San Francisco"  value=1>San Francisco</option>
+                    <option name="County_San Joaquin"  value=1>San Joaquin</option>
+                    <option name="County_San Luis Obispo"  value=1>San Luis Obispo</option>
+                    <option name="County_San Mateo"  value=1>San Mateo</option>
+                    <option name="County_Santa Barbara"  value=1>Santa Barbara</option>
+                    <option name="County_Santa Clara"  value=1>Santa Clara</option>
+                    <option name="County_Santa Cruz"  value=1>Santa Cruz</option>
+                    <option name="County_Shasta" value=1>Shasta</option>
+                    <option name="County_Sierra"  value=1>Sierra</option>
+                    <option name="County_Siskiyou" value=1>Siskiyou</option>
+                    <option name="County_Solano"  value=1>Solano</option>
+                    <option name="County_Sonoma"  value=1>Sonoma</option>
+                    <option name="County_Stanislaus"  value=1>Stanislaus</option>
+                    <option name="County_Sutter"  value=1>Sutter</option>
+                    <option name="County_Tehama"  value=1>Tehama</option>
+                    <option name="County_Trinity"  value=1>Trinity</option>
+                    <option name="County_Tulare"  value=1>Tulare</option>
+                    <option name="County_Tuolumne"  value=1>Tuolumne</option>
+                    <option name="County_Ventura"  value=1></option>
+                    <option name="County_Yolo"  value=1></option>
+                    <option name="County_Yuba"  value=1></option>
+                    <input type="hidden" value="0" id="County_Alameda" name="County_Alameda" />
+                    <input type="hidden" value="0" id="County_Alpine" name="County_Alpine" />
+                    <input type="hidden" value="0" id="County_Amador" name="County_Amador" />
+                    <input type="hidden" value="0" id="County_Butte" name="County_Butte" />
+                    <input type="hidden" value="0" id="County_Calaveras" name="County_Calaveras" />
+                    <input type="hidden" value="0" id="County_Colusa" name="County_Colusa" />
+                    <input type="hidden" value="0" id="County_Contra Costa" name="County_Contra Costa" />
+                    <input type="hidden" value="0" id="County_Del Norte" name="County_Del Norte" />
+                    <input type="hidden" value="0" id="County_El Dorado" name="County_El Dorado" />
+                    <input type="hidden" value="0" id="County_Fresno" name="County_Fresno" />
+                    <input type="hidden" value="0" id="County_Glenn" name="County_Glenn" />
+                    <input type="hidden" value="0" id="County_Humbolt" name="County_Humbolt" />
+                    <input type="hidden" value="0" id="County_Imperial" name="County_Imperial" />
+                    <input type="hidden" value="0" id="County_Inyo" name="County_Inyo" />
+                    <input type="hidden" value="0" id="County_Kern" name="County_Kern" />
+                    <input type="hidden" value="0" id="County_Kings" name="County_Kings" />
+                    <input type="hidden" value="0" id="County_Lake" name="County_Lake" />
+                    <input type="hidden" value="0" id="County_Lassen" name="County_Lassen" />
+                    <input type="hidden" value="0" id="County_Los Angeles" name="County_Los Angeles" />
+                    <input type="hidden" value="0" id="County_Madera" name="County_Madera" />
+                    <input type="hidden" value="0" id="County_Marin" name="County_Marin" />
+                    <input type="hidden" value="0" id="County_Mariposa" name="County_Mariposa" />
+                    <input type="hidden" value="0" id="County_Mendocino" name="County_Mendocino" />
+                    <input type="hidden" value="0" id="County_Merced" name="County_Merced" />
+                    <input type="hidden" value="0" id="County_Modoc" name="County_Modoc" />
+                    <input type="hidden" value="0" id="County_Mono" name="County_Mono" />
+                    <input type="hidden" value="0" id="County_Monterey" name="County_Monterey" />
+                    <input type="hidden" value="0" id="County_Napa" name="County_Napa" />
+                    <input type="hidden" value="0" id="County_Nevada" name="County_Nevada" />
+                    <input type="hidden" value="0" id="County_Orange" name="County_Orange" />
+                    <input type="hidden" value="0" id="County_Placer" name="County_Placer" />
+                    <input type="hidden" value="0" id="County_Plumas" name="County_Plumas" />
+                    <input type="hidden" value="0" id="County_Riverside" name="County_Riverside" />
+                    <input type="hidden" value="0" id="County_Sacramento" name="County_Sacramento" />
+                    <input type="hidden" value="0" id="County_San Benito" name="County_San Benito" />
+                    <input type="hidden" value="0" id="County_San Bernardino" name="County_San Bernardino" />
+                    <input type="hidden" value="0" id="County_San Diego" name="County_San Diego" />
+                    <input type="hidden" value="0" id="County_San Francisco" name="County_San Francisco" />
+                    <input type="hidden" value="0" id="County_San Joaquin" name="County_San Joaquin" />
+                    <input type="hidden" value="0" id="County_San Luis Obispo" name="County_San Luis Obispo" />
+                    <input type="hidden" value="0" id="County_San Mateo" name="County_San Mateo" />
+                    <input type="hidden" value="0" id="County_Santa Barbara" name="County_Santa Barbara" />
+                    <input type="hidden" value="0" id="County_Santa Clara" name="County_Santa Clara" />
+                    <input type="hidden" value="0" id="County_Santa Cruz" name="County_Santa Cruz" />
+                    <input type="hidden" value="0" id="County_Shasta" name="County_Shasta" />
+                    <input type="hidden" value="0" id="County_Sierra" name="County_Sierra" />
+                    <input type="hidden" value="0" id="County_Siskiyou" name="County_Siskiyou" />
+                    <input type="hidden" value="0" id="County_Solano" name="County_Solano" />
+                    <input type="hidden" value="0" id="County_Sonoma" name="County_Sonoma" />
+                    <input type="hidden" value="0" id="County_Stanislaus" name="County_Stanislaus" />
+                    <input type="hidden" value="0" id="County_Sutter" name="County_Sutter" />
+                    <input type="hidden" value="0" id="County_Tehama" name="County_Tehama" />
+                    <input type="hidden" value="0" id="County_Trinity" name="County_Trinity" />
+                    <input type="hidden" value="0" id="County_Tulare" name="County_Tulare" />
+                    <input type="hidden" value="0" id="County_Tuolumne" name="County_Tuolumne" />
+                    <!-- <input type="hidden" value="0" id="County_Ventura" name="County_Ventura" /> -->
+                    <!-- <input type="hidden" value="0" id="County_Yolo" name="County_Yolo" /> -->
+                    <!-- <input type="hidden" value="0" id="County_Yuba" name="County_Yuba" /> -->
+                  </select>
+                </div>
+                <br> 
+                <div class="dropdown">
+                  <label for="Month" style="color:rgb(0, 0, 0)">Choose Month:</label> <br>
+                  <select name="Month" id="Month" style="color:rgb(0, 0, 0)">
+                    <option name="Month_January" value=1>January</option>
+                    <option name="Month_February"  value=1>February</option>
+                    <option name="Month_March"  value=1>March</option>
+                    <option name="Month_April"  value=1>April</option>
+                    <option name="Month_May"  value=1>May</option>
+                    <option name="Month_June"  value=1>June</option>
+                    <option name="Month_July"  value=1>July</option>
+                    <option name="Month_August" value=1>August</option>
+                    <option name="Month_September"  value=1>September</option>
+                    <option name="Month_October"  value=1>October</option>
+                    <option name="Month_November"  value=1>November</option>
+                    <option name="Month_December"  value=1>December</option>
+                    
+                    <input type="hidden" value="0" id="Month_January" name="Month_January" />
+                    <input type="hidden" value="0" id="Month_February" name="Month_February" />
+                    <input type="hidden" value="0" id="Month_March" name="Month_March" />
+                    <input type="hidden" value="0" id="Month_April" name="Month_April" />
+                    <input type="hidden" value="0" id="Month_May" name="Month_May" />
+                    <input type="hidden" value="0" id="Month_June" name="Month_June" />
+                    <input type="hidden" value="0" id="Month_July" name="Month_July" />
+                    <input type="hidden" value="0" id="Month_August" name="Month_August" />
+                    <input type="hidden" value="0" id="Month_September" name="Month_September" />
+                    <input type="hidden" value="0" id="Month_October" name="Month_October" />
+                    <input type="hidden" value="0" id="Month_November" name="Month_November" />
+                    <input type="hidden" value="0" id="Month_December" name="Month_December" />
+                  </select>
+                </div>
+                <br>
+          
+                <div class="dropdown">
+                  <label for="Part_of_Week" style="color:rgb(0, 0, 0)">Choose Day of Week:</label> <br>
+                  <select name="Part_of_Week" id="Part_of_Week" style="color:rgb(0, 0, 0)">
+                    <option name="Part_of_Week_Weekday" value=1>Weekday</option>
+                    <option name="Part_of_Week_Weekend" value=1>Weekend</option>
+                    <input type="hidden" value="0" id="Part_of_Week_Weekday" name="Part_of_Week_Weekday" />
+                    <input type="hidden" value="0" id="Part_of_Week_Weekend" name="Part_of_Week_Weekend" />
+                  </select>
+                </div>
+                <br>
+          
+                <div class="dropdown">
+                  <label for="Time" style="color:rgb(0, 0, 0)">Choose Time:</label> <br>
+                  <select name="Time" id="Time" style="color:rgb(0, 0, 0)">
+                    <option name="Time_0.0" value=1>12:00am</option>
+                    <option name="Time_1.0"  value=1>1:00am</option>
+                    <option name="Time_2.0"  value=1>2:00am</option>
+                    <option name="Time_3.0"  value=1>3:00am</option>
+                    <option name="Time_4.0"  value=1>4:00am</option>
+                    <option name="Time_5.0"  value=1>5:00am</option>
+                    <option name="Time_6.0"  value=1>6:00am</option>
+                    <option name="Time_7.0"  value=1>7:00am</option>
+                    <option name="Time_8.0"  value=1>8:00am</option>
+                    <option name="Time_9.0"  value=1>9:00am</option>
+                    <option name="Time_10.0"  value=1>10:00am</option>
+                    <option name="Time_11.0"  value=1>11:00am</option>
+                    <option name="Time_12.0"  value=1>12:00pm</option>
+                    <option name="Time_13.0"  value=1>1:00pm</option>
+                    <option name="Time_14.0"  value=1>2:00pm</option>
+                    <option name="Time_15.0"  value=1>3:00pm</option>
+                    <option name="Time_16.0"  value=1>4:00pm</option>
+                    <option name="Time_17.0"  value=1>5:00pm</option>
+                    <option name="Time_18.0"  value=1>6:00pm</option>
+                    <option name="Time_19.0"  value=1>7:00pm</option>
+                    <option name="Time_20.0"  value=1>8:00pm</option>
+                    <option name="Time_21.0"  value=1>9:00pm</option>
+                    <option name="Time_22.0"  value=1>10:00pm</option>
+                    <option name="Time_23.0"  value=1>11:00pm</option>
+
+                    <input name="Time_0.0" type="hidden" value=0 />
+                    <input name="Time_1.0" type="hidden" value=0 />
+                    <input name="Time_2.0" type="hidden" value=0 />
+                    <input name="Time_3.0" type="hidden" value=0 />
+                    <input name="Time_4.0" type="hidden" value=0 />
+                    <input name="Time_5.0" type="hidden" value=0 />
+                    <input name="Time_6.0" type="hidden" value=0 />
+                    <input name="Time_7.0" type="hidden" value=0 />
+                    <input name="Time_8.0" type="hidden" value=0 />
+                    <input name="Time_9.0" type="hidden" value=0 />
+                    <input name="Time_10.0" type="hidden" value=0 />
+                    <input name="Time_11.0" type="hidden" value=0 />
+                    <input name="Time_12.0" type="hidden" value=0 />
+                    <input name="Time_13.0" type="hidden" value=0 />
+                    <input name="Time_14.0" type="hidden" value=0 />
+                    <input name="Time_15.0" type="hidden" value=0 />
+                    <input name="Time_16.0" type="hidden" value=0 />
+                    <input name="Time_17.0" type="hidden" value=0 />
+                    <input name="Time_18.0" type="hidden" value=0 />
+                    <input name="Time_19.0" type="hidden" value=0 />
+                    <input name="Time_20.0" type="hidden" value=0 />
+                    <input name="Time_21.0" type="hidden" value=0 />
+                    <input name="Time_22.0" type="hidden" value=0 />
+                    <input name="Time_23.0" type="hidden" value=0 />
+                  </select>
+                </div>
+                <br>    
+                  <!-- <input style="color:brown;" type="submit" onclick= county_start()> -->
+
+      
+              <div class="slidecontainer">
+                <label style="color:rgb(0, 0, 0)"> Temperature (F): <span  class="limit"></span></label>
+                  <input name="Temperature_F" type="range" min="0" max="120" value="20" class="slider" id="Temperature_F" step="1" oninput="this.nextElementSibling.value = this.value">
+                  <output name="Temperature_F" id="Temperature_F">80</output>
+              </div>
+    
+              <div class="slidecontainer">
+                <label style="color:rgb(0, 0, 0)"> Visibility (mi): <span  class="limit"></span></label>
+                <input name="Visibility_miles" type="range" min="0" max="10" value="5" class="slider" oninput="this.nextElementSibling.value = this.value"> 
+                <output name="Visibility_miles" id="Visibility_mi">5</output> 
+              </div>
+    
+              <div class="slidecontainer">
+                <label style="color:rgb(0, 0, 0)"> Precipitation (in): <span  class="limit"></span></label>
+                <input name="Precipitation_inches" type="range" min="0" max="10" value="5" class="slider" oninput="this.nextElementSibling.value = this.value">
+                <output name= "Precipitation_inches" id="Precipitation_in">5</output>
+              </div>
+              
+    
+              <h4 style="color:rgb(0, 0, 0)">Road Attributes</h4>
+              <input type="checkbox" id="Crossing" name="Cross_Walk" value="1">
+              <label for="Crossing" style="color:rgb(0, 0, 0)">Cross Walk</label><br>
+              <input type="hidden" value="0" id="Crossing" name="Cross_Walk" />
+              
+              <input type="checkbox" id="Junction" name="Intersection" value="1">
+              <label for="Junction" value="1" style="color:rgb(0, 0, 0)">Intersection</label><br>
+              <input type="hidden" value="0" id="Junction" name="Intersection" />
+              
+              <input type="checkbox" id="Roundabout" name="Roundabout" value="1">
+              <label for="Roundabout" value="1" style="color:rgb(0, 0, 0)">Roundabout</label><br>
+              <input type="hidden" value="0" id="Roundabout" name="Roundabout" />
+              
+              <input type="checkbox" id="Bump" name="Speed_Bump" value="1">
+              <label for="Bump" value="1" style="color:rgb(0, 0, 0)">Speed Bumps</label><br>
+              <input type="hidden" value="0" id="Bump" name="Speed_Bump" />
+              
+              <input type="checkbox" id="Traffic_Signal" name="Traffic_Light" value="1">
+              <label for="Traffic_Signal" value="1" style="color:rgb(0, 0, 0)">Stop Light</label><br>
+              <input type="hidden" value="0" id="Traffic_Signal" name="Traffic_Light" />
+              
+              <input type="checkbox" id="Stop" name="Stop_Sign" value="1"> 
+              <label for="Stop" value="1" style="color:rgb(0, 0, 0)">Stop Sign</label><br>
+              <input type="hidden" value="0" id="Stop" name="Stop_Sign" />
+              
+              <input type="checkbox" id="Crossing" name="Traffic" value="1">
+              <label for="Traffic_Calming" value="1" style="color:rgb(0, 0, 0)">Traffic</label><br>
+              <input type="hidden" value="0" id="Crossing" name="Cross_Walk" />
+              
+              <input type="checkbox" id="Turning_Loop" name="Turning_Loop" value="1">
+              <label for="Turning_Loop" value="1" style="color:rgb(0, 0, 0)">Turning Loop</label><br>
+              <input type="hidden" value="0" id="Turning_Loop" name="Turning_Loop"/>
+              
+              <input type="checkbox" id="Wrong_Way" name="No_Exit" value="1">
+              <label for="Wrong_Way" value="1" style="color:rgb(0, 0, 0)">Wrong Way</label><br>
+              <input type="hidden" value="0" id="Wrong_Way" name="No_Exit" />
+              
+              <input type="checkbox" id="Give_Way" name="Yield_Sign" value="1">
+              <label for="Give_Way" value="1" style="color:rgb(0, 0, 0)">Yield Sign</label><br>
+              <input type="hidden" value="0" id="Give_Way" name="Yield_Sign" />
+
+              <input type="checkbox" id="Railway" name="Railway" value="1">
+              <label for="Railway" value="1" style="color:rgb(0, 0, 0)">Railway</label><br>
+              <input type="hidden" value="0" id="Railway" name="Railway" />
+            <button  style="color:rgb(0, 0, 0)" type="submit">Submit</button>   
+            <br>
+            <br>
+            </div>
+          </form>   
+        </div>
+      </div>  
+      <div class="col-md-12">
+        <div id="cred">
+          <h6>Credit and Licensing</h6>
+            <p style="font-size: x-small;"> Raw Dataset Availble at <a href="https://www.kaggle.com/sobhanmoosavi/us-accidents">Kaggle<br></a>
+                Licensed under CC BY-NC-SA 4.0 and Credited to:<br>
+                Moosavi, Sobhan, Mohammad Hossein Samavatian, Srinivasan Parthasarathy, and Rajiv Ramnath. <a href="https://arxiv.org/abs/1906.05409">“A Countrywide Traffic Accident Dataset.</a>”, 2019.<br>
+                Moosavi, Sobhan, Mohammad Hossein Samavatian, Srinivasan Parthasarathy, Radu Teodorescu, and Rajiv Ramnath. <a href="https://arxiv.org/abs/1909.09638">"Accident Risk Prediction based on Heterogeneous Sparse Data: New Dataset and Insights.</a>" In proceedings of the 27th ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems, ACM, 2019.</p>
+        </div>
+      </div>
+      <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+      <div class="col-md-12">
+        <footer id="footer_about">
+          <h4>accidentsHappen: A Collaborative Project brought to you by:<br><br>
+              Robert Lau, Kim Ngo, Joshua Rivera, and Simranjot Singh <br><br>
+              University of California Berkeley Extension <br>
+              Data Analytics and Visualization Bootcamp (May-Oct 2020)</h4>
+          <a href="https://github.com/rlau929/final">Project Gitbub</a>
+        </footer>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.js" integrity="sha512-I54fxhTJwRigWTc3uNjgDzgii7LW+WJuyyA8kc6WaaZ7RQQNAf8bOEJLRNav7n/ca09MUwl5FptUukvqrOTUvQ==" crossorigin="anonymous"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="static/js/sideslideNav.js"></script>
+  <script src="static/js/dark-mode.js"></script>
+  <script src="static/js/scrollUp.js"></script>
+  <script src="static/js/initialViz.js"></script>
+  <script src="static/js/slider.js"></script>
+</body>
 </html>
